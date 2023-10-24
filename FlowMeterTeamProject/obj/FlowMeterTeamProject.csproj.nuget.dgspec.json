@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HP\\source\\repos\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj": {}
+    "C:\\Users\\andri\\gitrepos\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HP\\source\\repos\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj": {
+    "C:\\Users\\andri\\gitrepos\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\source\\repos\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj",
+        "projectUniqueName": "C:\\Users\\andri\\gitrepos\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj",
         "projectName": "FlowMeterTeamProject",
-        "projectPath": "C:\\Users\\HP\\source\\repos\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj",
-        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\source\\repos\\FlowMeterTeamProject\\obj\\",
+        "projectPath": "C:\\Users\\andri\\gitrepos\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj",
+        "packagesPath": "C:\\Users\\andri\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\andri\\gitrepos\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\andri\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -39,6 +39,30 @@
       "frameworks": {
         "net7.0-windows7.0": {
           "targetAlias": "net7.0-windows",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -58,7 +82,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
