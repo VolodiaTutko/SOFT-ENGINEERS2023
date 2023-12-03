@@ -1,4 +1,5 @@
 ﻿using FlowMeterTeamProject.Data;
+using FlowMeterTeamProject.Data.DataMock;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,9 @@ namespace FlowMeterTeamProject
         public MainWindow()
         {
             InitializeComponent();
+            if (Mock.checkIfDbAccountsEmpty()) {
+                Mock.FillRandomAccountsIntoDb(5);
+            }
 
             Main.NavigationService.Navigate(new FlowMeterTeamProject.Pages.Houses());
         }

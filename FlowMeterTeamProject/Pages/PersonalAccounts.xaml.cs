@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
+using FlowMeterTeamProject.Data.DataMock;
 
 namespace FlowMeterTeamProject.Pages
 {
@@ -29,19 +30,7 @@ namespace FlowMeterTeamProject.Pages
             InitializeComponent();
 
             FillDataGrid();
-
-            //Account[] accountData = GenerateRandomAccounts(20);
-
-
-            //using (var context = new AppDbContext())
-            //{
-            //    foreach (var data in accountData)
-            //    {
-            //        context.accounts.Add(data);
-            //    }
-            //    context.SaveChanges();
-            //}
-
+            //Mock.FillRandomAccountsIntoDb(10);
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -88,28 +77,5 @@ namespace FlowMeterTeamProject.Pages
         {
 
         }
-
-        //static Account[] GenerateRandomAccounts(int count)
-        //{
-        //    Random random = new Random();
-
-        //    return Enumerable.Range(1, count)
-        //        .Select(i => new Account
-        //        {
-        //            PersonalAccount = GenerateRandomAccountNumber(),
-        //            HotWater = (int)random.NextDouble() * 100,
-        //            ColdWater = (int)random.NextDouble() * 100,
-        //            Heating = (int)random.NextDouble() * 100,
-        //            Electricity = (int)random.NextDouble() * 100,
-        //            PublicService = (int)random.NextDouble() * 100
-        //        })
-        //        .ToArray();
-        //}
-
-        //static string GenerateRandomAccountNumber()
-        //{
-        //    Random random = new Random();
-        //    return random.Next(100000000, 999999999).ToString();
-        //}
     }
 }
