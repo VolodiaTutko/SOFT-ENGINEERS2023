@@ -16,6 +16,8 @@
 
         <StackPanel Orientation="Horizontal" Margin="10">
             <Button Content="Додати новий запис" Margin="0,0,20,0" />
+            <Button Content="Export to PDF" Margin="0,0,20,0" Click="ExportToPdfButton_Click"/>
+            <Button Content="Export to XLSX" Margin="0,0,20,0" Click="ExportToExcelButton_Click"/>
             <TextBox x:Name="searchBox" Width="200" TextChanged="SearchBox_TextChanged">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -36,13 +38,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="№" Binding="{Binding Number}" />
-                <DataGridTextColumn Header="Personal Account" Binding="{Binding PersonalAccount}" />
-                <DataGridTextColumn Header="Hot Water" Binding="{Binding HotWater}" />
-                <DataGridTextColumn Header="Cold Water" Binding="{Binding ColdWater}" />
+                <DataGridTextColumn Header="№" Binding="{Binding №}" />
+                <DataGridTextColumn Header="PersonalAccount" Binding="{Binding PersonalAccount}" />
+                <DataGridTextColumn Header="HotWater" Binding="{Binding HotWater}" />
+                <DataGridTextColumn Header="ColdWater" Binding="{Binding ColdWater}" />
                 <DataGridTextColumn Header="Heating" Binding="{Binding Heating}" />
                 <DataGridTextColumn Header="Electricity" Binding="{Binding Electricity}" />
-                <DataGridTextColumn Header="Public Service" Binding="{Binding PublicService}" />
+                <DataGridTextColumn Header="PublicService" Binding="{Binding PublicService}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

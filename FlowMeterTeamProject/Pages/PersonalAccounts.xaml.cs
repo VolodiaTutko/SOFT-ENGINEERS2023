@@ -15,7 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Text.RegularExpressions;
+using FlowMeterTeamProject.Utils.DataGrid;
 
 namespace FlowMeterTeamProject.Pages
 {
@@ -44,9 +44,19 @@ namespace FlowMeterTeamProject.Pages
 
         }
 
+        private void ExportToExcelButton_Click(object sender, RoutedEventArgs e)
+        {
+            XlsxExporter.ExportToExcelButton_Click(sender, e, dataGrid);
+        }
+
+        private void ExportToPdfButton_Click(object sender, RoutedEventArgs e)
+        {
+            PdfExporter.ExportToPdfButton_Click(sender, e, dataGrid);
+        }
+
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Utils.DataGrid.DataGridSearch.PerformSearch(dataGrid, searchBox);
+            DataGridSearch.PerformSearch(dataGrid, searchBox);
         }
 
 
@@ -57,7 +67,7 @@ namespace FlowMeterTeamProject.Pages
                 List<Account> accounts = context.accounts.ToList();
 
                 DataTable dt = new DataTable("Account");
-                dt.Columns.Add("Number", typeof(int));
+                dt.Columns.Add("№", typeof(int));
                 dt.Columns.Add("PersonalAccount", typeof(string));
                 dt.Columns.Add("HotWater", typeof(decimal));
                 dt.Columns.Add("ColdWater", typeof(decimal));
@@ -78,7 +88,7 @@ namespace FlowMeterTeamProject.Pages
                     );
                 }
 
-                dt.Columns["Number"].SetOrdinal(0);
+                dt.Columns["№"].SetOrdinal(0);
 
                 dataGrid.ItemsSource = dt.DefaultView;
             }
