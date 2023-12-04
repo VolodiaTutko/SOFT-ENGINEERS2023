@@ -22,33 +22,12 @@ namespace FlowMeterTeamProject
         public MainWindow()
         {
             InitializeComponent();
-
-            Main.NavigationService.Navigate(new FlowMeterTeamProject.Pages.Houses());
         }
 
-        private void BtnClick1(object sender, RoutedEventArgs e)
+        private void SwitchToMain_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new FlowMeterTeamProject.Pages.Houses();
+            MainContentControl.Content = new MainContent();
         }
-        private void BtnClick2(object sender, RoutedEventArgs e)
-        {
-            Main.Content = new FlowMeterTeamProject.Pages.PersonalAccounts();
-        }
-        private void BtnClick3(object sender, RoutedEventArgs e)
-        {
-            Main.Content = new FlowMeterTeamProject.Pages.Counters();
-        }
-        private void BtnClick4(object sender, RoutedEventArgs e)
-        {
-            Main.Content = new FlowMeterTeamProject.Pages.Services();
-        }
-        private void BtnClick5(object sender, RoutedEventArgs e)
-        {
-            Main.Content = new FlowMeterTeamProject.Pages.Payments();
-        }
-        private void BtnClick6(object sender, RoutedEventArgs e)
-        {
-            Main.Content = new FlowMeterTeamProject.Pages.Receipts();
-        }
+
     }
 }
