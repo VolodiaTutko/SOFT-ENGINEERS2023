@@ -1,5 +1,0 @@
-﻿{
-  "ConnectionStrings": {
-    "FlowMeterDatabase": "Host=localhost; Database=flowmeter; Username=postgres; Password=12032004"
-  }
-}
