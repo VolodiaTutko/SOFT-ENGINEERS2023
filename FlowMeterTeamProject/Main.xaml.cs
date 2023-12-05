@@ -27,14 +27,6 @@ namespace FlowMeterTeamProject
 
         private void SwitchToMain_Click(object sender, RoutedEventArgs e)
         {
-            //// Отримання доступу до TextBoxLogin та TextBoxPassword
-            //TextBox textBoxLogin = Log_in.FindName("textlogin") as TextBox;
-            //TextBox textBoxPassword = Log_in.FindName("textpassword") as TextBox;
-
-
-            //if (textBoxLogin != null && textBoxPassword != null)
-            //{
-           // Отримання даних з TextBoxLogin та TextBoxPassword
             string login = textlogin.Text;
             string password = textpassword.Text;
             
@@ -43,29 +35,23 @@ namespace FlowMeterTeamProject
                 var employee = dbContext.employees.FirstOrDefault(e => e.EmployeeLogin == login);
                 if (employee != null && employee.EmployeePassword == password)
                 {
-                    //MainLoginControler.Content = new MainContent();
+                    
                     Window newWindow = new Window
                     {
                         Content = new MainContent(),
                         Title = "FlowMeter"
                     };
 
-                    // Show the new window
                     Window.GetWindow(this).Close();
                     newWindow.Show();
                 }
                 else
                 {
-                    // Invalid user, handle accordingly
+                    textlogin.Text = string.Empty;
+                    textpassword.Text = string.Empty;
                 }
             }
-            
-
-            // Виведення даних в консоль (можна замінити на вашу логіку)
-            Console.WriteLine("Login: " + login);
-            Console.WriteLine("Password: " + password);
-            //}
-            //MainLoginControler.Content = new MainContent();
+           
         }
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
