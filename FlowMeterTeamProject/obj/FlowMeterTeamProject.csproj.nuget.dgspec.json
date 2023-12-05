@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\andri\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj": {}
+    "D:\\DevPE\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\andri\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj": {
+    "D:\\DevPE\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\andri\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj",
+        "projectUniqueName": "D:\\DevPE\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj",
         "projectName": "FlowMeterTeamProject",
-        "projectPath": "C:\\Users\\andri\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj",
-        "packagesPath": "C:\\Users\\andri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\andri\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\obj\\",
+        "projectPath": "D:\\DevPE\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "D:\\DevPE\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\andri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

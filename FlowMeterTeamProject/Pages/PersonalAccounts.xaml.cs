@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using FlowMeterTeamProject.Data.DataMock;
+using FlowMeterTeamProject.PersonalAccountDialogWindow;
 
 namespace FlowMeterTeamProject.Pages
 {
@@ -74,6 +75,11 @@ namespace FlowMeterTeamProject.Pages
         }
 
         private void b1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
 
         }

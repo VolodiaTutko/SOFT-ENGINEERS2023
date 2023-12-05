@@ -7,6 +7,15 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="HousesDialogWindow\AddNewHouse.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="HousesDialogWindow\EditDataHouse.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="HousesDialogWindow\PropertiesHouse.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Pages\Counters.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -25,8 +34,23 @@
     <Compile Update="Pages\Services.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="PersonalAccountDialogWindow\EditDataAccounts.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="PersonalAccountDialogWindow\PropertiesAccounts.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="HousesDialogWindow\AddNewHouse.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="HousesDialogWindow\EditDataHouse.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="HousesDialogWindow\PropertiesHouse.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Main.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -46,6 +70,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\Services.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PersonalAccountDialogWindow\EditDataAccounts.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="PersonalAccountDialogWindow\PropertiesAccounts.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

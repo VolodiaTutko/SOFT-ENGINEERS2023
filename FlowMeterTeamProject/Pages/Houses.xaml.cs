@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FlowMeterTeamProject.HousesDialogWindow;
+
 
 namespace FlowMeterTeamProject.Pages
 {
@@ -51,6 +53,14 @@ namespace FlowMeterTeamProject.Pages
         private void b1_Click(object sender, EventArgs e)
         {
             // Your button click logic here
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewHouse newDialog = new AddNewHouse();
+            newDialog.Show();
+
+
         }
     }
 }

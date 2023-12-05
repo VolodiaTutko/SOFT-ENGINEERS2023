@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Margin="10">
-            <Button Content="Додати новий запис" Margin="0,0,20,0" />
+            <Button Content="Додати новий запис" Margin="0,0,20,0" Click="Button_Click" />
             <TextBox x:Name="searchBox" Width="200" TextChanged="SearchBox_TextChanged">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
