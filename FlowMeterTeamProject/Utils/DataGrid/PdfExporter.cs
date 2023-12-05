@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
@@ -18,6 +22,7 @@ namespace FlowMeterTeamProject.Utils.DataGrid
             string filePath = Path.Combine(downloadsPath, "ExportedData.pdf");
             ExportDataGridToPdf(dataGrid, filePath);
         }
+
 
         private static void ExportDataGridToPdf(System.Windows.Controls.DataGrid dataGrid, string filePath)
         {
@@ -46,21 +51,44 @@ namespace FlowMeterTeamProject.Utils.DataGrid
                                 }
                             }
 
+                            // Check if any checkboxes are selected
+                            bool checkboxesSelected = false;
+
                             foreach (var item in dataGrid.Items)
                             {
-                                if (item is DataRowView rowView && rowView.Row.ItemArray.Length > 0)
+                                DataGridRow row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromItem(item);
+
+                                if (row != null)
                                 {
-                                    var row = rowView.Row;
-                                    foreach (DataGridColumn column in dataGrid.Columns)
+                                    CheckBox checkBox = FindVisualChild<CheckBox>(row);
+
+                                    if (checkBox != null && checkBox.IsChecked == true)
                                     {
-                                        if (!(column is DataGridTemplateColumn && ((DataGridTemplateColumn)column).CellTemplate.LoadContent() is CheckBox))
-                                        {
-                                            string propertyName = column.Header.ToString();
-                                            object cellValue = row[propertyName];
-                                            table.AddCell(new Cell().Add(new iText.Layout.Element.Paragraph(cellValue?.ToString())));
-                                        }
+                                        checkboxesSelected = true;
+                                        break;
                                     }
-                                    table.StartNewRow();
+                                }
+                            }
+
+                            // Export all rows or only selected rows based on checkboxesSelected
+                            foreach (var item in dataGrid.Items)
+                            {
+                                if (!checkboxesSelected || (checkboxesSelected && IsRowSelected(item, dataGrid)))
+                                {
+                                    if (item is DataRowView rowView && rowView.Row.ItemArray.Length > 0)
+                                    {
+                                        var rowData = rowView.Row;
+                                        foreach (DataGridColumn column in dataGrid.Columns)
+                                        {
+                                            if (!(column is DataGridTemplateColumn && ((DataGridTemplateColumn)column).CellTemplate.LoadContent() is CheckBox))
+                                            {
+                                                string propertyName = column.Header.ToString();
+                                                object cellValue = rowData[propertyName];
+                                                table.AddCell(new Cell().Add(new iText.Layout.Element.Paragraph(cellValue?.ToString())));
+                                            }
+                                        }
+                                        table.StartNewRow();
+                                    }
                                 }
                             }
 
@@ -76,5 +104,40 @@ namespace FlowMeterTeamProject.Utils.DataGrid
                 MessageBox.Show($"Error exporting data to PDF: {ex.Message}", "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private static bool IsRowSelected(object item, System.Windows.Controls.DataGrid dataGrid)
+        {
+            DataGridRow row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromItem(item);
+
+            if (row != null)
+            {
+                CheckBox checkBox = FindVisualChild<CheckBox>(row);
+
+                return checkBox != null && checkBox.IsChecked == true;
+            }
+
+            return false;
+        }
+
+
+
+        private static T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+
+                if (child != null && child is T)
+                    return (T)child;
+
+                T childOfChild = FindVisualChild<T>(child);
+
+                if (childOfChild != null)
+                    return childOfChild;
+            }
+
+            return null;
+        }
+
     }
 }
