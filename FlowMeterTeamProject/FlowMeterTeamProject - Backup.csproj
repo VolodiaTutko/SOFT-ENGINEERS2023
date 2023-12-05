@@ -9,6 +9,8 @@
 
 	<ItemGroup>
 		<None Remove="appsettings.json" />
+		<None Remove="HousesDialogWindow\edit.png" />
+		<None Remove="PersonalAccountDialogWindow\edit.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -27,14 +29,18 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="DAL\Migrations\" />
+		<Folder Include="Migrations\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="HousesDialogWindow\edit.png" />
+	  <Resource Include="PersonalAccountDialogWindow\edit.png" />
 	</ItemGroup>
 
 </Project>

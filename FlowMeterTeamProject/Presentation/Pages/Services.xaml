@@ -1,0 +1,47 @@
+﻿<Page x:Class="Presentation.Pages.Services"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Presentation.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Services">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <Button Content="Додати новий запис" Margin="0,0,20,0" />
+            <TextBox x:Name="searchBox" Width="200">
+                <TextBox.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="3"/>
+                    </Style>
+                </TextBox.Resources>
+            </TextBox>
+            <TextBlock x:Name="currentDateTextBlock" Margin="10,0,0,0" />
+        </StackPanel>
+
+        <DataGrid x:Name="dataGrid" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*" EnableRowVirtualization="False" EnableColumnVirtualization="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="30">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+
+                            <CheckBox Name="b1" Click="b1_Click" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="№" Binding="{Binding Number}" />
+                <DataGridTextColumn Header="ServiceId" Binding="{Binding ServiceId}" />
+                <DataGridTextColumn Header="HouseId" Binding="{Binding HouseId}" />
+                <DataGridTextColumn Header="TypeOfAccount" Binding="{Binding TypeOfAccount}" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
