@@ -5776,19 +5776,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {}
+    "C:\\Users\\roman\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj",
+      "projectUniqueName": "E:\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj",
       "projectName": "FlowMeterTeamProject",
-      "projectPath": "C:\\Users\\User\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\obj\\",
+      "projectPath": "E:\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\FlowMeterTeamProject.csproj",
+      "packagesPath": "C:\\Users\\roman\\.nuget\\packages\\",
+      "outputPath": "E:\\SOFT-ENGINEERS2023\\FlowMeterTeamProject\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\roman\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5872,7 +5872,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   },

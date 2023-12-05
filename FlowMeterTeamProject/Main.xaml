@@ -5,12 +5,248 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlowMeterTeamProject"
         mc:Ignorable="d"
-        Title="Main" Height="450" Width="800">
+        Height="650" Width="1200"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip">
+    <Window.Background>
+        <SolidColorBrush Color=" #faf8f0"/>
+    </Window.Background>
+    <Window.Resources>
+        <ControlTemplate x:Key="TextBoxLogin" TargetType="{x:Type TextBox}">
+            <Border Background="White"  CornerRadius="10">
+                <Grid>
+                    <TextBlock Text="Login" FontSize="15" Foreground="Gray" Margin="5" IsHitTestVisible="False" Visibility="Collapsed" Name="LoginBackgroundText" />
+                    <ScrollViewer x:Name="PART_ContentHost" Foreground="Black"  Margin="7"/>
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Text" Value="" />
+                        <Condition Property="IsFocused" Value="False" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Visibility" TargetName="LoginBackgroundText" Value="Visible" />
+                </MultiTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="TextBoxPassword" TargetType="{x:Type TextBox}">
+            <Border Background="White"  CornerRadius="10">
+                <Grid>
+                    <TextBlock Text="Enter password " FontSize="15" Foreground="Gray" Margin="5" IsHitTestVisible="False" Visibility="Collapsed" Name="PasswordBackgroundText" />
+                    <ScrollViewer x:Name="PART_ContentHost" Foreground="Black"  Margin="7"/>
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Text" Value="" />
+                        <Condition Property="IsFocused" Value="False" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Visibility" TargetName="PasswordBackgroundText" Value="Visible" />
+                </MultiTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+
+
+
+
+
+
+
     <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.ColumnSpan="2"
+                Background="#FF2196F3"
+                MouseDown="Border_MouseDown">
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Content="FlowMeter"
+                       Foreground="White"
+                       FontWeight="SemiBold" Grid.ColumnSpan="2"/>
+                <StackPanel HorizontalAlignment="Left"
+                            Orientation="Horizontal" Grid.Column="1" Margin="90,0,0,0">
+                    <Button Width="20" Height="20"
+                            Content="🗕"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="White"
+                            FontWeight="Bold"
+                            Margin="0,0,0,3"
+                            Click="ButtonMinimize_Click"/>
+                    <Button Width="20" Height="20"
+                            Content="⬜️"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="White"
+                            FontWeight="Bold"
+                            Click="WindowStateButton_Click"/>
+                    <Button Width="20" Height="20"
+                            Content="✕"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="White"
+                            FontWeight="Bold"
+                            Click="CloseButton_Click"/>
+
+                </StackPanel>
+            </Grid>
+        </Border >
+
+
+
+        <Image Name="log" Grid.Row="1" Source="/logo.png"/>
+        <!--<Grid Name="Log_" Grid.Row="1" Grid.Column="2">
+        <ContentControl x:Name="MainLoginControler">
+            <Button Content = "Login" FontSize="17" Margin="170,0,0,0" Click="SwitchToMain_Click">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#FF2196F3"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}" 
+                                                        CornerRadius="15"
+                                                        Padding="0"
+                                                        BorderThickness="0"
+                                                        
+                                                        Margin="5" 
+                                                        Height="30"
+                                                        Width="150">
+                                        <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter Property="Background" Value="#252525"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </ContentControl>
+        </Grid>-->
+
+
+
+        <Grid Name="Log_in" Grid.Row="2" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="67" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="250" />
+            </Grid.ColumnDefinitions>
+            <Border  CornerRadius="18" BorderThickness="4" BorderBrush="#FF2196F3" Height="NaN" Width="NaN" >
+                <Border.Background>
+                    <SolidColorBrush Color="#FF131313" Opacity="0.1"/>
+                </Border.Background>
+                <StackPanel Margin="20">
+
+                    <StackPanel Orientation="Horizontal" Margin="10 0 10 10" HorizontalAlignment="Center">
+                        <TextBlock Text="Welcome" Foreground="#FF2196F3" FontSize="29" RenderTransformOrigin="2.556,1.057" />
+                    </StackPanel>
+
+                    <TextBox x:Name="textlogin" Template="{StaticResource TextBoxLogin}" Margin="150 50 150 15"  />
+                    <TextBox x:Name="textpassword" Template="{StaticResource TextBoxPassword}" Margin="150 10 150 25"  />
+
+                    <StackPanel Orientation="Horizontal" Margin="0 40 0 10" >
+                        <TextBlock Text="Aren`t you registered yet? " FontSize="15" Margin="70 5 0 0" Foreground="#FF929DA9" FontWeight="Bold"   />
+                        <Label Content="Register" >
+                            <Label.Style>
+                                <Style TargetType="Label">
+                                    <Setter Property="Foreground" Value="#FF2196F3"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                    <Setter Property="Margin" Value="0,0,15,0"/>
+                                    <Setter Property="FontSize" Value="15"/>
+                                    <Setter Property="FontWeight" Value="Thin"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="#FF001794"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+                        <ContentControl x:Name="MainLoginControler">
+                            <Button Content = "Login" FontSize="17" Margin="170,0,0,0" Click="SwitchToMain_Click">
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="#FF2196F3"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}" 
+                                                        CornerRadius="15"
+                                                        Padding="0"
+                                                        BorderThickness="0"
+                                                        
+                                                        Margin="5" 
+                                                        Height="30"
+                                                        Width="150">
+                                                    <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsPressed" Value="True">
+                                                        <Setter Property="Background" Value="#252525"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        </ContentControl>
+
+                    </StackPanel>
+
+
+                </StackPanel>
+            </Border>
+
+
+
+        </Grid>
+
+        <Grid Grid.Row="3"   Background="#FF2196F3" Grid.ColumnSpan="2" Width="NaN">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="25" />
+
+            </Grid.RowDefinitions>
+
+
+        </Grid>
+    </Grid>
+    <!--<Grid>
         <ContentControl x:Name="MainContentControl">
             <Grid>
                 <Button Content="Switch to Main" Click="SwitchToMain_Click" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Grid>
         </ContentControl>
-    </Grid>
+    </Grid>-->
 </Window>
