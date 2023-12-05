@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="MainContent.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Counters.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Houses.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Payments.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\PersonalAccounts.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Receipts.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\Services.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Main.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainContent.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Counters.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Houses.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Payments.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\PersonalAccounts.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Receipts.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\Services.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>
