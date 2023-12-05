@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\DevPE\SOFT-ENGINEERS2023\FlowMeterTeamProject\obj\Debug\net7.0-windows\
+C:\Users\andri\SOFT-ENGINEERS2023\FlowMeterTeamProject\obj\Debug\net7.0-windows\
 FlowMeterTeamProject
 none
 false
 TRACE;DEBUG;NET;NET7_0;NETCOREAPP
-D:\DevPE\SOFT-ENGINEERS2023\FlowMeterTeamProject\App.xaml
+C:\Users\andri\SOFT-ENGINEERS2023\FlowMeterTeamProject\App.xaml
 12-1882104592
 11413424753
 28-1326530028
-218160360655
+198-306949569
 HousesDialogWindow\AddNewHouse.xaml;HousesDialogWindow\EditDataHouse.xaml;HousesDialogWindow\PropertiesHouse.xaml;Main.xaml;Pages\Counters.xaml;Pages\Houses.xaml;Pages\Payments.xaml;Pages\PersonalAccounts.xaml;Pages\Receipts.xaml;Pages\Services.xaml;PersonalAccountDialogWindow\EditDataAccounts.xaml;PersonalAccountDialogWindow\PropertiesAccounts.xaml;
 
 False
