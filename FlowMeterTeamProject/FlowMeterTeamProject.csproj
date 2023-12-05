@@ -9,6 +9,8 @@
 
 	<ItemGroup>
 		<None Remove="appsettings.json" />
+		<None Remove="HousesDialogWindow\edit.png" />
+		<None Remove="PersonalAccountDialogWindow\edit.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -30,6 +32,11 @@
 
 	<ItemGroup>
 		<Folder Include="Migrations\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="HousesDialogWindow\edit.png" />
+	  <Resource Include="PersonalAccountDialogWindow\edit.png" />
 	</ItemGroup>
 
 </Project>

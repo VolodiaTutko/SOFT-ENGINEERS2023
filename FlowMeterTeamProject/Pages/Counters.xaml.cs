@@ -71,5 +71,10 @@ namespace FlowMeterTeamProject.Pages
         {
 
         }
+
+        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
