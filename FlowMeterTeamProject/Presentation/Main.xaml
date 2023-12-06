@@ -12,6 +12,58 @@
     <Window.Background>
         <SolidColorBrush Color=" #faf8f0"/>
     </Window.Background>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+
+                    <DoubleAnimation
+                    Storyboard.TargetName="textlogin"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:1" />
+
+                    <DoubleAnimation
+                    Storyboard.TargetName="textpassword"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:1" />
+
+                    <DoubleAnimation
+                    Storyboard.TargetName="MainLoginControler"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:1" />
+
+                    <DoubleAnimation
+                    Storyboard.TargetName="MainLoginControler"
+                    Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                    From="50"
+                    To="0"
+                    Duration="0:0:1" />
+
+                    <DoubleAnimation
+                    Storyboard.TargetName="Log_in"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:1" />
+
+                    <DoubleAnimation
+                    Storyboard.TargetName="Log_in"
+                    Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                    From="-50"
+                    To="0"
+                    Duration="0:0:1" />
+
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+
     <Window.Resources>
         <ControlTemplate x:Key="TextBoxLogin" TargetType="{x:Type TextBox}">
             <Border Background="White"  CornerRadius="10">
