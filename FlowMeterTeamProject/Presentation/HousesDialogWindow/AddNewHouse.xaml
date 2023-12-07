@@ -8,7 +8,7 @@
         Title="Додати новий будинок" Height="400" Width="400">
     <Grid Margin="0, 0,0, 0">
         <Label Content="Адреса" HorizontalAlignment="Left" Margin="34,18,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontFamily="Modern No. 20" Height="28" Width="63"/>
-        <Label Content="Кількість кваритир на обліку" HorizontalAlignment="Left" Margin="34,86,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontFamily="Modern No. 20" Height="27" Width="210"/>
+        <Label Content="Кількість квартир на обліку" HorizontalAlignment="Left" Margin="34,86,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontFamily="Modern No. 20" Height="27" Width="210"/>
         <Label Content="Площа опалення" HorizontalAlignment="Left" Margin="34,158,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontFamily="Modern No. 20" Height="27" Width="130"/>
         <Label Content="Кількість мешканців" HorizontalAlignment="Left" Margin="34,227,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" FontFamily="Modern No. 20" Height="27" Width="154"/>
         <TextBox HorizontalAlignment="Left" Margin="144,18,0,0" TextWrapping="WrapWithOverflow" Text="" VerticalAlignment="Top" Width="215" TextAlignment="Center" BorderBrush="#FFABADB3" TextChanged="TextBox_TextChanged" Height="31"/>

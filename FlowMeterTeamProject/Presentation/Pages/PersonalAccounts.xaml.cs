@@ -19,6 +19,7 @@ using System.Text.RegularExpressions;
 using DAL.Data.DataMock;
 using Presentation.PersonalAccountDialogWindow;
 using BLL.Utils.DataGrid;
+using FlowMeterTeamProject.Presentation.DialogWindows;
 
 namespace Presentation.Pages
 {
@@ -33,35 +34,8 @@ namespace Presentation.Pages
 
             FillDataGrid();
 
-            //Account[] accountData = GenerateRandomAccounts(20);
-
-
-            //using (var context = new AppDbContext())
-            //{
-            //    foreach (var data in accountData)
-            //    {
-            //        context.accounts.Add(data);
-            //    }
-            //    context.SaveChanges();
-            //}
-
+            dataGrid.MouseRightButtonDown += DataGrid_MouseRightButtonDown;
         }
-
-        private void ExportToExcelButton_Click(object sender, RoutedEventArgs e)
-        {
-            XlsxExporter.ExportToExcelButton_Click(sender, e, dataGrid);
-        }
-
-        private void ExportToPdfButton_Click(object sender, RoutedEventArgs e)
-        {
-            PdfExporter.ExportToPdfButton_Click(sender, e, dataGrid);
-        }
-
-        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            DataGridSearch.PerformSearch(dataGrid, searchBox);
-        }
-
 
         public void FillDataGrid()
         {
@@ -97,14 +71,56 @@ namespace Presentation.Pages
             }
         }
 
-        private void b1_Click(object sender, EventArgs e)
+        private void DataGrid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+            var row = (DataGridRow)(dataGrid.ItemContainerGenerator.ContainerFromItem(dataGrid.SelectedItem));
 
+            if (row != null)
+            {
+                Dictionary<string, string> rowData = new Dictionary<string, string>();
+
+                foreach (var column in dataGrid.Columns)
+                {
+                    if (column is DataGridTextColumn textColumn)
+                    {
+                        string header = textColumn.Header.ToString();
+
+                        var cellContent = column.GetCellContent(row);
+
+                        if (cellContent is TextBlock textBlock)
+                        {
+                            string cellValue = textBlock.Text;
+                            rowData.Add(header, cellValue);
+                        }
+                    }
+                }
+
+                RowDetails dialog = new RowDetails(rowData);
+                dialog.Owner = Window.GetWindow(this);
+                dialog.ShowDialog();
+            }
+        }
+        
+        private void ExportToExcelButton_Click(object sender, RoutedEventArgs e)
+        {
+            XlsxExporter.ExportToExcelButton_Click(sender, e, dataGrid);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ExportToPdfButton_Click(object sender, RoutedEventArgs e)
         {
-
+            PdfExporter.ExportToPdfButton_Click(sender, e, dataGrid);
         }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DataGridSearch.PerformSearch(dataGrid, searchBox);
+        }
+
+        private void AddNewRecordButton_Click(object sender, RoutedEventArgs e)
+        {
+            var propertiesAccountsWindow = new Presentation.PersonalAccountDialogWindow.PropertiesAccounts();
+            propertiesAccountsWindow.ShowDialog();
+        }
+
     }
 }

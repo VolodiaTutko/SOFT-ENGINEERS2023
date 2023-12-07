@@ -36,13 +36,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="№" Binding="{Binding Number}" />
-                <DataGridTextColumn Header="Counter ID" Binding="{Binding CountersId}" />
-                <DataGridTextColumn Header="Previous Indicator" Binding="{Binding PreviousIndicator}" />
-                <DataGridTextColumn Header="Current Indicator" Binding="{Binding CurrentIndicator}" />
-                <DataGridTextColumn Header="Account" Binding="{Binding Account}" />
-                <DataGridTextColumn Header="Type Of Account" Binding="{Binding TypeOfAccount}" />
-                <DataGridTextColumn Header="Date" Binding="{Binding Date}" />
+                <DataGridTextColumn Header="№" Binding="{Binding Number}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Counter ID" Binding="{Binding CountersId}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Previous Indicator" Binding="{Binding PreviousIndicator}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Current Indicator" Binding="{Binding CurrentIndicator}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Account" Binding="{Binding Account}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Type Of Account" Binding="{Binding TypeOfAccount}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding Date}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

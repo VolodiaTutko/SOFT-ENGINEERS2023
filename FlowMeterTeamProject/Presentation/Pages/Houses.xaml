@@ -37,12 +37,12 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="№" Binding="{Binding Number}" />
-                <DataGridTextColumn Header="House ID" Binding="{Binding HouseId}" />
-                <DataGridTextColumn Header="House Address" Binding="{Binding HouseAddress}" />
-                <DataGridTextColumn Header="Heating Area" Binding="{Binding HeatingAreaOfHouse}" />
-                <DataGridTextColumn Header="Number of Flat" Binding="{Binding NumberOfFlat}" />
-                <DataGridTextColumn Header="Number of Residents" Binding="{Binding NumberOfResidents}" />
+                <DataGridTextColumn Header="№" Binding="{Binding Number}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="House ID" Binding="{Binding HouseId}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="House Address" Binding="{Binding HouseAddress}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Heating Area" Binding="{Binding HeatingAreaOfHouse}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Number of Flat" Binding="{Binding NumberOfFlat}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Number of Residents" Binding="{Binding NumberOfResidents}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

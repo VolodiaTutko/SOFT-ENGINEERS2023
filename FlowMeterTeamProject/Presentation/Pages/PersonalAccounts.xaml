@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Margin="10">
-            <Button Content="Додати новий запис" Margin="0,0,20,0" />
+            <Button Content="Додати новий запис" Margin="0,0,20,0" Click="AddNewRecordButton_Click" />
             <Button Content="Export to PDF" Margin="0,0,20,0" Click="ExportToPdfButton_Click"/>
             <Button Content="Export to XLSX" Margin="0,0,20,0" Click="ExportToExcelButton_Click"/>
             <TextBox x:Name="searchBox" Width="200" TextChanged="SearchBox_TextChanged">
@@ -33,18 +33,17 @@
                 <DataGridTemplateColumn Width="30">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-
-                            <CheckBox Name="b1" Click="b1_Click" />
+                            <CheckBox Name="b1" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="№" Binding="{Binding №}" />
-                <DataGridTextColumn Header="PersonalAccount" Binding="{Binding PersonalAccount}" />
-                <DataGridTextColumn Header="HotWater" Binding="{Binding HotWater}" />
-                <DataGridTextColumn Header="ColdWater" Binding="{Binding ColdWater}" />
-                <DataGridTextColumn Header="Heating" Binding="{Binding Heating}" />
-                <DataGridTextColumn Header="Electricity" Binding="{Binding Electricity}" />
-                <DataGridTextColumn Header="PublicService" Binding="{Binding PublicService}" />
+                <DataGridTextColumn Header="№" Binding="{Binding №}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="PersonalAccount" Binding="{Binding PersonalAccount}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="HotWater" Binding="{Binding HotWater}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="ColdWater" Binding="{Binding ColdWater}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Heating" Binding="{Binding Heating}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Electricity" Binding="{Binding Electricity}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="PublicService" Binding="{Binding PublicService}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
