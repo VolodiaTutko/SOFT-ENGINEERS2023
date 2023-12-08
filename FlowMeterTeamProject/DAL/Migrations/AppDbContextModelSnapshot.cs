@@ -65,10 +65,10 @@ namespace FlowMeterTeamProject.Migrations
                     b.Property<int?>("HeatingArea")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("HouseID")
+                    b.Property<int>("HouseId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("NumberOfPersons")
+                    b.Property<int>("NumberOfPersons")
                         .HasColumnType("integer");
 
                     b.Property<string>("PersonalAccount")
