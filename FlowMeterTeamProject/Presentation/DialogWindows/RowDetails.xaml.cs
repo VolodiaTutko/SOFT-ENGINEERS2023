@@ -33,7 +33,6 @@ namespace FlowMeterTeamProject.Presentation.DialogWindows
                     detailsTextBlock.Text += $"{pair.Key}: {pair.Value}\n";
                 }
 
-                // Add a separator between rows
                 detailsTextBlock.Text += "------------------------\n";
             }
         }

@@ -37,9 +37,9 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="№" Binding="{Binding Number}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="ServiceId" Binding="{Binding ServiceId}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="HouseId" Binding="{Binding HouseId}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="TypeOfAccount" Binding="{Binding TypeOfAccount}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Service Id" Binding="{Binding ServiceId}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="House Id" Binding="{Binding HouseId}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Type Of Account" Binding="{Binding TypeOfAccount}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>

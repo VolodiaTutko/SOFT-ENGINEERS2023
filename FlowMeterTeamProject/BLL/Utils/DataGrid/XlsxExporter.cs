@@ -26,7 +26,7 @@ namespace BLL.Utils.DataGrid
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             string downloadsPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
-            string filePath = System.IO.Path.Combine(downloadsPath, "ExportedDataXLSX.xlsx");
+            string filePath = System.IO.Path.Combine(downloadsPath, $"ExportedData_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx");
             ExportDataGridToExcel(dataGrid, filePath);
         }
 
@@ -39,18 +39,26 @@ namespace BLL.Utils.DataGrid
                     var worksheet = package.Workbook.Worksheets.Add("ExportedData");
 
                     int headerIndex = 1;
+
+                    Dictionary<string, string> columnHeaderToPropertyName = new Dictionary<string, string>();
+
                     foreach (DataGridColumn column in dataGrid.Columns)
                     {
                         if (!(column is DataGridTemplateColumn && ((DataGridTemplateColumn)column).CellTemplate.LoadContent() is CheckBox))
                         {
-                            worksheet.Cells[1, headerIndex].Value = column.Header.ToString();
+                            string columnHeader = column.Header.ToString();
+
+                            string propertyName = columnHeader.Replace(" ", "");
+
+                            columnHeaderToPropertyName[columnHeader] = propertyName;
+
+                            worksheet.Cells[1, headerIndex].Value = columnHeader;
                             headerIndex++;
                         }
                     }
 
                     int rowIndex = 2;
 
-                    // Check if any checkboxes are selected
                     bool checkboxesSelected = false;
 
                     foreach (var item in dataGrid.Items)
@@ -69,7 +77,6 @@ namespace BLL.Utils.DataGrid
                         }
                     }
 
-                    // Export all rows or only selected rows based on checkboxesSelected
                     foreach (var item in dataGrid.Items)
                     {
                         if (!checkboxesSelected || checkboxesSelected && IsRowSelected(item, dataGrid))
@@ -77,17 +84,34 @@ namespace BLL.Utils.DataGrid
                             if (item is DataRowView rowView && rowView.Row.ItemArray.Length > 0)
                             {
                                 var row = rowView.Row;
+
+                                bool startNewLine = headerIndex > 1;
+
                                 int columnIndex = 1;
+
                                 foreach (DataGridColumn column in dataGrid.Columns)
                                 {
                                     if (!(column is DataGridTemplateColumn && ((DataGridTemplateColumn)column).CellTemplate.LoadContent() is CheckBox))
                                     {
-                                        string propertyName = column.Header.ToString();
-                                        object cellValue = row[propertyName];
-                                        worksheet.Cells[rowIndex, columnIndex].Value = cellValue?.ToString();
-                                        columnIndex++;
+                                        string columnHeader = column.Header.ToString();
+
+                                        if (columnHeaderToPropertyName.TryGetValue(columnHeader, out string propertyName))
+                                        {
+                                            if (startNewLine)
+                                            {
+                                                worksheet.Cells[rowIndex, columnIndex].Value = row[propertyName]?.ToString();
+                                            }
+                                            else
+                                            {
+                                                worksheet.Cells[rowIndex, columnIndex].Value = columnHeader;
+                                                startNewLine = true;
+                                            }
+
+                                            columnIndex++;
+                                        }
                                     }
                                 }
+
                                 rowIndex++;
                             }
                         }
@@ -103,6 +127,7 @@ namespace BLL.Utils.DataGrid
                 MessageBox.Show($"Error exporting data to Excel: {ex.Message}", "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
 
         private static T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject

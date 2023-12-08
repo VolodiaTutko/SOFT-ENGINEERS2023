@@ -15,7 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Text.RegularExpressions;
 using DAL.Data.DataMock;
 using Presentation.PersonalAccountDialogWindow;
 using BLL.Utils.DataGrid;
@@ -170,11 +169,6 @@ namespace Presentation.Pages
             var propertiesAccountsWindow = new Presentation.PersonalAccountDialogWindow.PropertiesAccounts();
             propertiesAccountsWindow.ShowDialog();
         }
-
-
-
-
-
 
         private void CheckBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {

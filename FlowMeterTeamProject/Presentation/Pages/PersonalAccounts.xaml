@@ -38,11 +38,11 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="№" Binding="{Binding №}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="ConsumersId" Binding="{Binding ConsumersId}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="PersonalAccount" Binding="{Binding PersonalAccount}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Consumers Id" Binding="{Binding ConsumersId}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Personal Account" Binding="{Binding PersonalAccount}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Flat" Binding="{Binding Flat}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="ConsumerOwner" Binding="{Binding ConsumerOwner}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="HeatingArea" Binding="{Binding HeatingArea}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Consumer Owner" Binding="{Binding ConsumerOwner}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Heating Area" Binding="{Binding HeatingArea}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
