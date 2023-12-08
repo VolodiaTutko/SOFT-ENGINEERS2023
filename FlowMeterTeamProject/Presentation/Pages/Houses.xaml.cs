@@ -38,10 +38,15 @@ namespace Presentation.Pages
 
                 DataTable dt = new DataTable("House");
                 dt.Columns.Add("Number", typeof(int));
+                dt.Columns.Add("HouseAddress", typeof(string));
+                dt.Columns.Add("HeatingAreaOfHouse", typeof(int));
+                dt.Columns.Add("NumberOfFlat", typeof(int));
+                dt.Columns.Add("NumberOfResidents", typeof(int));
+
 
                 for (int i = 0; i < houses.Count; i++)
                 {
-                    dt.Rows.Add(i + 1, houses[i].HouseId, houses[i].HouseAddress, houses[i].HeatingAreaOfHouse, houses[i].NumberOfFlat, houses[i].NumberOfResidents);
+                    dt.Rows.Add(i + 1, houses[i].HouseAddress, houses[i].HeatingAreaOfHouse, houses[i].NumberOfFlat, houses[i].NumberOfResidents);
                 }
 
                 dt.Columns["Number"].SetOrdinal(0);

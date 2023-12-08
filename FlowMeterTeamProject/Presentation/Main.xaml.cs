@@ -24,9 +24,9 @@ namespace Presentation
         {
             InitializeComponent();
 
-            if (Mock.checkIfDbAccountsEmpty())
+            if (Mock.checkIfDbConsumersEmpty())
             {
-                Mock.FillRandomAccountsIntoDb(5);
+                Mock.FillRandomConsumersIntoDb(5);
             }
         }
 

@@ -19,16 +19,22 @@ namespace FlowMeterTeamProject.Presentation.DialogWindows
     /// </summary>
     public partial class RowDetails : Window
     {
-        private readonly Dictionary<string, string> rowData;
+        private readonly List<Dictionary<string, string>> rowsData;
 
-        public RowDetails(Dictionary<string, string> rowData)
+        public RowDetails(List<Dictionary<string, string>> rowsData)
         {
             InitializeComponent();
-            this.rowData = rowData;
+            this.rowsData = rowsData;
 
-            foreach (var pair in rowData)
+            foreach (var rowData in rowsData)
             {
-                detailsTextBlock.Text += $"{pair.Key}: {pair.Value}\n";
+                foreach (var pair in rowData)
+                {
+                    detailsTextBlock.Text += $"{pair.Key}: {pair.Value}\n";
+                }
+
+                // Add a separator between rows
+                detailsTextBlock.Text += "------------------------\n";
             }
         }
     }

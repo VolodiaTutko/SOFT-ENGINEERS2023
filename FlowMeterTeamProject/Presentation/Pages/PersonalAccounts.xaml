@@ -28,22 +28,21 @@
             <TextBlock x:Name="currentDateTextBlock" Margin="10,0,0,0" />
         </StackPanel>
 
-        <DataGrid x:Name="dataGrid" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*" EnableRowVirtualization="False" EnableColumnVirtualization="False">
+        <DataGrid x:Name="dataGrid" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*" EnableRowVirtualization="False" EnableColumnVirtualization="False" >
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="30">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox Name="b1" />
+                            <CheckBox Name="b1" IsChecked="{Binding IsSelected, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" PreviewMouseLeftButtonDown="CheckBox_PreviewMouseDown"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="№" Binding="{Binding №}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="ConsumersId" Binding="{Binding ConsumersId}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="PersonalAccount" Binding="{Binding PersonalAccount}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="HotWater" Binding="{Binding HotWater}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="ColdWater" Binding="{Binding ColdWater}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Heating" Binding="{Binding Heating}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Electricity" Binding="{Binding Electricity}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="PublicService" Binding="{Binding PublicService}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Flat" Binding="{Binding Flat}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="ConsumerOwner" Binding="{Binding ConsumerOwner}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="HeatingArea" Binding="{Binding HeatingArea}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
