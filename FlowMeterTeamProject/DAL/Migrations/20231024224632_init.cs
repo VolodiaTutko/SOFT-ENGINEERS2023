@@ -32,14 +32,14 @@ namespace FlowMeterTeamProject.Migrations
                 name: "consumers",
                 columns: table => new
                 {
-                    HouseId = table.Column<int>(type: "integer", nullable: false),
+                   
                     ConsumersId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PersonalAccount = table.Column<string>(type: "text", nullable: false),
                     Flat = table.Column<int>(type: "integer", nullable: true),
                     ConsumerOwner = table.Column<string>(type: "text", nullable: false),
                     HeatingArea = table.Column<int>(type: "integer", nullable: true),
-                    NumberOfPersons = table.Column<int>(type: "integer", nullable: true)
+                   
                 },
                 constraints: table =>
                 {

@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FlowMeterTeamProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231024224632_init")]
-    partial class init
+    [Migration("20231208201243_NewMigration")]
+    partial class NewMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace FlowMeterTeamProject.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("FlowMeterTeamProject.Data.Account", b =>
+            modelBuilder.Entity("DAL.Data.Account", b =>
                 {
                     b.Property<string>("PersonalAccount")
                         .HasColumnType("text");
@@ -50,7 +50,7 @@ namespace FlowMeterTeamProject.Migrations
                     b.ToTable("accounts");
                 });
 
-            modelBuilder.Entity("FlowMeterTeamProject.Data.Consumer", b =>
+            modelBuilder.Entity("DAL.Data.Consumer", b =>
                 {
                     b.Property<int>("ConsumersId")
                         .ValueGeneratedOnAdd()
@@ -63,9 +63,15 @@ namespace FlowMeterTeamProject.Migrations
                         .HasColumnType("text");
 
                     b.Property<int?>("Flat")
-                        .HasColumnType("integer");                 
+                        .HasColumnType("integer");
 
                     b.Property<int?>("HeatingArea")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("HouseId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("NumberOfPersons")
                         .HasColumnType("integer");
 
                     b.Property<string>("PersonalAccount")
@@ -77,7 +83,7 @@ namespace FlowMeterTeamProject.Migrations
                     b.ToTable("consumers");
                 });
 
-            modelBuilder.Entity("FlowMeterTeamProject.Data.Counter", b =>
+            modelBuilder.Entity("DAL.Data.Counter", b =>
                 {
                     b.Property<int>("CountersId")
                         .ValueGeneratedOnAdd()
@@ -107,7 +113,7 @@ namespace FlowMeterTeamProject.Migrations
                     b.ToTable("counters");
                 });
 
-            modelBuilder.Entity("FlowMeterTeamProject.Data.Employee", b =>
+            modelBuilder.Entity("DAL.Data.Employee", b =>
                 {
                     b.Property<string>("EmployeeLogin")
                         .HasColumnType("text");
@@ -125,7 +131,7 @@ namespace FlowMeterTeamProject.Migrations
                     b.ToTable("employees");
                 });
 
-            modelBuilder.Entity("FlowMeterTeamProject.Data.House", b =>
+            modelBuilder.Entity("DAL.Data.House", b =>
                 {
                     b.Property<int>("HouseId")
                         .ValueGeneratedOnAdd()
@@ -151,7 +157,7 @@ namespace FlowMeterTeamProject.Migrations
                     b.ToTable("houses");
                 });
 
-            modelBuilder.Entity("FlowMeterTeamProject.Data.Service", b =>
+            modelBuilder.Entity("DAL.Data.Service", b =>
                 {
                     b.Property<int>("ServiceId")
                         .ValueGeneratedOnAdd()

@@ -20,8 +20,10 @@ namespace FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow
     /// </summary>
     public partial class AddNewAccount : Window
     {
+        private IDataGridUpdater _dataGridUpdater;
+
         public List<string> MyItems { get; set; } = new List<string>();
-        public AddNewAccount()
+        public AddNewAccount(IDataGridUpdater dataGridUpdater)
         {
             InitializeComponent();
             this.ResizeMode = ResizeMode.NoResize;
@@ -38,7 +40,8 @@ namespace FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow
 
 
             };
-                
+            _dataGridUpdater = dataGridUpdater;
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -47,6 +50,58 @@ namespace FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void SaveNewAccount(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                using (var context = new AppDbContext())
+                {
+                    var selectedItem = HouseComboBox.SelectedItem;
+                    string selectedValue = selectedItem.ToString();
+
+
+                    int houseid = context.houses
+                        .Where(h => h.HouseAddress == selectedValue)
+                        .Select(h => h.HouseId)
+                        .FirstOrDefault();
+
+                   
+                    string owner = OwnerTextBox.Text;
+                    int flat = int.Parse(FlatTextBox.Text);
+                    int heatingArea = int.Parse(HeatingAreaTextBox.Text);
+                    string personalAccount = PersonalAccountTextBox.Text;
+                    int numberOfPersons = int.Parse(NumberOfPersonsTextBox.Text);
+
+
+                    Consumer newPersonalAccount = new Consumer
+                    {
+                        HouseId = houseid,
+                        ConsumerOwner = owner,
+                        Flat = flat,
+                        HeatingArea = heatingArea,
+                        PersonalAccount = personalAccount,
+                        NumberOfPersons = numberOfPersons
+                    };
+
+                    context.consumers.Add(newPersonalAccount);
+                    context.SaveChanges();
+                    _dataGridUpdater?.UpdateDataGrid();
+                    this.Close();
+                    MessageBox.Show($"Додано новий особовий рахунок: {newPersonalAccount.PersonalAccount}");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Опціонально: обробте помилку (виведення повідомлення або логування)
+                MessageBox.Show($"Помилка при збереженні даних: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Save(object sender, RoutedEventArgs e)
         {
 
         }

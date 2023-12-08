@@ -18,6 +18,6 @@ namespace DAL.Data
         public string ConsumerOwner { get; set; }
         public int? HeatingArea { get; set; }
 
-        public int? NumberOfPersons { get; set; }
+       
     }
 }

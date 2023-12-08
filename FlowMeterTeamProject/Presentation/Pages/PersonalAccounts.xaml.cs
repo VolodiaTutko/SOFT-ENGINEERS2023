@@ -21,58 +21,68 @@ using Presentation.PersonalAccountDialogWindow;
 using BLL.Utils.DataGrid;
 using FlowMeterTeamProject.Presentation.DialogWindows;
 using FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow;
+using FlowMeterTeamProject.Presentation;
 
 namespace Presentation.Pages
 {
     /// <summary>
     /// Interaction logic for PersonalAccounts.xaml
     /// </summary>
-    public partial class PersonalAccounts : Page
-    {
+    public partial class PersonalAccounts : Page, IDataGridUpdater
+    {       
         public PersonalAccounts()
         {
             InitializeComponent();
 
-            //FillDataGrid();
+            FillDataGrid();
 
             dataGrid.MouseRightButtonDown += DataGrid_MouseRightButtonDown;
         }
+        public event EventHandler DataGridUpdated;
 
-        //public void FillDataGrid()
-        //{
-        //    using (var context = new AppDbContext())
-        //    {
-        //        List<Consumer> personalAccounts = context.consumers.ToList();
+        public void UpdateDataGrid()
+        {
+            FillDataGrid();
+        }
 
-        //        DataTable dt = new DataTable("PesronalAccount");
-        //        dt.Columns.Add("№", typeof(int));
-        //        dt.Columns.Add("PersonalAccount", typeof(string));
-        //        dt.Columns.Add("Owner", typeof(decimal));
-        //        dt.Columns.Add("House", typeof(decimal));
-        //        dt.Columns.Add("Flat", typeof(decimal));
-        //        dt.Columns.Add("Area", typeof(decimal));
-        //        dt.Columns.Add("NumberOfPerson", typeof(decimal));
-              
+        public void FillDataGrid()
+        {
+            using (var context = new AppDbContext())
+            {
+                List<Consumer> personalAccounts = context.consumers.ToList();
 
-        //        for (int i = 0; i < personalAccounts.Count; i++)
-        //        {
-                    
-        //            dt.Rows.Add(
-        //                i + 1,
-        //                personalAccounts[i].PersonalAccount,
-        //                personalAccounts[i].ConsumerOwner,
-        //                personalAccounts[i].HouseID,
-        //                personalAccounts[i].Flat,
-        //                personalAccounts[i].HeatingArea,
-        //                personalAccounts[i].NumberOfPersons
-        //            );
-        //        }
+                DataTable dt = new DataTable("PesronalAccount");
+                dt.Columns.Add("№", typeof(int));
+                dt.Columns.Add("PersonalAccount", typeof(string));
+                dt.Columns.Add("Owner", typeof(string));
+                dt.Columns.Add("House", typeof(string));
+                dt.Columns.Add("Flat", typeof(decimal));
+                dt.Columns.Add("Area", typeof(decimal));
+                dt.Columns.Add("NumberOfPerson", typeof(decimal));
 
-        //        dt.Columns["№"].SetOrdinal(0);
 
-        //        dataGrid.ItemsSource = dt.DefaultView;
-        //    }
-        //}
+                for (int i = 0; i < personalAccounts.Count; i++)
+                {
+
+                    dt.Rows.Add(
+                        i + 1,
+                        personalAccounts[i].PersonalAccount,
+                        personalAccounts[i].ConsumerOwner,
+                        context.houses
+                        .Where(h => h.HouseId == personalAccounts[i].HouseId)
+                        .Select(h => h.HouseAddress)
+                        .FirstOrDefault(),
+                        personalAccounts[i].Flat,
+                        personalAccounts[i].HeatingArea,
+                        personalAccounts[i].NumberOfPersons
+                    );
+                }
+
+                dt.Columns["№"].SetOrdinal(0);
+
+                dataGrid.ItemsSource = dt.DefaultView;
+            }
+        }
 
         private void DataGrid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -121,7 +131,7 @@ namespace Presentation.Pages
 
         private void AddNewRecordButton_Click(object sender, RoutedEventArgs e)
         {
-            var addNewAccount = new AddNewAccount();
+            var addNewAccount = new AddNewAccount(this);
             addNewAccount.ShowDialog();
         }
 

@@ -41,8 +41,8 @@
                 <DataGridTextColumn Header="Особовий рахунок" Binding="{Binding PersonalAccount}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="ПІБ власника" Binding="{Binding Owner}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Будинок" Binding="{Binding House}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="№ квартири" Binding="{Binding Falt}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Площа" Binding="{Binding Area}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="№ квартири" Binding="{Binding Flat}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Площа м²" Binding="{Binding Area}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Кількість співмешканців" Binding="{Binding NumberOfPerson}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
