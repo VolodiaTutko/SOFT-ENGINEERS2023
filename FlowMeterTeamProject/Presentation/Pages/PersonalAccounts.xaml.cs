@@ -20,6 +20,7 @@ using DAL.Data.DataMock;
 using Presentation.PersonalAccountDialogWindow;
 using BLL.Utils.DataGrid;
 using FlowMeterTeamProject.Presentation.DialogWindows;
+using FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow;
 
 namespace Presentation.Pages
 {
@@ -32,44 +33,46 @@ namespace Presentation.Pages
         {
             InitializeComponent();
 
-            FillDataGrid();
+            //FillDataGrid();
 
             dataGrid.MouseRightButtonDown += DataGrid_MouseRightButtonDown;
         }
 
-        public void FillDataGrid()
-        {
-            using (var context = new AppDbContext())
-            {
-                List<Account> accounts = context.accounts.ToList();
+        //public void FillDataGrid()
+        //{
+        //    using (var context = new AppDbContext())
+        //    {
+        //        List<Consumer> personalAccounts = context.consumers.ToList();
 
-                DataTable dt = new DataTable("Account");
-                dt.Columns.Add("№", typeof(int));
-                dt.Columns.Add("PersonalAccount", typeof(string));
-                dt.Columns.Add("HotWater", typeof(decimal));
-                dt.Columns.Add("ColdWater", typeof(decimal));
-                dt.Columns.Add("Heating", typeof(decimal));
-                dt.Columns.Add("Electricity", typeof(decimal));
-                dt.Columns.Add("PublicService", typeof(decimal));
+        //        DataTable dt = new DataTable("PesronalAccount");
+        //        dt.Columns.Add("№", typeof(int));
+        //        dt.Columns.Add("PersonalAccount", typeof(string));
+        //        dt.Columns.Add("Owner", typeof(decimal));
+        //        dt.Columns.Add("House", typeof(decimal));
+        //        dt.Columns.Add("Flat", typeof(decimal));
+        //        dt.Columns.Add("Area", typeof(decimal));
+        //        dt.Columns.Add("NumberOfPerson", typeof(decimal));
+              
 
-                for (int i = 0; i < accounts.Count; i++)
-                {
-                    dt.Rows.Add(
-                        i + 1,
-                        accounts[i].PersonalAccount,
-                        accounts[i].HotWater,
-                        accounts[i].ColdWater,
-                        accounts[i].Heating,
-                        accounts[i].Electricity,
-                        accounts[i].PublicService
-                    );
-                }
+        //        for (int i = 0; i < personalAccounts.Count; i++)
+        //        {
+                    
+        //            dt.Rows.Add(
+        //                i + 1,
+        //                personalAccounts[i].PersonalAccount,
+        //                personalAccounts[i].ConsumerOwner,
+        //                personalAccounts[i].HouseID,
+        //                personalAccounts[i].Flat,
+        //                personalAccounts[i].HeatingArea,
+        //                personalAccounts[i].NumberOfPersons
+        //            );
+        //        }
 
-                dt.Columns["№"].SetOrdinal(0);
+        //        dt.Columns["№"].SetOrdinal(0);
 
-                dataGrid.ItemsSource = dt.DefaultView;
-            }
-        }
+        //        dataGrid.ItemsSource = dt.DefaultView;
+        //    }
+        //}
 
         private void DataGrid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -118,9 +121,23 @@ namespace Presentation.Pages
 
         private void AddNewRecordButton_Click(object sender, RoutedEventArgs e)
         {
-            var propertiesAccountsWindow = new Presentation.PersonalAccountDialogWindow.PropertiesAccounts();
-            propertiesAccountsWindow.ShowDialog();
+            var addNewAccount = new AddNewAccount();
+            addNewAccount.ShowDialog();
         }
 
+        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void DataGrid_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.RightButton == MouseButtonState.Pressed)
+            {
+                // Показати вікно PropertiesAcconts
+                var propertiesWindow = new PropertiesAccounts();
+                propertiesWindow.ShowDialog();
+            }
+        }
     }
 }

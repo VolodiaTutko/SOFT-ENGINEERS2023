@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Margin="10">
-            <Button Content="Додати новий запис" Margin="0,0,20,0" Click="Button_Click" />
+            <Button Content="Додати новий запис" Margin="0,0,20,0" Click="Button_Click" FontWeight="Bold" BorderBrush="#FFB1B1B1" Background="#FF1F4E8E" Foreground="White" />
             <TextBox x:Name="searchBox" Width="200">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -27,7 +27,7 @@
             <TextBlock x:Name="currentDateTextBlock" Margin="10,0,0,0" />
         </StackPanel>
 
-        <DataGrid x:Name="dataGrid" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*" EnableRowVirtualization="False" EnableColumnVirtualization="False">
+        <DataGrid x:Name="dataGrid" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*" EnableRowVirtualization="False" EnableColumnVirtualization="False" SelectionChanged="dataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="30">
                     <DataGridTemplateColumn.CellTemplate>
@@ -38,11 +38,10 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="№" Binding="{Binding Number}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="House ID" Binding="{Binding HouseId}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="House Address" Binding="{Binding HouseAddress}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Heating Area" Binding="{Binding HeatingAreaOfHouse}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Number of Flat" Binding="{Binding NumberOfFlat}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Number of Residents" Binding="{Binding NumberOfResidents}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Адреса будинку" Binding="{Binding HouseAddress}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Площа опалення" Binding="{Binding HeatingAreaOfHouse}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Кількість квартир" Binding="{Binding NumberOfFlat}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Кількість мешканців" Binding="{Binding NumberOfResidents}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Presentation.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="PersonalAccounts">
+      Title="Особові рахунки">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -28,7 +28,7 @@
             <TextBlock x:Name="currentDateTextBlock" Margin="10,0,0,0" />
         </StackPanel>
 
-        <DataGrid x:Name="dataGrid" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*" EnableRowVirtualization="False" EnableColumnVirtualization="False">
+        <DataGrid x:Name="dataGrid" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*" EnableRowVirtualization="False" EnableColumnVirtualization="False" SelectionChanged="dataGrid_SelectionChanged" MouseRightButtonDown="DataGrid_PreviewMouseRightButtonDown">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="30">
                     <DataGridTemplateColumn.CellTemplate>
@@ -38,12 +38,12 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="№" Binding="{Binding №}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="PersonalAccount" Binding="{Binding PersonalAccount}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="HotWater" Binding="{Binding HotWater}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="ColdWater" Binding="{Binding ColdWater}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Heating" Binding="{Binding Heating}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Electricity" Binding="{Binding Electricity}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="PublicService" Binding="{Binding PublicService}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Особовий рахунок" Binding="{Binding PersonalAccount}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="ПІБ власника" Binding="{Binding Owner}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Будинок" Binding="{Binding House}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="№ квартири" Binding="{Binding Falt}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Площа" Binding="{Binding Area}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Кількість співмешканців" Binding="{Binding NumberOfPerson}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

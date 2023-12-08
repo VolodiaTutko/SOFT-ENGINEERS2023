@@ -38,11 +38,11 @@ namespace DAL.Data.DataMock
                 .Select(i => new Account
                 {
                     PersonalAccount = GenerateRandomNumberString(),
-                    HotWater = (int)random.NextDouble() * 100,
-                    ColdWater = (int)random.NextDouble() * 100,
-                    Heating = (int)random.NextDouble() * 100,
-                    Electricity = (int)random.NextDouble() * 100,
-                    PublicService = (int)random.NextDouble() * 100
+                    //HotWater = (int)random.NextDouble() * 100,
+                    //ColdWater = (int)random.NextDouble() * 100,
+                    //Heating = (int)random.NextDouble() * 100,
+                    //Electricity = (int)random.NextDouble() * 100,
+                    //PublicService = (int)random.NextDouble() * 100
                 })
                 .ToArray();
         }

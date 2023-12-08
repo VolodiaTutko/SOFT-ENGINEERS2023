@@ -22,6 +22,7 @@ namespace Presentation.HousesDialogWindow
         public EditDataHouse()
         {
             InitializeComponent();
+            this.ResizeMode = ResizeMode.NoResize;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
