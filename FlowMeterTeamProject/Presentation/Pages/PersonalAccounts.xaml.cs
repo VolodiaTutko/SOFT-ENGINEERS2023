@@ -50,15 +50,14 @@ namespace Presentation.Pages
             {
                 List<Consumer> personalAccounts = context.consumers.ToList();
 
-                DataTable dt = new DataTable("PesronalAccount");
+                DataTable dt = new DataTable("Consumer");
                 dt.Columns.Add("№", typeof(int));
-                dt.Columns.Add("ConsumersId", typeof(int));
                 dt.Columns.Add("PersonalAccount", typeof(string));
-                dt.Columns.Add("Owner", typeof(string));
-                dt.Columns.Add("House", typeof(string));
-                dt.Columns.Add("Flat", typeof(decimal));
-                dt.Columns.Add("Area", typeof(decimal));
-                dt.Columns.Add("NumberOfPerson", typeof(decimal));
+                dt.Columns.Add("Flat", typeof(int));
+                dt.Columns.Add("ConsumerOwner", typeof(string));
+                dt.Columns.Add("HeatingArea", typeof(int));
+                dt.Columns.Add("HouseAddress", typeof(string));
+                dt.Columns.Add("NumberOfPerson", typeof(int));
 
 
                 for (int i = 0; i < personalAccounts.Count; i++)
@@ -67,13 +66,13 @@ namespace Presentation.Pages
                     dt.Rows.Add(
                         i + 1,
                         personalAccounts[i].PersonalAccount,
+                        personalAccounts[i].Flat,
                         personalAccounts[i].ConsumerOwner,
+                        personalAccounts[i].HeatingArea,
                         context.houses
                         .Where(h => h.HouseId == personalAccounts[i].HouseId)
                         .Select(h => h.HouseAddress)
                         .FirstOrDefault(),
-                        personalAccounts[i].Flat,
-                        personalAccounts[i].HeatingArea,
                         personalAccounts[i].NumberOfPersons
                     );
                 }
@@ -199,6 +198,33 @@ namespace Presentation.Pages
                 var propertiesWindow = new PropertiesAccounts();
                 propertiesWindow.ShowDialog();
             }
+        }
+
+
+        private void CheckBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+
+            DataGridRow dataGridRow = FindAncestor<DataGridRow>(checkBox);
+            if (dataGridRow != null)
+            {
+                dataGridRow.IsSelected = !dataGridRow.IsSelected;
+            }
+            e.Handled = true;
+        }
+
+        private T FindAncestor<T>(DependencyObject current) where T : DependencyObject
+        {
+            do
+            {
+                if (current is T ancestor)
+                {
+                    return ancestor;
+                }
+                current = VisualTreeHelper.GetParent(current);
+            } while (current != null);
+
+            return null;
         }
     }
 }
