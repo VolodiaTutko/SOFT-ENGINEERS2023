@@ -16,20 +16,22 @@ using iText.Layout.Properties;
 using iText.IO.Font;
 using iText.IO.Font.Constants;
 using iText.Kernel.Font;
+using iTextSharp.text;
+using System.Windows.Data;
+using iText.Layout;
 
 namespace BLL.Utils.DataGrid
 {
     internal class PdfExporter
     {
-        public static void ExportToPdfButton_Click(object sender, RoutedEventArgs e, System.Windows.Controls.DataGrid dataGrid, string title)
+        public static void ExportToPdfButton_Click(object sender, RoutedEventArgs e, System.Windows.Controls.DataGrid dataGrid, string title, List<string> customHeaders)
         {
             string downloadsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
             string filePath = Path.Combine(downloadsPath, $"ExportedData_{DateTime.Now:yyyyMMdd_HHmmss}.pdf");
-            ExportDataGridToPdf(dataGrid, filePath, title);
+            ExportDataGridToPdf(dataGrid, filePath, title, customHeaders);
         }
 
-
-        private static void ExportDataGridToPdf(System.Windows.Controls.DataGrid dataGrid, string filePath, string title)
+        private static void ExportDataGridToPdf(System.Windows.Controls.DataGrid dataGrid, string filePath, string title, List<string> customHeaders)
         {
             try
             {
@@ -39,31 +41,23 @@ namespace BLL.Utils.DataGrid
                     {
                         using (PdfDocument pdf = new PdfDocument(writer))
                         {
-                            Document document = new Document(pdf);
+                            iText.Layout.Document document = new iText.Layout.Document(pdf);
 
-                            document.Add(new Paragraph(title));
+                            document.Add(new iText.Layout.Element.Paragraph(title));
 
-                            float[] columnWidths = { 2, 3, 3, 3, 3, 3, 3 };
+                            float[] columnWidths = Enumerable.Repeat(3, customHeaders.Count).Select(x => (float)x).ToArray();
                             Table table = new Table(UnitValue.CreatePercentArray(columnWidths));
 
                             PdfFont font = PdfFontFactory.CreateFont("Presentation/Assets/arial-unicode-ms.ttf", PdfEncodings.IDENTITY_H);
                             table.SetFontSize(8).SetFont(font);
-                            document.Add(new Paragraph(title).SetFont(font));
-
-
-                            Dictionary<string, string> columnHeaderToPropertyName = new Dictionary<string, string>();
+                            document.Add(new iText.Layout.Element.Paragraph(title).SetFont(font));
 
                             foreach (DataGridColumn column in dataGrid.Columns)
                             {
                                 if (!(column is DataGridTemplateColumn && ((DataGridTemplateColumn)column).CellTemplate.LoadContent() is CheckBox))
                                 {
                                     string columnHeader = column.Header.ToString();
-
-                                    string propertyName = columnHeader.Replace(" ", "");
-
-                                    columnHeaderToPropertyName[columnHeader] = propertyName;
-
-                                    table.AddCell(new Cell().Add(new Paragraph(column.Header.ToString())));
+                                    table.AddCell(new Cell().Add(new iText.Layout.Element.Paragraph(columnHeader)));
                                 }
                             }
 
@@ -99,19 +93,19 @@ namespace BLL.Utils.DataGrid
                                         {
                                             if (!(column is DataGridTemplateColumn && ((DataGridTemplateColumn)column).CellTemplate.LoadContent() is CheckBox))
                                             {
-                                                string columnHeader = column.Header.ToString();
+                                                Binding binding = (column as DataGridBoundColumn)?.Binding as Binding;
+                                                string bindingPath = binding?.Path.Path;
 
-                                                if (columnHeaderToPropertyName.TryGetValue(columnHeader, out string propertyName))
+                                                string columnHeader = customHeaders.FirstOrDefault(h => h.Equals(bindingPath, StringComparison.OrdinalIgnoreCase)) ?? bindingPath;
+
+                                                if (startNewLine)
                                                 {
-                                                    if (startNewLine)
-                                                    {
-                                                        table.StartNewRow();
-                                                        startNewLine = false;
-                                                    }
-
-                                                    object cellValue = rowData[propertyName];
-                                                    table.AddCell(new Cell().Add(new Paragraph(cellValue?.ToString())));
+                                                    table.StartNewRow();
+                                                    startNewLine = false;
                                                 }
+
+                                                object cellValue = rowData[columnHeader];
+                                                table.AddCell(new Cell().Add(new iText.Layout.Element.Paragraph(cellValue?.ToString())));
                                             }
                                         }
                                     }
@@ -131,10 +125,6 @@ namespace BLL.Utils.DataGrid
             }
         }
 
-
-
-
-
         private static bool IsRowSelected(object item, System.Windows.Controls.DataGrid dataGrid)
         {
             DataGridRow row = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromItem(item);
@@ -148,7 +138,6 @@ namespace BLL.Utils.DataGrid
 
             return false;
         }
-
 
 
         private static T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject

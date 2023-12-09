@@ -38,12 +38,12 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="№" Binding="{Binding №}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Personal Account" Binding="{Binding PersonalAccount}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Flat" Binding="{Binding Flat}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Consumer Owner" Binding="{Binding ConsumerOwner}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Heating Area" Binding="{Binding HeatingArea}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="House Address" Binding="{Binding HouseAddress}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Number of person" Binding="{Binding NumberOfPerson}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Особовий рахунок" Binding="{Binding PersonalAccount}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Квартира" Binding="{Binding Flat}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Власник квартири" Binding="{Binding ConsumerOwner}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Опалювальна площа" Binding="{Binding HeatingArea}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Адреса будинку" Binding="{Binding HouseAddress}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Кількість мешканців" Binding="{Binding NumberOfPerson}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -42,7 +42,7 @@ namespace Presentation.Pages
                 List<Counter> counters = context.counters.ToList();
 
                 DataTable dt = new DataTable("Counter");
-                dt.Columns.Add("Number", typeof(int));
+                dt.Columns.Add("№", typeof(int));
                 dt.Columns.Add("CountersId", typeof(int));
                 dt.Columns.Add("PreviousIndicator", typeof(decimal));
                 dt.Columns.Add("CurrentIndicator", typeof(decimal));
@@ -62,21 +62,32 @@ namespace Presentation.Pages
                     );
                 }
 
-                dt.Columns["Number"].SetOrdinal(0);
+                dt.Columns["№"].SetOrdinal(0);
 
                 dataGrid.ItemsSource = dt.DefaultView;
             }
         }
 
+        List<string> customHeaders = new List<string>
+        {
+            "№",
+            "CountersId",
+            "PreviousIndicator",
+            "CurrentIndicator",
+            "Account",
+            "TypeOfAccount",
+            "Date"
+        };
+
 
         private void ExportToExcelButton_Click(object sender, RoutedEventArgs e)
         {
-            XlsxExporter.ExportToExcelButton_Click(sender, e, dataGrid);
+            XlsxExporter.ExportToExcelButton_Click(sender, e, dataGrid, customHeaders);
         }
 
         private void ExportToPdfButton_Click(object sender, RoutedEventArgs e)
         {
-            PdfExporter.ExportToPdfButton_Click(sender, e, dataGrid, "Інформація по лічильниках");
+            PdfExporter.ExportToPdfButton_Click(sender, e, dataGrid, "Інформація по лічильниках", customHeaders);
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)

@@ -22,15 +22,15 @@ namespace BLL.Utils.DataGrid
 {
     internal class XlsxExporter
     {
-        public static void ExportToExcelButton_Click(object sender, RoutedEventArgs e, System.Windows.Controls.DataGrid dataGrid)
+        public static void ExportToExcelButton_Click(object sender, RoutedEventArgs e, System.Windows.Controls.DataGrid dataGrid, List<string> customHeaders)
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             string downloadsPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
             string filePath = System.IO.Path.Combine(downloadsPath, $"ExportedData_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx");
-            ExportDataGridToExcel(dataGrid, filePath);
+            ExportDataGridToExcel(dataGrid, filePath, customHeaders);
         }
 
-        private static void ExportDataGridToExcel(System.Windows.Controls.DataGrid dataGrid, string filePath)
+        private static void ExportDataGridToExcel(System.Windows.Controls.DataGrid dataGrid, string filePath, List<string> customHeaders)
         {
             try
             {
@@ -89,27 +89,19 @@ namespace BLL.Utils.DataGrid
 
                                 int columnIndex = 1;
 
-                                foreach (DataGridColumn column in dataGrid.Columns)
+                                foreach (var header in customHeaders)
                                 {
-                                    if (!(column is DataGridTemplateColumn && ((DataGridTemplateColumn)column).CellTemplate.LoadContent() is CheckBox))
+                                    if (startNewLine)
                                     {
-                                        string columnHeader = column.Header.ToString();
-
-                                        if (columnHeaderToPropertyName.TryGetValue(columnHeader, out string propertyName))
-                                        {
-                                            if (startNewLine)
-                                            {
-                                                worksheet.Cells[rowIndex, columnIndex].Value = row[propertyName]?.ToString();
-                                            }
-                                            else
-                                            {
-                                                worksheet.Cells[rowIndex, columnIndex].Value = columnHeader;
-                                                startNewLine = true;
-                                            }
-
-                                            columnIndex++;
-                                        }
+                                        worksheet.Cells[rowIndex, columnIndex].Value = row[header]?.ToString();
                                     }
+                                    else
+                                    {
+                                        worksheet.Cells[rowIndex, columnIndex].Value = header;
+                                        startNewLine = true;
+                                    }
+
+                                    columnIndex++;
                                 }
 
                                 rowIndex++;
@@ -127,6 +119,7 @@ namespace BLL.Utils.DataGrid
                 MessageBox.Show($"Error exporting data to Excel: {ex.Message}", "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
 
 

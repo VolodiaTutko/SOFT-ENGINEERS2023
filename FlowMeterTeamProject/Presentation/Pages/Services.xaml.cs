@@ -54,14 +54,25 @@ namespace Presentation.Pages
                 dataGrid.ItemsSource = dt.DefaultView;
             }
         }
+
+        List<string> customHeaders = new List<string>
+        {
+            "№",
+            "ServiceId",
+            "HouseId",
+            "TypeOfAccount",
+            "Price"
+        };
+
+
         private void ExportToExcelButton_Click(object sender, RoutedEventArgs e)
         {
-            XlsxExporter.ExportToExcelButton_Click(sender, e, dataGrid);
+            XlsxExporter.ExportToExcelButton_Click(sender, e, dataGrid, customHeaders);
         }
 
         private void ExportToPdfButton_Click(object sender, RoutedEventArgs e)
         {
-            PdfExporter.ExportToPdfButton_Click(sender, e, dataGrid, "Інформація по послугах і тарифах");
+            PdfExporter.ExportToPdfButton_Click(sender, e, dataGrid, "Інформація по послугах і тарифах", customHeaders);
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)

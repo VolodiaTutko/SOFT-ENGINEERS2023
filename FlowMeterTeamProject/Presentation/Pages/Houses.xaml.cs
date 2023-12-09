@@ -68,14 +68,24 @@ namespace Presentation.Pages
             }
         }
 
+        List<string> customHeaders = new List<string>
+        {
+            "№",
+            "HouseAddress",
+            "HeatingAreaOfHouse",
+            "NumberOfFlat",
+            "NumberOfResidents"
+        };
+
+
         private void ExportToExcelButton_Click(object sender, RoutedEventArgs e)
         {
-            XlsxExporter.ExportToExcelButton_Click(sender, e, dataGrid);
+            XlsxExporter.ExportToExcelButton_Click(sender, e, dataGrid, customHeaders);
         }
 
         private void ExportToPdfButton_Click(object sender, RoutedEventArgs e)
         {
-            PdfExporter.ExportToPdfButton_Click(sender, e, dataGrid, "Інформація по будинках");
+            PdfExporter.ExportToPdfButton_Click(sender, e, dataGrid, "Інформація по будинках", customHeaders);
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)

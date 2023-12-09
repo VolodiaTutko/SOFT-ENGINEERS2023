@@ -44,6 +44,18 @@ namespace Presentation.Pages
             FillDataGrid();
         }
 
+
+        List<string> customHeaders = new List<string>
+        {
+            "№",
+            "PersonalAccount",
+            "Flat",
+            "ConsumerOwner",
+            "HeatingArea",
+            "HouseAddress",
+            "NumberOfPerson"
+        };
+
         public void FillDataGrid()
         {
             using (var context = new AppDbContext())
@@ -166,12 +178,12 @@ namespace Presentation.Pages
 
         private void ExportToExcelButton_Click(object sender, RoutedEventArgs e)
         {
-            XlsxExporter.ExportToExcelButton_Click(sender, e, dataGrid);
+            XlsxExporter.ExportToExcelButton_Click(sender, e, dataGrid, customHeaders);
         }
 
         private void ExportToPdfButton_Click(object sender, RoutedEventArgs e)
         {
-            PdfExporter.ExportToPdfButton_Click(sender, e, dataGrid, "Інформація по особових рахунках");
+            PdfExporter.ExportToPdfButton_Click(sender, e, dataGrid, "Інформація по особових рахунках", customHeaders);
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)

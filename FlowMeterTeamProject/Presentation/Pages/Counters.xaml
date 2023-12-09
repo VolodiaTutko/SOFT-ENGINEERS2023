@@ -38,12 +38,12 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="№" Binding="{Binding Number}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Counter ID" Binding="{Binding CountersId}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Previous Indicator" Binding="{Binding PreviousIndicator}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Current Indicator" Binding="{Binding CurrentIndicator}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Account" Binding="{Binding Account}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="ID Лічильника" Binding="{Binding CountersId}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Попередній показник" Binding="{Binding PreviousIndicator}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Поточний показник" Binding="{Binding CurrentIndicator}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Особовий рахунок" Binding="{Binding Account}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Type Of Account" Binding="{Binding TypeOfAccount}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Date" Binding="{Binding Date}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Date}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
