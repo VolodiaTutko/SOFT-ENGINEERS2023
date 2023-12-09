@@ -38,10 +38,10 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="№" Binding="{Binding Number}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Адреса будинку" Binding="{Binding HouseAddress}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Площа опалення" Binding="{Binding HeatingAreaOfHouse}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Кількість квартир" Binding="{Binding NumberOfFlat}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Кількість мешканців" Binding="{Binding NumberOfResidents}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="House Address" Binding="{Binding HouseAddress}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Heating Area" Binding="{Binding HeatingAreaOfHouse}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Number of Flat" Binding="{Binding NumberOfFlat}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Number of Residents" Binding="{Binding NumberOfResidents}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

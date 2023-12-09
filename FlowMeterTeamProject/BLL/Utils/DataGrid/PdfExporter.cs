@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,7 +20,7 @@ namespace BLL.Utils.DataGrid
         public static void ExportToPdfButton_Click(object sender, RoutedEventArgs e, System.Windows.Controls.DataGrid dataGrid)
         {
             string downloadsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
-            string filePath = Path.Combine(downloadsPath, "ExportedData.pdf");
+            string filePath = Path.Combine(downloadsPath, $"ExportedData_{DateTime.Now:yyyyMMdd_HHmmss}.pdf");
             ExportDataGridToPdf(dataGrid, filePath);
         }
 
@@ -43,15 +44,22 @@ namespace BLL.Utils.DataGrid
 
                             table.SetFontSize(8);
 
+                            Dictionary<string, string> columnHeaderToPropertyName = new Dictionary<string, string>();
+
                             foreach (DataGridColumn column in dataGrid.Columns)
                             {
                                 if (!(column is DataGridTemplateColumn && ((DataGridTemplateColumn)column).CellTemplate.LoadContent() is CheckBox))
                                 {
+                                    string columnHeader = column.Header.ToString();
+
+                                    string propertyName = columnHeader.Replace(" ", "");
+
+                                    columnHeaderToPropertyName[columnHeader] = propertyName;
+
                                     table.AddCell(new Cell().Add(new Paragraph(column.Header.ToString())));
                                 }
                             }
 
-                            // Check if any checkboxes are selected
                             bool checkboxesSelected = false;
 
                             foreach (var item in dataGrid.Items)
@@ -70,7 +78,6 @@ namespace BLL.Utils.DataGrid
                                 }
                             }
 
-                            // Export all rows or only selected rows based on checkboxesSelected
                             foreach (var item in dataGrid.Items)
                             {
                                 if (!checkboxesSelected || checkboxesSelected && IsRowSelected(item, dataGrid))
@@ -78,16 +85,28 @@ namespace BLL.Utils.DataGrid
                                     if (item is DataRowView rowView && rowView.Row.ItemArray.Length > 0)
                                     {
                                         var rowData = rowView.Row;
+
+                                        bool startNewLine = table.GetNumberOfColumns() > 0;
+
                                         foreach (DataGridColumn column in dataGrid.Columns)
                                         {
                                             if (!(column is DataGridTemplateColumn && ((DataGridTemplateColumn)column).CellTemplate.LoadContent() is CheckBox))
                                             {
-                                                string propertyName = column.Header.ToString();
-                                                object cellValue = rowData[propertyName];
-                                                table.AddCell(new Cell().Add(new Paragraph(cellValue?.ToString())));
+                                                string columnHeader = column.Header.ToString();
+
+                                                if (columnHeaderToPropertyName.TryGetValue(columnHeader, out string propertyName))
+                                                {
+                                                    if (startNewLine)
+                                                    {
+                                                        table.StartNewRow();
+                                                        startNewLine = false;
+                                                    }
+
+                                                    object cellValue = rowData[propertyName];
+                                                    table.AddCell(new Cell().Add(new Paragraph(cellValue?.ToString())));
+                                                }
                                             }
                                         }
-                                        table.StartNewRow();
                                     }
                                 }
                             }
@@ -104,6 +123,10 @@ namespace BLL.Utils.DataGrid
                 MessageBox.Show($"Error exporting data to PDF: {ex.Message}", "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+
+
+
 
         private static bool IsRowSelected(object item, System.Windows.Controls.DataGrid dataGrid)
         {

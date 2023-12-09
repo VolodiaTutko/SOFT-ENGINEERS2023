@@ -33,17 +33,17 @@
                 <DataGridTemplateColumn Width="30">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox Name="b1" />
+                            <CheckBox Name="b1" IsChecked="{Binding IsSelected, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" PreviewMouseLeftButtonDown="CheckBox_PreviewMouseDown"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="№" Binding="{Binding №}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Особовий рахунок" Binding="{Binding PersonalAccount}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="ПІБ власника" Binding="{Binding Owner}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Будинок" Binding="{Binding House}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="№ квартири" Binding="{Binding Flat}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Площа м²" Binding="{Binding Area}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Consumers Id" Binding="{Binding ConsumersId}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Personal Account" Binding="{Binding PersonalAccount}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Flat" Binding="{Binding Flat}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Consumer Owner" Binding="{Binding ConsumerOwner}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Кількість співмешканців" Binding="{Binding NumberOfPerson}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Heating Area" Binding="{Binding HeatingArea}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
