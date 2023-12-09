@@ -13,19 +13,23 @@ using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 
+using iText.IO.Font;
+using iText.IO.Font.Constants;
+using iText.Kernel.Font;
+
 namespace BLL.Utils.DataGrid
 {
     internal class PdfExporter
     {
-        public static void ExportToPdfButton_Click(object sender, RoutedEventArgs e, System.Windows.Controls.DataGrid dataGrid)
+        public static void ExportToPdfButton_Click(object sender, RoutedEventArgs e, System.Windows.Controls.DataGrid dataGrid, string title)
         {
             string downloadsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
             string filePath = Path.Combine(downloadsPath, $"ExportedData_{DateTime.Now:yyyyMMdd_HHmmss}.pdf");
-            ExportDataGridToPdf(dataGrid, filePath);
+            ExportDataGridToPdf(dataGrid, filePath, title);
         }
 
 
-        private static void ExportDataGridToPdf(System.Windows.Controls.DataGrid dataGrid, string filePath)
+        private static void ExportDataGridToPdf(System.Windows.Controls.DataGrid dataGrid, string filePath, string title)
         {
             try
             {
@@ -37,12 +41,15 @@ namespace BLL.Utils.DataGrid
                         {
                             Document document = new Document(pdf);
 
-                            document.Add(new Paragraph("Exported DataGrid to PDF"));
+                            document.Add(new Paragraph(title));
 
                             float[] columnWidths = { 2, 3, 3, 3, 3, 3, 3 };
                             Table table = new Table(UnitValue.CreatePercentArray(columnWidths));
 
-                            table.SetFontSize(8);
+                            PdfFont font = PdfFontFactory.CreateFont("Presentation/Assets/arial-unicode-ms.ttf", PdfEncodings.IDENTITY_H);
+                            table.SetFontSize(8).SetFont(font);
+                            document.Add(new Paragraph(title).SetFont(font));
+
 
                             Dictionary<string, string> columnHeaderToPropertyName = new Dictionary<string, string>();
 

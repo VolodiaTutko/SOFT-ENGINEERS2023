@@ -171,7 +171,7 @@ namespace Presentation.Pages
 
         private void ExportToPdfButton_Click(object sender, RoutedEventArgs e)
         {
-            PdfExporter.ExportToPdfButton_Click(sender, e, dataGrid);
+            PdfExporter.ExportToPdfButton_Click(sender, e, dataGrid, "Інформація по особових рахунках");
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -185,16 +185,10 @@ namespace Presentation.Pages
             addNewAccount.ShowDialog();
         }
 
-        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void DataGrid_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.RightButton == MouseButtonState.Pressed)
             {
-                // Показати вікно PropertiesAcconts
                 var propertiesWindow = new PropertiesAccounts();
                 propertiesWindow.ShowDialog();
             }

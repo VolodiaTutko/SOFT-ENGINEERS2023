@@ -17,7 +17,9 @@
 
         <StackPanel Orientation="Horizontal" Margin="10">
             <Button Content="Додати новий запис" Margin="0,0,20,0" Click="Button_Click" FontWeight="Bold" BorderBrush="#FFB1B1B1" Background="#FF1F4E8E" Foreground="White" />
-            <TextBox x:Name="searchBox" Width="200">
+            <Button Content="Export to PDF" Margin="0,0,20,0" Click="ExportToPdfButton_Click"/>
+            <Button Content="Export to XLSX" Margin="0,0,20,0" Click="ExportToExcelButton_Click"/>
+            <TextBox x:Name="searchBox" Width="200" TextChanged="SearchBox_TextChanged">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="3"/>
@@ -27,19 +29,19 @@
             <TextBlock x:Name="currentDateTextBlock" Margin="10,0,0,0" />
         </StackPanel>
 
-        <DataGrid x:Name="dataGrid" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*" EnableRowVirtualization="False" EnableColumnVirtualization="False" SelectionChanged="dataGrid_SelectionChanged">
+        <DataGrid x:Name="dataGrid" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*" EnableRowVirtualization="False" EnableColumnVirtualization="False" MouseRightButtonDown="DataGrid_PreviewMouseRightButtonDown">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="30">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
 
-                            <CheckBox Name="b1" Click="b1_Click" />
+                            <CheckBox Name="b1" IsChecked="{Binding IsSelected, Mode=TwoWay, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" PreviewMouseLeftButtonDown="CheckBox_PreviewMouseDown" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="№" Binding="{Binding Number}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="№" Binding="{Binding №}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="House Address" Binding="{Binding HouseAddress}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Heating Area" Binding="{Binding HeatingAreaOfHouse}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Heating Area Of House" Binding="{Binding HeatingAreaOfHouse}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Number of Flat" Binding="{Binding NumberOfFlat}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Number of Residents" Binding="{Binding NumberOfResidents}" IsReadOnly="True"/>
             </DataGrid.Columns>

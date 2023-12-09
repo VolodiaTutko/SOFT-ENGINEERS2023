@@ -16,6 +16,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Presentation.HousesDialogWindow;
 using FlowMeterTeamProject.Presentation;
+using BLL.Utils.DataGrid;
+using FlowMeterTeamProject.Presentation.DialogWindows;
+using FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow;
+using Presentation.PersonalAccountDialogWindow;
 
 namespace Presentation.Pages
 {
@@ -28,6 +32,8 @@ namespace Presentation.Pages
         {
             InitializeComponent();
             FillDataGrid();
+
+            dataGrid.MouseRightButtonDown += DataGrid_PreviewMouseRightButtonDown;
         }
 
         public event EventHandler DataGridUpdated;
@@ -44,7 +50,7 @@ namespace Presentation.Pages
                 List<House> houses = context.houses.ToList();
 
                 DataTable dt = new DataTable("House");
-                dt.Columns.Add("Number", typeof(int));
+                dt.Columns.Add("№", typeof(int));
                 dt.Columns.Add("HouseAddress", typeof(string));
                 dt.Columns.Add("HeatingAreaOfHouse", typeof(int));
                 dt.Columns.Add("NumberOfFlat", typeof(int));
@@ -56,36 +62,71 @@ namespace Presentation.Pages
                     dt.Rows.Add(i + 1, houses[i].HouseAddress, houses[i].HeatingAreaOfHouse, houses[i].NumberOfFlat, houses[i].NumberOfResidents);
                 }
 
-                dt.Columns["Number"].SetOrdinal(0);
+                dt.Columns["№"].SetOrdinal(0);
 
                 dataGrid.ItemsSource = dt.DefaultView;
             }
         }
 
-
-        private void b1_Click(object sender, EventArgs e)
+        private void ExportToExcelButton_Click(object sender, RoutedEventArgs e)
         {
-            // Your button click logic here
+            XlsxExporter.ExportToExcelButton_Click(sender, e, dataGrid);
         }
+
+        private void ExportToPdfButton_Click(object sender, RoutedEventArgs e)
+        {
+            PdfExporter.ExportToPdfButton_Click(sender, e, dataGrid, "Інформація по будинках");
+        }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DataGridSearch.PerformSearch(dataGrid, searchBox);
+        }
+
+        private void AddNewRecordButton_Click(object sender, RoutedEventArgs e)
+        {
+            var addNewAccount = new AddNewAccount(this);
+            addNewAccount.ShowDialog();
+        }
+
+        private void CheckBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+
+            DataGridRow dataGridRow = FindAncestor<DataGridRow>(checkBox);
+            if (dataGridRow != null)
+            {
+                dataGridRow.IsSelected = !dataGridRow.IsSelected;
+            }
+            e.Handled = true;
+        }
+
+        private T FindAncestor<T>(DependencyObject current) where T : DependencyObject
+        {
+            do
+            {
+                if (current is T ancestor)
+                {
+                    return ancestor;
+                }
+                current = VisualTreeHelper.GetParent(current);
+            } while (current != null);
+
+            return null;
+        }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             AddNewHouse newDialog = new AddNewHouse(this);
             newDialog.Show();
-
-
-        }
-
-        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         private void DataGrid_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (e.RightButton == MouseButtonState.Pressed)
             {
-               
+
                 var propertiesWindow = new PropertiesHouse();
                 propertiesWindow.ShowDialog();
             }

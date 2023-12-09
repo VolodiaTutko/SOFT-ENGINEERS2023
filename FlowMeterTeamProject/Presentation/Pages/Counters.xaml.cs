@@ -17,6 +17,10 @@ using System.Windows.Shapes;
 using System.Data.SqlClient;
 using System.Net;
 using DAL.Data;
+using BLL.Utils.DataGrid;
+using FlowMeterTeamProject.Presentation.DialogWindows;
+using FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow;
+using Presentation.PersonalAccountDialogWindow;
 
 namespace Presentation.Pages
 {
@@ -28,8 +32,6 @@ namespace Presentation.Pages
         public Counters()
         {
             InitializeComponent();
-            currentDateTextBlock.Text = DateTime.Now.ToString("dd-MM-yyyy");
-
             FillDataGrid();
         }
 
@@ -66,14 +68,46 @@ namespace Presentation.Pages
             }
         }
 
-        private void b1_Click(object sender, EventArgs e)
-        {
 
+        private void ExportToExcelButton_Click(object sender, RoutedEventArgs e)
+        {
+            XlsxExporter.ExportToExcelButton_Click(sender, e, dataGrid);
         }
 
-        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ExportToPdfButton_Click(object sender, RoutedEventArgs e)
         {
+            PdfExporter.ExportToPdfButton_Click(sender, e, dataGrid, "Інформація по лічильниках");
+        }
 
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DataGridSearch.PerformSearch(dataGrid, searchBox);
+        }
+
+        private void CheckBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+
+            DataGridRow dataGridRow = FindAncestor<DataGridRow>(checkBox);
+            if (dataGridRow != null)
+            {
+                dataGridRow.IsSelected = !dataGridRow.IsSelected;
+            }
+            e.Handled = true;
+        }
+
+        private T FindAncestor<T>(DependencyObject current) where T : DependencyObject
+        {
+            do
+            {
+                if (current is T ancestor)
+                {
+                    return ancestor;
+                }
+                current = VisualTreeHelper.GetParent(current);
+            } while (current != null);
+
+            return null;
         }
     }
 }
