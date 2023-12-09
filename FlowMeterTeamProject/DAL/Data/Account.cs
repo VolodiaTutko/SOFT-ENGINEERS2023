@@ -11,10 +11,10 @@ namespace DAL.Data
     {
         [Key]
         public string PersonalAccount { get; set; }
-        public decimal? HotWater { get; set; }
-        public decimal? ColdWater { get; set; }
-        public decimal? Heating { get; set; }
-        public decimal? Electricity { get; set; }
-        public decimal? PublicService { get; set; }
+        public string? HotWater { get; set; }
+        public string? ColdWater { get; set; }
+        public string? Heating { get; set; }
+        public string? Electricity { get; set; }
+        public string? PublicService { get; set; }
     }
 }

@@ -53,7 +53,6 @@ namespace Presentation.Pages
                     dt.Rows.Add(
                         i + 1,
                         counters[i].CountersId,
-                        counters[i].PreviousIndicator,
                         counters[i].CurrentIndicator,
                         counters[i].Account,
                         counters[i].TypeOfAccount,

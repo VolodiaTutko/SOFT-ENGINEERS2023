@@ -11,7 +11,6 @@ namespace DAL.Data
     {
         [Key]
         public int CountersId { get; set; }
-        public decimal? PreviousIndicator { get; set; }
         public decimal? CurrentIndicator { get; set; }
         public string Account { get; set; }
         public string TypeOfAccount { get; set; }

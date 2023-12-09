@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FlowMeterTeamProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231208201243_NewMigration")]
-    partial class NewMigration
+    [Migration("20231209142932_accounts_types_and_previndicator_drop")]
+    partial class accountstypesandprevindicatordrop
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,20 +30,20 @@ namespace FlowMeterTeamProject.Migrations
                     b.Property<string>("PersonalAccount")
                         .HasColumnType("text");
 
-                    b.Property<decimal?>("ColdWater")
-                        .HasColumnType("numeric");
+                    b.Property<string>("ColdWater")
+                        .HasColumnType("text");
 
-                    b.Property<decimal?>("Electricity")
-                        .HasColumnType("numeric");
+                    b.Property<string>("Electricity")
+                        .HasColumnType("text");
 
-                    b.Property<decimal?>("Heating")
-                        .HasColumnType("numeric");
+                    b.Property<string>("Heating")
+                        .HasColumnType("text");
 
-                    b.Property<decimal?>("HotWater")
-                        .HasColumnType("numeric");
+                    b.Property<string>("HotWater")
+                        .HasColumnType("text");
 
-                    b.Property<decimal?>("PublicService")
-                        .HasColumnType("numeric");
+                    b.Property<string>("PublicService")
+                        .HasColumnType("text");
 
                     b.HasKey("PersonalAccount");
 
@@ -100,9 +100,6 @@ namespace FlowMeterTeamProject.Migrations
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<decimal?>("PreviousIndicator")
-                        .HasColumnType("numeric");
 
                     b.Property<string>("TypeOfAccount")
                         .IsRequired()
