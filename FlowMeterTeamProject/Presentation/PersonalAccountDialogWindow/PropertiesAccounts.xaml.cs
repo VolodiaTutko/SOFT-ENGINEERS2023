@@ -28,8 +28,8 @@ namespace Presentation.PersonalAccountDialogWindow
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            //EditData2 editData2 = new EditData2();
-            //editData2.ShowDialog();
+            var editDataAccounts = new EditDataAccounts();
+            editDataAccounts.ShowDialog();
         }
     }
 }

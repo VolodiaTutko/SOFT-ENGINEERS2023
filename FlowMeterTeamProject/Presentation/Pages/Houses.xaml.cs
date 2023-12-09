@@ -15,18 +15,25 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Presentation.HousesDialogWindow;
-
+using FlowMeterTeamProject.Presentation;
 
 namespace Presentation.Pages
 {
     /// <summary>
     /// Interaction logic for Houses.xaml
     /// </summary>
-    public partial class Houses : Page
+    public partial class Houses : Page, IDataGridUpdater
     {
         public Houses()
         {
             InitializeComponent();
+            FillDataGrid();
+        }
+
+        public event EventHandler DataGridUpdated;
+
+        public void UpdateDataGrid()
+        {
             FillDataGrid();
         }
 
@@ -55,6 +62,7 @@ namespace Presentation.Pages
             }
         }
 
+
         private void b1_Click(object sender, EventArgs e)
         {
             // Your button click logic here
@@ -62,10 +70,25 @@ namespace Presentation.Pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AddNewHouse newDialog = new AddNewHouse();
+            AddNewHouse newDialog = new AddNewHouse(this);
             newDialog.Show();
 
 
+        }
+
+        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void DataGrid_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.RightButton == MouseButtonState.Pressed)
+            {
+               
+                var propertiesWindow = new PropertiesHouse();
+                propertiesWindow.ShowDialog();
+            }
         }
     }
 }

@@ -63,7 +63,7 @@ namespace FlowMeterTeamProject.Migrations
                         .HasColumnType("text");
 
                     b.Property<int?>("Flat")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer");                 
 
                     b.Property<int?>("HeatingArea")
                         .HasColumnType("integer");

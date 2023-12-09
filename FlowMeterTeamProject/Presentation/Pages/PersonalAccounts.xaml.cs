@@ -19,14 +19,16 @@ using DAL.Data.DataMock;
 using Presentation.PersonalAccountDialogWindow;
 using BLL.Utils.DataGrid;
 using FlowMeterTeamProject.Presentation.DialogWindows;
+using FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow;
+using FlowMeterTeamProject.Presentation;
 
 namespace Presentation.Pages
 {
     /// <summary>
     /// Interaction logic for PersonalAccounts.xaml
     /// </summary>
-    public partial class PersonalAccounts : Page
-    {
+    public partial class PersonalAccounts : Page, IDataGridUpdater
+    {       
         public PersonalAccounts()
         {
             InitializeComponent();
@@ -35,30 +37,43 @@ namespace Presentation.Pages
 
             dataGrid.MouseRightButtonDown += DataGrid_MouseRightButtonDown;
         }
+        public event EventHandler DataGridUpdated;
+
+        public void UpdateDataGrid()
+        {
+            FillDataGrid();
+        }
 
         public void FillDataGrid()
         {
             using (var context = new AppDbContext())
             {
-                List<Consumer> consumers = context.consumers.ToList();
+                List<Consumer> personalAccounts = context.consumers.ToList();
 
                 DataTable dt = new DataTable("Consumer");
                 dt.Columns.Add("№", typeof(int));
-                dt.Columns.Add("ConsumersId", typeof(int));
                 dt.Columns.Add("PersonalAccount", typeof(string));
                 dt.Columns.Add("Flat", typeof(int));
                 dt.Columns.Add("ConsumerOwner", typeof(string));
                 dt.Columns.Add("HeatingArea", typeof(int));
+                dt.Columns.Add("HouseAddress", typeof(string));
+                dt.Columns.Add("NumberOfPerson", typeof(int));
 
-                for (int i = 0; i < consumers.Count; i++)
+
+                for (int i = 0; i < personalAccounts.Count; i++)
                 {
+
                     dt.Rows.Add(
                         i + 1,
-                        consumers[i].ConsumersId,
-                        consumers[i].PersonalAccount,
-                        consumers[i].Flat,
-                        consumers[i].ConsumerOwner,
-                        consumers[i].HeatingArea
+                        personalAccounts[i].PersonalAccount,
+                        personalAccounts[i].Flat,
+                        personalAccounts[i].ConsumerOwner,
+                        personalAccounts[i].HeatingArea,
+                        context.houses
+                        .Where(h => h.HouseId == personalAccounts[i].HouseId)
+                        .Select(h => h.HouseAddress)
+                        .FirstOrDefault(),
+                        personalAccounts[i].NumberOfPersons
                     );
                 }
 
@@ -166,9 +181,25 @@ namespace Presentation.Pages
 
         private void AddNewRecordButton_Click(object sender, RoutedEventArgs e)
         {
-            var propertiesAccountsWindow = new Presentation.PersonalAccountDialogWindow.PropertiesAccounts();
-            propertiesAccountsWindow.ShowDialog();
+            var addNewAccount = new AddNewAccount(this);
+            addNewAccount.ShowDialog();
         }
+
+        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void DataGrid_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.RightButton == MouseButtonState.Pressed)
+            {
+                // Показати вікно PropertiesAcconts
+                var propertiesWindow = new PropertiesAccounts();
+                propertiesWindow.ShowDialog();
+            }
+        }
+
 
         private void CheckBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -195,6 +226,5 @@ namespace Presentation.Pages
 
             return null;
         }
-
     }
 }

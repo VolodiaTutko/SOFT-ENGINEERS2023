@@ -27,8 +27,10 @@ namespace Presentation.HousesDialogWindow
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //EditData editData = new EditData();
-            //editData.Show();
+            var editData = new EditDataHouse();
+            editData.ShowDialog();
         }
+
+       
     }
 }
