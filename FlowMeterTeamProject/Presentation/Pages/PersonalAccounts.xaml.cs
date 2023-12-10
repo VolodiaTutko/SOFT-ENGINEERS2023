@@ -21,6 +21,7 @@ using BLL.Utils.DataGrid;
 using FlowMeterTeamProject.Presentation.DialogWindows;
 using FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow;
 using FlowMeterTeamProject.Presentation;
+using System.Reflection;
 
 namespace Presentation.Pages
 {
@@ -28,14 +29,15 @@ namespace Presentation.Pages
     /// Interaction logic for PersonalAccounts.xaml
     /// </summary>
     public partial class PersonalAccounts : Page, IDataGridUpdater
-    {       
+    {
+        public string personalAccountValue;
         public PersonalAccounts()
         {
             InitializeComponent();
 
             FillDataGrid();
 
-            dataGrid.MouseRightButtonDown += DataGrid_MouseRightButtonDown;
+            //dataGrid.MouseRightButtonDown += DataGrid_MouseRightButtonDown;
         }
         public event EventHandler DataGridUpdated;
 
@@ -43,6 +45,18 @@ namespace Presentation.Pages
         {
             FillDataGrid();
         }
+
+
+        List<string> customHeaders = new List<string>
+        {
+            "№",
+            "PersonalAccount",
+            "Flat",
+            "ConsumerOwner",
+            "HeatingArea",
+            "HouseAddress",
+            "NumberOfPerson"
+        };
 
         public void FillDataGrid()
         {
@@ -125,15 +139,28 @@ namespace Presentation.Pages
                     }
                 }
 
-                if (selectedRowsData.Count > 1)
+                if (selectedRowsData.Count > 1) // відкривається вікно з Сформувати квитанції
                 {
-                    RowDetails dialog = new RowDetails(selectedRowsData);
-                    dialog.Owner = Window.GetWindow(this);
-                    dialog.ShowDialog();
+
+
+                    var propertiesMany = new PropertiesAccountsForMany();
+                    propertiesMany.ShowDialog();
+                    //RowDetails dialog = new RowDetails(selectedRowsData);
+                    //dialog.Owner = Window.GetWindow(this);
+                    //dialog.ShowDialog();
+                }
+                else if (selectedRowsData.Count == 1)
+                {
+                    personalAccountValue = selectedRowsData[0]["Особовий рахунок"];
+
+
+                    var properties = new PropertiesAccounts(personalAccountValue);
+
+                    properties.ShowDialog();
                 }
                 else if (selectedRowsData.Count == 1) {
                     var propertiesWindow = new PropertiesAccounts();
-                    propertiesWindow.ShowDialog();
+                    propertiesWindow.ShowDialog(); 
                 }
                 else
                 {
@@ -141,6 +168,7 @@ namespace Presentation.Pages
                 }
             }
         }
+
 
 
         private T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
@@ -170,12 +198,12 @@ namespace Presentation.Pages
 
         private void ExportToExcelButton_Click(object sender, RoutedEventArgs e)
         {
-            XlsxExporter.ExportToExcelButton_Click(sender, e, dataGrid);
+            XlsxExporter.ExportToExcelButton_Click(sender, e, dataGrid, customHeaders);
         }
 
         private void ExportToPdfButton_Click(object sender, RoutedEventArgs e)
         {
-            PdfExporter.ExportToPdfButton_Click(sender, e, dataGrid);
+            PdfExporter.ExportToPdfButton_Click(sender, e, dataGrid, "Інформація по особових рахунках", customHeaders);
         }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -188,22 +216,77 @@ namespace Presentation.Pages
             var addNewAccount = new AddNewAccount(this);
             addNewAccount.ShowDialog();
         }
+        // ---------------------------------------------------------------------------------------------------//
+        //private void DataGrid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    var selectedRows = dataGrid.SelectedItems;
 
-        private void dataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        //    if (selectedRows.Count > 0)
+        //    {
+        //        List<Dictionary<string, string>> selectedRowsData = new List<Dictionary<string, string>>();
 
-        }
+        //        foreach (var selectedItem in selectedRows)
+        //        {
+        //            var row = (DataGridRow)(dataGrid.ItemContainerGenerator.ContainerFromItem(selectedItem));
 
-        private void DataGrid_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.RightButton == MouseButtonState.Pressed)
-            {
-                // Показати вікно PropertiesAcconts
-                var propertiesWindow = new PropertiesAccounts();
-                propertiesWindow.ShowDialog();
-            }
-        }
+        //            if (row != null)
+        //            {
+        //                Dictionary<string, string> rowData = new Dictionary<string, string>();
 
+        //                foreach (var column in dataGrid.Columns)
+        //                {
+        //                    if (column is DataGridTextColumn textColumn)
+        //                    {
+        //                        string header = textColumn.Header.ToString();
+
+        //                        var cellContent = column.GetCellContent(row);
+
+        //                        if (cellContent is TextBlock textBlock)
+        //                        {
+        //                            string cellValue = textBlock.Text;
+        //                            rowData.Add(header, cellValue);
+        //                        }
+        //                    }
+        //                }
+
+        //                selectedRowsData.Add(rowData);
+        //            }
+        //        }
+
+        //        if (selectedRowsData.Count > 0)
+        //        {
+                    
+        //             personalAccountValue = selectedRowsData[0]["Особовий рахунок"];
+
+
+        //            var properties = new PropertiesAccounts(personalAccountValue);
+                   
+        //            properties.ShowDialog();
+
+        //        }
+        //        else
+        //        {
+                    
+        //            MessageBox.Show("Please select the checkbox in the row before viewing details.");
+        //        }
+        //    }
+        //}
+
+
+        //private T TryFindParent<T>(DependencyObject current) where T : DependencyObject
+        //{
+        //    DependencyObject parent = VisualTreeHelper.GetParent(current);
+
+        //    while (parent != null && !(parent is T))
+        //    {
+        //        parent = VisualTreeHelper.GetParent(parent);
+        //    }
+
+        //    return (T)parent;
+        //}
+
+       
+        //------------------------------------------------------------------------------------------------------------------------------//
 
         private void CheckBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -230,5 +313,57 @@ namespace Presentation.Pages
 
             return null;
         }
+
+       
+
+        private void SelectAllCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            SelectAllCheckBoxes(true);
+        }
+
+        private void SelectAllCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SelectAllCheckBoxes(false);
+        }
+
+        private void SelectAllCheckBoxes(bool isChecked)
+        {
+            for (int i = 0; i < dataGrid.Items.Count; i++)
+            {
+                var dataGridRow = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(i);
+
+                if (dataGridRow != null)
+                {
+                    var checkBox = FindCheckBoxInVisualTree(dataGridRow);
+                    if (checkBox != null)
+                    {
+                        checkBox.IsChecked = isChecked;
+                    }
+                }
+            }
+        }
+
+        private CheckBox FindCheckBoxInVisualTree(DependencyObject parent)
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+
+                if (child is CheckBox checkBox)
+                {
+                    return checkBox;
+                }
+
+                var result = FindCheckBoxInVisualTree(child);
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+
+            return null;
+        }
+
+
     }
 }

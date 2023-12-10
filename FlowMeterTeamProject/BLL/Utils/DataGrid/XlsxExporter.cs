@@ -1,36 +1,36 @@
-﻿using DAL.Data;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.IO;
-using OfficeOpenXml;
-
-namespace BLL.Utils.DataGrid
+﻿namespace BLL.Utils.DataGrid
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Documents;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using System.Windows.Navigation;
+    using System.Windows.Shapes;
+    using DAL.Data;
+    using OfficeOpenXml;
+
     internal class XlsxExporter
     {
-        public static void ExportToExcelButton_Click(object sender, RoutedEventArgs e, System.Windows.Controls.DataGrid dataGrid)
+        public static void ExportToExcelButton_Click(object sender, RoutedEventArgs e, System.Windows.Controls.DataGrid dataGrid, List<string> customHeaders)
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             string downloadsPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
             string filePath = System.IO.Path.Combine(downloadsPath, $"ExportedData_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx");
-            ExportDataGridToExcel(dataGrid, filePath);
+            ExportDataGridToExcel(dataGrid, filePath, customHeaders);
         }
 
-        private static void ExportDataGridToExcel(System.Windows.Controls.DataGrid dataGrid, string filePath)
+        private static void ExportDataGridToExcel(System.Windows.Controls.DataGrid dataGrid, string filePath, List<string> customHeaders)
         {
             try
             {
@@ -46,9 +46,11 @@ namespace BLL.Utils.DataGrid
                     {
                         if (!(column is DataGridTemplateColumn && ((DataGridTemplateColumn)column).CellTemplate.LoadContent() is CheckBox))
                         {
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                             string columnHeader = column.Header.ToString();
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 
-                            string propertyName = columnHeader.Replace(" ", "");
+                            string propertyName = columnHeader.Replace(" ", string.Empty);
 
                             columnHeaderToPropertyName[columnHeader] = propertyName;
 
@@ -67,7 +69,9 @@ namespace BLL.Utils.DataGrid
 
                         if (row != null)
                         {
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                             CheckBox checkBox = FindVisualChild<CheckBox>(row);
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 
                             if (checkBox != null && checkBox.IsChecked == true)
                             {
@@ -79,7 +83,7 @@ namespace BLL.Utils.DataGrid
 
                     foreach (var item in dataGrid.Items)
                     {
-                        if (!checkboxesSelected || checkboxesSelected && IsRowSelected(item, dataGrid))
+                        if (!checkboxesSelected || (checkboxesSelected && IsRowSelected(item, dataGrid)))
                         {
                             if (item is DataRowView rowView && rowView.Row.ItemArray.Length > 0)
                             {
@@ -89,27 +93,19 @@ namespace BLL.Utils.DataGrid
 
                                 int columnIndex = 1;
 
-                                foreach (DataGridColumn column in dataGrid.Columns)
+                                foreach (var header in customHeaders)
                                 {
-                                    if (!(column is DataGridTemplateColumn && ((DataGridTemplateColumn)column).CellTemplate.LoadContent() is CheckBox))
+                                    if (startNewLine)
                                     {
-                                        string columnHeader = column.Header.ToString();
-
-                                        if (columnHeaderToPropertyName.TryGetValue(columnHeader, out string propertyName))
-                                        {
-                                            if (startNewLine)
-                                            {
-                                                worksheet.Cells[rowIndex, columnIndex].Value = row[propertyName]?.ToString();
-                                            }
-                                            else
-                                            {
-                                                worksheet.Cells[rowIndex, columnIndex].Value = columnHeader;
-                                                startNewLine = true;
-                                            }
-
-                                            columnIndex++;
-                                        }
+                                        worksheet.Cells[rowIndex, columnIndex].Value = row[header]?.ToString();
                                     }
+                                    else
+                                    {
+                                        worksheet.Cells[rowIndex, columnIndex].Value = header;
+                                        startNewLine = true;
+                                    }
+
+                                    columnIndex++;
                                 }
 
                                 rowIndex++;
@@ -120,29 +116,37 @@ namespace BLL.Utils.DataGrid
                     package.SaveAs(new FileInfo(filePath));
                 }
 
-                MessageBox.Show("Data exported to Excel successfully.", "Export Successful", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Дані успішно експортовані в Excel.", "Export Successful", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error exporting data to Excel: {ex.Message}", "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Помилка при експортуванні даних в Excel: {ex.Message}", "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
 
 
-        private static T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject
+
+        private static T? FindVisualChild<T>(DependencyObject obj)
+            where T : DependencyObject
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
             {
                 DependencyObject child = VisualTreeHelper.GetChild(obj, i);
 
                 if (child != null && child is T)
+                {
                     return (T)child;
+                }
 
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                 T childOfChild = FindVisualChild<T>(child);
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 
                 if (childOfChild != null)
+                {
                     return childOfChild;
+                }
             }
 
             return null;
@@ -154,7 +158,9 @@ namespace BLL.Utils.DataGrid
 
             if (row != null)
             {
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                 CheckBox checkBox = FindVisualChild<CheckBox>(row);
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 
                 return checkBox != null && checkBox.IsChecked == true;
             }

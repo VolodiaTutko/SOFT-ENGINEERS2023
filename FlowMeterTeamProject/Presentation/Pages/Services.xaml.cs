@@ -14,17 +14,28 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BLL.Utils.DataGrid;
+using FlowMeterTeamProject.Presentation.DialogWindows;
+using FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow;
+using FlowMeterTeamProject.Presentation;
 
 namespace Presentation.Pages
 {
     /// <summary>
     /// Interaction logic for Services.xaml
     /// </summary>
-    public partial class Services : Page
+    public partial class Services : Page, IDataGridUpdater
     {
         public Services()
         {
             InitializeComponent();
+            FillDataGrid();
+        }
+
+        public event EventHandler DataGridUpdated;
+
+        public void UpdateDataGrid()
+        {
             FillDataGrid();
         }
 
@@ -35,26 +46,129 @@ namespace Presentation.Pages
                 List<Service> services = context.services.ToList();
 
                 DataTable dt = new DataTable("Service");
-                dt.Columns.Add("Number", typeof(int));
-                dt.Columns.Add("ServiceId", typeof(int));
-                dt.Columns.Add("HouseId", typeof(int));
+                dt.Columns.Add("№", typeof(int));
+                dt.Columns.Add("HouseId", typeof(string));
                 dt.Columns.Add("TypeOfAccount", typeof(string));
                 dt.Columns.Add("Price", typeof(int));
 
                 for (int i = 0; i < services.Count; i++)
                 {
-                    dt.Rows.Add(i + 1, services[i].ServiceId, services[i].HouseId, services[i].TypeOfAccount, services[i].Price);
+                    dt.Rows.Add(i + 1,
+                        context.houses
+                        .Where(h => h.HouseId == services[i].HouseId)
+                        .Select(h => h.HouseAddress)
+                        .FirstOrDefault(), services[i].TypeOfAccount, services[i].Price);
                 }
 
-                dt.Columns["Number"].SetOrdinal(0);
+                dt.Columns["№"].SetOrdinal(0);
 
                 dataGrid.ItemsSource = dt.DefaultView;
             }
         }
 
-        private void b1_Click(object sender, EventArgs e)
+        List<string> customHeaders = new List<string>
         {
-            // Your button click logic here
+            "№",
+            "HouseId",
+            "TypeOfAccount",
+            "Price"
+        };
+
+
+        private void ExportToExcelButton_Click(object sender, RoutedEventArgs e)
+        {
+            XlsxExporter.ExportToExcelButton_Click(sender, e, dataGrid, customHeaders);
+        }
+
+        private void ExportToPdfButton_Click(object sender, RoutedEventArgs e)
+        {
+            PdfExporter.ExportToPdfButton_Click(sender, e, dataGrid, "Інформація по послугах і тарифах", customHeaders);
+        }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DataGridSearch.PerformSearch(dataGrid, searchBox);
+        }
+
+        private void CheckBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+
+            DataGridRow dataGridRow = FindAncestor<DataGridRow>(checkBox);
+            if (dataGridRow != null)
+            {
+                dataGridRow.IsSelected = !dataGridRow.IsSelected;
+            }
+            e.Handled = true;
+        }
+
+        private T FindAncestor<T>(DependencyObject current) where T : DependencyObject
+        {
+            do
+            {
+                if (current is T ancestor)
+                {
+                    return ancestor;
+                }
+                current = VisualTreeHelper.GetParent(current);
+            } while (current != null);
+
+            return null;
+        }
+
+
+        private void SelectAllCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            SelectAllCheckBoxes(true);
+        }
+
+        private void SelectAllCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SelectAllCheckBoxes(false);
+        }
+
+        private void SelectAllCheckBoxes(bool isChecked)
+        {
+            for (int i = 0; i < dataGrid.Items.Count; i++)
+            {
+                var dataGridRow = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(i);
+
+                if (dataGridRow != null)
+                {
+                    var checkBox = FindCheckBoxInVisualTree(dataGridRow);
+                    if (checkBox != null)
+                    {
+                        checkBox.IsChecked = isChecked;
+                    }
+                }
+            }
+        }
+
+        private CheckBox FindCheckBoxInVisualTree(DependencyObject parent)
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+
+                if (child is CheckBox checkBox)
+                {
+                    return checkBox;
+                }
+
+                var result = FindCheckBoxInVisualTree(child);
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+
+            return null;
+        }
+
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+            NewServiceDialog NewServiceDialog = new NewServiceDialog(this);
+            NewServiceDialog.Show();
         }
     }
 }
