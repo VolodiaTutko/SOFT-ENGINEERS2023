@@ -1,14 +1,15 @@
-﻿namespace FlowMeterTeamProject.BLL.Utils.DataGrid
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using DAL.Data;
+using DAL.Data.DataMock;
+using Microsoft.EntityFrameworkCore.Storage;
+
+namespace FlowMeterTeamProject.BLL.Utils.DataGrid
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using DAL.Data;
-    using DAL.Data.DataMock;
-    using Microsoft.EntityFrameworkCore.Storage;
 
     static class ReceiptsLogic
     {

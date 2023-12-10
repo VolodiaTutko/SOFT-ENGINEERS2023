@@ -158,10 +158,6 @@ namespace Presentation.Pages
 
                     properties.ShowDialog();
                 }
-                else if (selectedRowsData.Count == 1) {
-                    var propertiesWindow = new PropertiesAccounts();
-                    propertiesWindow.ShowDialog(); 
-                }
                 else
                 {
                     MessageBox.Show("Please select the checkbox in the row before viewing details.");
@@ -255,18 +251,18 @@ namespace Presentation.Pages
 
         //        if (selectedRowsData.Count > 0)
         //        {
-                    
+
         //             personalAccountValue = selectedRowsData[0]["Особовий рахунок"];
 
 
         //            var properties = new PropertiesAccounts(personalAccountValue);
-                   
+
         //            properties.ShowDialog();
 
         //        }
         //        else
         //        {
-                    
+
         //            MessageBox.Show("Please select the checkbox in the row before viewing details.");
         //        }
         //    }
@@ -285,7 +281,7 @@ namespace Presentation.Pages
         //    return (T)parent;
         //}
 
-       
+
         //------------------------------------------------------------------------------------------------------------------------------//
 
         private void CheckBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -314,7 +310,7 @@ namespace Presentation.Pages
             return null;
         }
 
-       
+
 
         private void SelectAllCheckBox_Checked(object sender, RoutedEventArgs e)
         {

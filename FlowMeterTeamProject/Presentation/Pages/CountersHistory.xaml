@@ -15,32 +15,83 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Margin="10">
-            <Button Content="Додати новий запис" Margin="0,0,20,0" Click="AddNewItem_Click"/>
-            <TextBox x:Name="searchBox" Width="200">
+            <CheckBox x:Name="selectAllCheckBox" Content="Вибрати все" Margin="0,0,20,0" VerticalAlignment="Center" Checked="SelectAllCheckBox_Checked" Unchecked="SelectAllCheckBox_Unchecked"/>
+            <Button Content="Додати новий запис" Margin="0,0,20,0" Click="AddNewItem_Click" FontWeight="Bold" BorderBrush="#FFB1B1B1" Background="#FF305AAB" Foreground="White"/>
+            <Button Content="Експортувати в PDF" Margin="0,0,20,0" Click="ExportToPdfButton_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#FF305AAB"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="BorderBrush" Value="#FFB1B1B1"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF305AAB"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button Content="Експортувати в XLSX" Margin="0,0,20,0" Click="ExportToExcelButton_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#FF305AAB"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="BorderBrush" Value="#FFB1B1B1"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FF305AAB"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <TextBox x:Name="searchBox" Width="200" TextChanged="SearchBox_TextChanged" BorderThickness="1">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="3"/>
                     </Style>
                 </TextBox.Resources>
+                <TextBox.Template>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3"/>
+                            <TextBlock x:Name="watermark" Text="Пошук" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" Foreground="Gray" Visibility="Collapsed"/>
+                            <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#FF1F4E8E"/>
+                            </Trigger>
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="watermark" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="watermark" Property="Visibility" Value="Collapsed"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </TextBox.Template>
             </TextBox>
-
             <TextBlock x:Name="currentDateTextBlock" Margin="10,0,0,0" />
         </StackPanel>
 
-        <DataGrid x:Name="dataGrid" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*" EnableRowVirtualization="False" EnableColumnVirtualization="False" SelectionChanged="dataGrid_SelectionChanged">
+        <DataGrid x:Name="dataGrid" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*" EnableRowVirtualization="False" EnableColumnVirtualization="False" SelectionChanged="dataGrid_SelectionChanged" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="30">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox Name="b1" Click="b1_Click" />
+                            <CheckBox Name="b1" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="№" Binding="{Binding Number}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Account" Binding="{Binding Account}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Type" Binding="{Binding Type}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Current Value" Binding="{Binding Current Value}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Value as of date" Binding="{Binding Value as of date}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="№" Binding="{Binding №}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Рахунок" Binding="{Binding Account}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Тип" Binding="{Binding Type}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Поточне значення" Binding="{Binding Current Value}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Дата зміни значення" Binding="{Binding Value as of date}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

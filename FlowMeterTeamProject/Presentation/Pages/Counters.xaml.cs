@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Media;
 using System.Data;
 using System.Linq;
 using System.Windows;
@@ -11,6 +12,8 @@ using BLL.Utils.DataGrid;
 using FlowMeterTeamProject.Presentation.DialogWindows;
 using FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow;
 using Presentation.PersonalAccountDialogWindow;
+using System.Windows.Input;
+
 
 namespace Presentation.Pages
 {
@@ -34,7 +37,7 @@ namespace Presentation.Pages
             List<CounterEntity> counters = countersInfo.GetCounterEntities();
 
             DataTable dt = new DataTable("Counter");
-            dt.Columns.Add("Number", typeof(int));
+            dt.Columns.Add("№", typeof(int));
             dt.Columns.Add("Account", typeof(string));
             dt.Columns.Add("Type", typeof(string));
             dt.Columns.Add("Current Value", typeof(decimal));
@@ -51,19 +54,18 @@ namespace Presentation.Pages
                 );
             }
 
-            dt.Columns["Number"].SetOrdinal(0);
+            dt.Columns["№"].SetOrdinal(0);
 
-                dataGrid.ItemsSource = dt.DefaultView; 
-            }
+            dataGrid.ItemsSource = dt.DefaultView;
         }
 
         List<string> customHeaders = new List<string>
         {
             "№",
-            "CurrentIndicator",
             "Account",
-            "TypeOfAccount",
-            "Date"
+            "Type",
+            "Current Value",
+            "Value as of date"
         };
 
 
@@ -156,6 +158,11 @@ namespace Presentation.Pages
             return null;
         }
 
+        private void AddNewItem_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewCounter newCounterDialog = new AddNewCounter();
+            newCounterDialog.Show();
+        }
 
     }
 }

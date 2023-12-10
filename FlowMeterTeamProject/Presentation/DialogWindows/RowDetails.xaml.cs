@@ -1,22 +1,23 @@
-﻿namespace FlowMeterTeamProject.Presentation.DialogWindows
-{
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Data;
-    using System.Windows.Documents;
-    using System.Windows.Input;
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
-    using System.Windows.Shapes;
-    using DAL.Data;
-    using FlowMeterTeamProject.BLL.Utils.DataGrid;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using DAL.Data;
+using FlowMeterTeamProject.BLL.Utils.DataGrid;
 
+
+namespace FlowMeterTeamProject.Presentation.DialogWindows
+{
     /// <summary>
     /// Interaction logic for RowDetails.xaml
     /// </summary>
