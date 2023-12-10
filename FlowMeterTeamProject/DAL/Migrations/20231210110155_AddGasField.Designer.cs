@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FlowMeterTeamProject.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231209114112_fix_consumers")]
-    partial class fixconsumers
+    [Migration("20231210110155_AddGasField")]
+    partial class AddGasField
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,20 +30,23 @@ namespace FlowMeterTeamProject.Migrations
                     b.Property<string>("PersonalAccount")
                         .HasColumnType("text");
 
-                    b.Property<decimal?>("ColdWater")
-                        .HasColumnType("numeric");
+                    b.Property<string>("ColdWater")
+                        .HasColumnType("text");
 
-                    b.Property<decimal?>("Electricity")
-                        .HasColumnType("numeric");
+                    b.Property<string>("Electricity")
+                        .HasColumnType("text");
 
-                    b.Property<decimal?>("Heating")
-                        .HasColumnType("numeric");
+                    b.Property<string>("Gas")
+                        .HasColumnType("text");
 
-                    b.Property<decimal?>("HotWater")
-                        .HasColumnType("numeric");
+                    b.Property<string>("Heating")
+                        .HasColumnType("text");
 
-                    b.Property<decimal?>("PublicService")
-                        .HasColumnType("numeric");
+                    b.Property<string>("HotWater")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PublicService")
+                        .HasColumnType("text");
 
                     b.HasKey("PersonalAccount");
 
@@ -68,10 +71,10 @@ namespace FlowMeterTeamProject.Migrations
                     b.Property<int?>("HeatingArea")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("HouseId")
+                    b.Property<int>("HouseId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("NumberOfPersons")
+                    b.Property<int>("NumberOfPersons")
                         .HasColumnType("integer");
 
                     b.Property<string>("PersonalAccount")
@@ -100,9 +103,6 @@ namespace FlowMeterTeamProject.Migrations
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<decimal?>("PreviousIndicator")
-                        .HasColumnType("numeric");
 
                     b.Property<string>("TypeOfAccount")
                         .IsRequired()

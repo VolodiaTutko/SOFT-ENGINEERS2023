@@ -88,6 +88,11 @@ namespace FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow
                     };
 
                     context.consumers.Add(newPersonalAccount);
+                    Account newAccount = new Account
+                    {
+                        PersonalAccount = personalAccount
+                    };
+                    context.accounts.Add(newAccount);
                     context.SaveChanges();
                     _dataGridUpdater?.UpdateDataGrid();
                     this.Close();
@@ -96,7 +101,6 @@ namespace FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow
             }
             catch (Exception ex)
             {
-                // Опціонально: обробте помилку (виведення повідомлення або логування)
                 MessageBox.Show($"Помилка при збереженні даних: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

@@ -33,6 +33,12 @@
     <Compile Update="Presentation\PersonalAccountDialogWindow\AddNewAccount.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Presentation\PersonalAccountDialogWindow\PropertiesAccountsForMany.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Presentation\PersonalAccountDialogWindow\SubAccounts.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Presentation\DialogWindows\NewServiceDialog.xaml">
@@ -66,6 +72,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Presentation\PersonalAccountDialogWindow\AddNewAccount.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Presentation\PersonalAccountDialogWindow\PropertiesAccountsForMany.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Presentation\PersonalAccountDialogWindow\SubAccounts.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

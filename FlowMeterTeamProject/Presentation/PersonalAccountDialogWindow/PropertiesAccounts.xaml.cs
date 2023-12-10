@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FlowMeterTeamProject.Presentation;
+using FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow;
+using Presentation.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace Presentation.PersonalAccountDialogWindow
 {
     /// <summary>
@@ -19,10 +23,12 @@ namespace Presentation.PersonalAccountDialogWindow
     /// </summary>
     public partial class PropertiesAccounts : Window
     {
-        public PropertiesAccounts()
+        public string personalacount;
+        public PropertiesAccounts(string PersonalAccount)
         {
             InitializeComponent();
             this.ResizeMode = ResizeMode.NoResize;
+            personalacount = PersonalAccount;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -30,6 +36,19 @@ namespace Presentation.PersonalAccountDialogWindow
 
             var editDataAccounts = new EditDataAccounts();
             editDataAccounts.ShowDialog();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SubAccounts(object sender, RoutedEventArgs e)
+        {
+            var subAccounts = new SubAccounts(personalacount);
+            subAccounts.LabelPersonalAccount.Content = personalacount;
+            subAccounts.ShowDialog();
+
         }
     }
 }

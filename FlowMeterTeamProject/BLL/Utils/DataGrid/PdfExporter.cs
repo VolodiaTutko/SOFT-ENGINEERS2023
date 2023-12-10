@@ -1,27 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
-using iText.Kernel.Pdf;
-using iText.Layout;
-using iText.Layout.Element;
-using iText.Layout.Properties;
-
-using iText.IO.Font;
-using iText.IO.Font.Constants;
-using iText.Kernel.Font;
-using iTextSharp.text;
-using System.Windows.Data;
-using iText.Layout;
-
-namespace BLL.Utils.DataGrid
+﻿namespace BLL.Utils.DataGrid
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.IO;
+    using System.Linq;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Media;
+    using iText.IO.Font;
+    using iText.Kernel.Font;
+    using iText.Kernel.Pdf;
+    using iText.Layout;
+    using iText.Layout.Element;
+    using iText.Layout.Properties;
+
     internal class PdfExporter
     {
         public static void ExportToPdfButton_Click(object sender, RoutedEventArgs e, System.Windows.Controls.DataGrid dataGrid, string title, List<string> customHeaders)
@@ -69,7 +63,9 @@ namespace BLL.Utils.DataGrid
 
                                 if (row != null)
                                 {
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                                     CheckBox checkBox = FindVisualChild<CheckBox>(row);
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 
                                     if (checkBox != null && checkBox.IsChecked == true)
                                     {
@@ -81,7 +77,7 @@ namespace BLL.Utils.DataGrid
 
                             foreach (var item in dataGrid.Items)
                             {
-                                if (!checkboxesSelected || checkboxesSelected && IsRowSelected(item, dataGrid))
+                                if (!checkboxesSelected || (checkboxesSelected && IsRowSelected(item, dataGrid)))
                                 {
                                     if (item is DataRowView rowView && rowView.Row.ItemArray.Length > 0)
                                     {
@@ -93,8 +89,8 @@ namespace BLL.Utils.DataGrid
                                         {
                                             if (!(column is DataGridTemplateColumn && ((DataGridTemplateColumn)column).CellTemplate.LoadContent() is CheckBox))
                                             {
-                                                Binding binding = (column as DataGridBoundColumn)?.Binding as Binding;
-                                                string bindingPath = binding?.Path.Path;
+                                                Binding? binding = (column as DataGridBoundColumn)?.Binding as Binding;
+                                                string? bindingPath = binding?.Path.Path;
 
                                                 string columnHeader = customHeaders.FirstOrDefault(h => h.Equals(bindingPath, StringComparison.OrdinalIgnoreCase)) ?? bindingPath;
 
@@ -117,11 +113,11 @@ namespace BLL.Utils.DataGrid
                     }
                 }
 
-                MessageBox.Show("Data exported to PDF successfully.", "Export Successful", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Дані успішно експортовані в PDF.", "Export Successful", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error exporting data to PDF: {ex.Message}", "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Помилка при експортуванні даних в PDF: {ex.Message}", "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -131,7 +127,9 @@ namespace BLL.Utils.DataGrid
 
             if (row != null)
             {
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                 CheckBox checkBox = FindVisualChild<CheckBox>(row);
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 
                 return checkBox != null && checkBox.IsChecked == true;
             }
@@ -140,19 +138,26 @@ namespace BLL.Utils.DataGrid
         }
 
 
-        private static T FindVisualChild<T>(DependencyObject obj) where T : DependencyObject
+        private static T? FindVisualChild<T>(DependencyObject obj)
+            where T : DependencyObject
         {
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
             {
                 DependencyObject child = VisualTreeHelper.GetChild(obj, i);
 
                 if (child != null && child is T)
+                {
                     return (T)child;
+                }
 
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
                 T childOfChild = FindVisualChild<T>(child);
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
 
                 if (childOfChild != null)
+                {
                     return childOfChild;
+                }
             }
 
             return null;
