@@ -15,6 +15,8 @@ namespace DAL.Data
         public string? ColdWater { get; set; }
         public string? Heating { get; set; }
         public string? Electricity { get; set; }
+        public string? Gas { get; set; }
         public string? PublicService { get; set; }
+        
     }
 }

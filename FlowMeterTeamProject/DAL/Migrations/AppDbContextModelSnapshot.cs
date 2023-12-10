@@ -33,6 +33,9 @@ namespace FlowMeterTeamProject.Migrations
                     b.Property<string>("Electricity")
                         .HasColumnType("text");
 
+                    b.Property<string>("Gas")
+                        .HasColumnType("text");
+
                     b.Property<string>("Heating")
                         .HasColumnType("text");
 

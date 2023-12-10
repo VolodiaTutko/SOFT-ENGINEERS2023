@@ -10,7 +10,8 @@ namespace DAL.Data.DataMock
 {
     static class Mock
     {
-        public static bool checkIfDbConsumersEmpty () {
+        public static bool checkIfDbConsumersEmpty()
+        {
             using (var context = new AppDbContext())
             {
                 return context.consumers.ToList().Count == 0 ? true : false;
@@ -77,7 +78,7 @@ namespace DAL.Data.DataMock
                 .Select(i => new Consumer
                 {
                     PersonalAccount = GenerateRandomNumberString(),
-                    Flat = random.Next(1, 100), 
+                    Flat = random.Next(1, 100),
                     ConsumerOwner = GenerateRandomString(),
                     HeatingArea = random.Next(50, 200)
                 })

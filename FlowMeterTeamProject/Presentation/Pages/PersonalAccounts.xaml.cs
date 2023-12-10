@@ -21,6 +21,7 @@ using BLL.Utils.DataGrid;
 using FlowMeterTeamProject.Presentation.DialogWindows;
 using FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow;
 using FlowMeterTeamProject.Presentation;
+using System.Reflection;
 
 namespace Presentation.Pages
 {
@@ -28,14 +29,15 @@ namespace Presentation.Pages
     /// Interaction logic for PersonalAccounts.xaml
     /// </summary>
     public partial class PersonalAccounts : Page, IDataGridUpdater
-    {       
+    {
+        public string personalAccountValue;
         public PersonalAccounts()
         {
             InitializeComponent();
 
             FillDataGrid();
 
-            dataGrid.MouseRightButtonDown += DataGrid_MouseRightButtonDown;
+            //dataGrid.MouseRightButtonDown += DataGrid_MouseRightButtonDown;
         }
         public event EventHandler DataGridUpdated;
 
@@ -137,11 +139,24 @@ namespace Presentation.Pages
                     }
                 }
 
-                if (selectedRowsData.Count > 0)
+                if (selectedRowsData.Count > 1) // відкривається вікно з Сформувати квитанції
                 {
-                    RowDetails dialog = new RowDetails(selectedRowsData);
-                    dialog.Owner = Window.GetWindow(this);
-                    dialog.ShowDialog();
+
+
+                    var propertiesMany = new PropertiesAccountsForMany();
+                    propertiesMany.ShowDialog();
+                    //RowDetails dialog = new RowDetails(selectedRowsData);
+                    //dialog.Owner = Window.GetWindow(this);
+                    //dialog.ShowDialog();
+                }
+                else if (selectedRowsData.Count == 1)
+                {
+                    personalAccountValue = selectedRowsData[0]["Особовий рахунок"];
+
+
+                    var properties = new PropertiesAccounts(personalAccountValue);
+
+                    properties.ShowDialog();
                 }
                 else
                 {
@@ -149,6 +164,7 @@ namespace Presentation.Pages
                 }
             }
         }
+
 
 
         private T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
@@ -196,16 +212,77 @@ namespace Presentation.Pages
             var addNewAccount = new AddNewAccount(this);
             addNewAccount.ShowDialog();
         }
+        // ---------------------------------------------------------------------------------------------------//
+        //private void DataGrid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    var selectedRows = dataGrid.SelectedItems;
 
-        private void DataGrid_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.RightButton == MouseButtonState.Pressed)
-            {
-                var propertiesWindow = new PropertiesAccounts();
-                propertiesWindow.ShowDialog();
-            }
-        }
+        //    if (selectedRows.Count > 0)
+        //    {
+        //        List<Dictionary<string, string>> selectedRowsData = new List<Dictionary<string, string>>();
 
+        //        foreach (var selectedItem in selectedRows)
+        //        {
+        //            var row = (DataGridRow)(dataGrid.ItemContainerGenerator.ContainerFromItem(selectedItem));
+
+        //            if (row != null)
+        //            {
+        //                Dictionary<string, string> rowData = new Dictionary<string, string>();
+
+        //                foreach (var column in dataGrid.Columns)
+        //                {
+        //                    if (column is DataGridTextColumn textColumn)
+        //                    {
+        //                        string header = textColumn.Header.ToString();
+
+        //                        var cellContent = column.GetCellContent(row);
+
+        //                        if (cellContent is TextBlock textBlock)
+        //                        {
+        //                            string cellValue = textBlock.Text;
+        //                            rowData.Add(header, cellValue);
+        //                        }
+        //                    }
+        //                }
+
+        //                selectedRowsData.Add(rowData);
+        //            }
+        //        }
+
+        //        if (selectedRowsData.Count > 0)
+        //        {
+                    
+        //             personalAccountValue = selectedRowsData[0]["Особовий рахунок"];
+
+
+        //            var properties = new PropertiesAccounts(personalAccountValue);
+                   
+        //            properties.ShowDialog();
+
+        //        }
+        //        else
+        //        {
+                    
+        //            MessageBox.Show("Please select the checkbox in the row before viewing details.");
+        //        }
+        //    }
+        //}
+
+
+        //private T TryFindParent<T>(DependencyObject current) where T : DependencyObject
+        //{
+        //    DependencyObject parent = VisualTreeHelper.GetParent(current);
+
+        //    while (parent != null && !(parent is T))
+        //    {
+        //        parent = VisualTreeHelper.GetParent(parent);
+        //    }
+
+        //    return (T)parent;
+        //}
+
+       
+        //------------------------------------------------------------------------------------------------------------------------------//
 
         private void CheckBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -232,5 +309,7 @@ namespace Presentation.Pages
 
             return null;
         }
+
+       
     }
 }

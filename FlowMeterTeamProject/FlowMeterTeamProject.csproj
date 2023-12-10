@@ -10,6 +10,7 @@
 	<ItemGroup>
 		<None Remove="appsettings.json" />
 		<None Remove="logo.png" />
+		<None Remove="Presentation\PersonalAccountDialogWindow\edit.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -43,6 +44,7 @@
 
 	<ItemGroup>
 	  <Resource Include="logo.png" />
+	  <Resource Include="Presentation\PersonalAccountDialogWindow\edit.png" />
 	</ItemGroup>
 
 </Project>
