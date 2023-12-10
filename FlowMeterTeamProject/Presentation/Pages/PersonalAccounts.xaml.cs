@@ -311,5 +311,55 @@ namespace Presentation.Pages
         }
 
        
+
+        private void SelectAllCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            SelectAllCheckBoxes(true);
+        }
+
+        private void SelectAllCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SelectAllCheckBoxes(false);
+        }
+
+        private void SelectAllCheckBoxes(bool isChecked)
+        {
+            for (int i = 0; i < dataGrid.Items.Count; i++)
+            {
+                var dataGridRow = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(i);
+
+                if (dataGridRow != null)
+                {
+                    var checkBox = FindCheckBoxInVisualTree(dataGridRow);
+                    if (checkBox != null)
+                    {
+                        checkBox.IsChecked = isChecked;
+                    }
+                }
+            }
+        }
+
+        private CheckBox FindCheckBoxInVisualTree(DependencyObject parent)
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+
+                if (child is CheckBox checkBox)
+                {
+                    return checkBox;
+                }
+
+                var result = FindCheckBoxInVisualTree(child);
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+
+            return null;
+        }
+
+
     }
 }

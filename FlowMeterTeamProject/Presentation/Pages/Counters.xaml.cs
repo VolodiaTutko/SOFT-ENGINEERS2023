@@ -43,8 +43,6 @@ namespace Presentation.Pages
 
                 DataTable dt = new DataTable("Counter");
                 dt.Columns.Add("№", typeof(int));
-                dt.Columns.Add("CountersId", typeof(int));
-                dt.Columns.Add("PreviousIndicator", typeof(decimal));
                 dt.Columns.Add("CurrentIndicator", typeof(decimal));
                 dt.Columns.Add("Account", typeof(string));
                 dt.Columns.Add("TypeOfAccount", typeof(string));
@@ -54,7 +52,6 @@ namespace Presentation.Pages
                 {
                     dt.Rows.Add(
                         i + 1,
-                        counters[i].CountersId,
                         counters[i].CurrentIndicator,
                         counters[i].Account,
                         counters[i].TypeOfAccount,
@@ -71,8 +68,6 @@ namespace Presentation.Pages
         List<string> customHeaders = new List<string>
         {
             "№",
-            "CountersId",
-            "PreviousIndicator",
             "CurrentIndicator",
             "Account",
             "TypeOfAccount",
@@ -120,5 +115,55 @@ namespace Presentation.Pages
 
             return null;
         }
+
+        private void SelectAllCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            SelectAllCheckBoxes(true);
+        }
+
+        private void SelectAllCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SelectAllCheckBoxes(false);
+        }
+
+        private void SelectAllCheckBoxes(bool isChecked)
+        {
+            for (int i = 0; i < dataGrid.Items.Count; i++)
+            {
+                var dataGridRow = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(i);
+
+                if (dataGridRow != null)
+                {
+                    var checkBox = FindCheckBoxInVisualTree(dataGridRow);
+                    if (checkBox != null)
+                    {
+                        checkBox.IsChecked = isChecked;
+                    }
+                }
+            }
+        }
+
+        private CheckBox FindCheckBoxInVisualTree(DependencyObject parent)
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+
+                if (child is CheckBox checkBox)
+                {
+                    return checkBox;
+                }
+
+                var result = FindCheckBoxInVisualTree(child);
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+
+            return null;
+        }
+
+
     }
 }

@@ -38,18 +38,21 @@ namespace Presentation.Pages
                 List<Service> services = context.services.ToList();
 
                 DataTable dt = new DataTable("Service");
-                dt.Columns.Add("Number", typeof(int));
-                dt.Columns.Add("ServiceId", typeof(int));
-                dt.Columns.Add("HouseId", typeof(int));
+                dt.Columns.Add("№", typeof(int));
+                dt.Columns.Add("HouseId", typeof(string));
                 dt.Columns.Add("TypeOfAccount", typeof(string));
                 dt.Columns.Add("Price", typeof(int));
 
                 for (int i = 0; i < services.Count; i++)
                 {
-                    dt.Rows.Add(i + 1, services[i].ServiceId, services[i].HouseId, services[i].TypeOfAccount, services[i].Price);
+                    dt.Rows.Add(i + 1,
+                        context.houses
+                        .Where(h => h.HouseId == services[i].HouseId)
+                        .Select(h => h.HouseAddress)
+                        .FirstOrDefault(), services[i].TypeOfAccount, services[i].Price);
                 }
 
-                dt.Columns["Number"].SetOrdinal(0);
+                dt.Columns["№"].SetOrdinal(0);
 
                 dataGrid.ItemsSource = dt.DefaultView;
             }
@@ -58,7 +61,6 @@ namespace Presentation.Pages
         List<string> customHeaders = new List<string>
         {
             "№",
-            "ServiceId",
             "HouseId",
             "TypeOfAccount",
             "Price"
@@ -105,6 +107,56 @@ namespace Presentation.Pages
 
             return null;
         }
+
+
+        private void SelectAllCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            SelectAllCheckBoxes(true);
+        }
+
+        private void SelectAllCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            SelectAllCheckBoxes(false);
+        }
+
+        private void SelectAllCheckBoxes(bool isChecked)
+        {
+            for (int i = 0; i < dataGrid.Items.Count; i++)
+            {
+                var dataGridRow = (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(i);
+
+                if (dataGridRow != null)
+                {
+                    var checkBox = FindCheckBoxInVisualTree(dataGridRow);
+                    if (checkBox != null)
+                    {
+                        checkBox.IsChecked = isChecked;
+                    }
+                }
+            }
+        }
+
+        private CheckBox FindCheckBoxInVisualTree(DependencyObject parent)
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+
+                if (child is CheckBox checkBox)
+                {
+                    return checkBox;
+                }
+
+                var result = FindCheckBoxInVisualTree(child);
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+
+            return null;
+        }
+
 
 
     }
