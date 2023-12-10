@@ -68,7 +68,7 @@
         <ControlTemplate x:Key="TextBoxLogin" TargetType="{x:Type TextBox}">
             <Border Background="White"  CornerRadius="10">
                 <Grid>
-                    <TextBlock Text="Login" FontSize="15" Foreground="Gray" Margin="5" IsHitTestVisible="False" Visibility="Collapsed" Name="LoginBackgroundText" />
+                    <TextBlock Text="Логін" FontSize="15" Foreground="Gray" Margin="5" IsHitTestVisible="False" Visibility="Collapsed" Name="LoginBackgroundText" />
                     <ScrollViewer x:Name="PART_ContentHost" Foreground="Black"  Margin="7"/>
                 </Grid>
             </Border>
@@ -86,7 +86,7 @@
         <ControlTemplate x:Key="TextBoxPassword" TargetType="{x:Type TextBox}">
             <Border Background="White"  CornerRadius="10">
                 <Grid>
-                    <TextBlock Text="Enter password " FontSize="15" Foreground="Gray" Margin="5" IsHitTestVisible="False" Visibility="Collapsed" Name="PasswordBackgroundText" />
+                    <TextBlock Text="Введіть пароль" FontSize="15" Foreground="Gray" Margin="5" IsHitTestVisible="False" Visibility="Collapsed" Name="PasswordBackgroundText" />
                     <ScrollViewer x:Name="PART_ContentHost" Foreground="Black"  Margin="7"/>
                 </Grid>
             </Border>
@@ -173,32 +173,15 @@
                 <StackPanel Margin="20">
 
                     <StackPanel Orientation="Horizontal" Margin="10 0 10 10" HorizontalAlignment="Center">
-                        <TextBlock Text="Welcome" Foreground="#FF2196F3" FontSize="29" RenderTransformOrigin="2.556,1.057" />
+                        <TextBlock Text="Вітаємо" Foreground="#FF2196F3" FontSize="29" RenderTransformOrigin="2.556,1.057" />
                     </StackPanel>
 
                     <TextBox x:Name="textlogin" Template="{StaticResource TextBoxLogin}" Margin="150 50 150 15"  />
                     <TextBox x:Name="textpassword" Template="{StaticResource TextBoxPassword}" Margin="150 10 150 25"  />
 
                     <StackPanel Orientation="Horizontal" Margin="0 40 0 10" >
-                        <TextBlock Text="Aren`t you registered yet? " FontSize="15" Margin="70 5 0 0" Foreground="#FF929DA9" FontWeight="Bold"   />
-                        <Label Content="Register" >
-                            <Label.Style>
-                                <Style TargetType="Label">
-                                    <Setter Property="Foreground" Value="#FF2196F3"/>
-                                    <Setter Property="FontWeight" Value="Bold"/>
-                                    <Setter Property="Margin" Value="0,0,15,0"/>
-                                    <Setter Property="FontSize" Value="15"/>
-                                    <Setter Property="FontWeight" Value="Thin"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Foreground" Value="#FF001794"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Label.Style>
-                        </Label>
                         <ContentControl x:Name="MainLoginControler">
-                            <Button Content = "Login" FontSize="17" Margin="170,0,0,0" Click="SwitchToMain_Click">
+                            <Button Content = "Увійти" FontSize="17" Margin="265,0,0,0" Click="SwitchToMain_Click">
                                 <Button.Style>
                                     <Style TargetType="{x:Type Button}">
                                         <Setter Property="Background" Value="#FF2196F3"/>

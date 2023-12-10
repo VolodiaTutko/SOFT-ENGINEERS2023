@@ -76,21 +76,27 @@ namespace DAL.Data.DataMock
                 PersonalAccount = "1000000000",
                 Flat = 1,
                 ConsumerOwner = "Боровець Роман Назарович",
-                HeatingArea = 267
+                HeatingArea = 267,
+                HouseId = 1,
+                NumberOfPersons = 100
             };
             Consumer newConsumer2 = new Consumer
             {
                 PersonalAccount = "1000000007",
                 Flat = 2,
                 ConsumerOwner = "Боровець Роман Назарович",
-                HeatingArea = 87
+                HeatingArea = 87,
+                HouseId = 2,
+                NumberOfPersons = 150
             };
             Consumer newConsumer3 = new Consumer
             {
                 PersonalAccount = "10000000014",
                 Flat = 3,
                 ConsumerOwner = "Тутко Володимир Григорович",
-                HeatingArea = 110
+                HeatingArea = 110,
+                HouseId = 3,
+                NumberOfPersons = 85
             };
 
             using (var dbContext = new AppDbContext())

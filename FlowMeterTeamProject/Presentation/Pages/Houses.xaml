@@ -16,9 +16,10 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Margin="10">
+            <CheckBox x:Name="selectAllCheckBox" Content="Вибрати все" Margin="0,0,20,0" VerticalAlignment="Center" Checked="SelectAllCheckBox_Checked" Unchecked="SelectAllCheckBox_Unchecked"/>
             <Button Content="Додати новий запис" Margin="0,0,20,0" Click="Button_Click" FontWeight="Bold" BorderBrush="#FFB1B1B1" Background="#FF1F4E8E" Foreground="White" />
-            <Button Content="Export to PDF" Margin="0,0,20,0" Click="ExportToPdfButton_Click"/>
-            <Button Content="Export to XLSX" Margin="0,0,20,0" Click="ExportToExcelButton_Click"/>
+            <Button Content="Експортувати в PDF" Margin="0,0,20,0" Click="ExportToPdfButton_Click"/>
+            <Button Content="Експортувати в XLSX" Margin="0,0,20,0" Click="ExportToExcelButton_Click"/>
             <TextBox x:Name="searchBox" Width="200" TextChanged="SearchBox_TextChanged">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">

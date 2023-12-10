@@ -112,11 +112,11 @@ namespace BLL.Utils.DataGrid
                     package.SaveAs(new FileInfo(filePath));
                 }
 
-                MessageBox.Show("Data exported to Excel successfully.", "Export Successful", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Дані успішно експортовані в Excel.", "Export Successful", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error exporting data to Excel: {ex.Message}", "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Помилка при експортуванні даних в Excel: {ex.Message}", "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

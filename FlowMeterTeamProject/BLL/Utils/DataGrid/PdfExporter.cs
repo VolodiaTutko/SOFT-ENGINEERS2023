@@ -117,11 +117,11 @@ namespace BLL.Utils.DataGrid
                     }
                 }
 
-                MessageBox.Show("Data exported to PDF successfully.", "Export Successful", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Дані успішно експортовані в PDF.", "Export Successful", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error exporting data to PDF: {ex.Message}", "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Помилка при експортуванні даних в PDF: {ex.Message}", "Export Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
