@@ -17,17 +17,25 @@ using System.Windows.Shapes;
 using BLL.Utils.DataGrid;
 using FlowMeterTeamProject.Presentation.DialogWindows;
 using FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow;
+using FlowMeterTeamProject.Presentation;
 
 namespace Presentation.Pages
 {
     /// <summary>
     /// Interaction logic for Services.xaml
     /// </summary>
-    public partial class Services : Page
+    public partial class Services : Page, IDataGridUpdater
     {
         public Services()
         {
             InitializeComponent();
+            FillDataGrid();
+        }
+
+        public event EventHandler DataGridUpdated;
+
+        public void UpdateDataGrid()
+        {
             FillDataGrid();
         }
 
@@ -157,8 +165,9 @@ namespace Presentation.Pages
             return null;
         }
 
-
-
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+            NewServiceDialog NewServiceDialog = new NewServiceDialog(this);
             NewServiceDialog.Show();
         }
     }
