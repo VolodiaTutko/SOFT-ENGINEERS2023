@@ -3,6 +3,9 @@
   <PropertyGroup />
   <ItemGroup />
   <ItemGroup>
+    <Compile Update="Presentation\DialogWindows\NewServiceDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Presentation\DialogWindows\RowDetails.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -32,6 +35,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Presentation\DialogWindows\NewServiceDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Presentation\DialogWindows\RowDetails.xaml">
       <SubType>Designer</SubType>
     </Page>

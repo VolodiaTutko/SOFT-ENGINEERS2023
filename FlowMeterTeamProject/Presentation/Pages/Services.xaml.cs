@@ -106,6 +106,11 @@ namespace Presentation.Pages
             return null;
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NewServiceDialog NewServiceDialog = new NewServiceDialog();
 
+            NewServiceDialog.Show();
+        }
     }
 }

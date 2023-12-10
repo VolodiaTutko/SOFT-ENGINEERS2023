@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Margin="10">
-            <Button Content="Додати новий запис" Margin="0,0,20,0" FontWeight="Bold" BorderBrush="#FFB1B1B1" Background="#FF1F4E8E" Foreground="White" />
+            <Button Content="Додати новий запис" Margin="0,0,20,0" FontWeight="Bold" BorderBrush="#FFB1B1B1" Background="#FF1F4E8E" Foreground="White" Click="Button_Click" />
             <Button Content="Export to PDF" Margin="0,0,20,0" Click="ExportToPdfButton_Click"/>
             <Button Content="Export to XLSX" Margin="0,0,20,0" Click="ExportToExcelButton_Click"/>
             <TextBox x:Name="searchBox" Width="200" TextChanged="SearchBox_TextChanged">
