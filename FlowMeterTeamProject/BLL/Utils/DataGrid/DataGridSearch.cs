@@ -29,9 +29,9 @@ namespace BLL.Utils.DataGrid
                         var cellContent = column.GetCellContent(item);
                         if (cellContent is TextBlock textBlock)
                         {
-                            string cellText = textBlock.Text.ToLower();
+                            string cellText = textBlock.Text;
 
-                            int index = cellText.IndexOf(searchText);
+                            int index = cellText.IndexOf(searchText, StringComparison.OrdinalIgnoreCase);
                             if (index >= 0)
                             {
                                 textBlock.Inlines.Clear();
