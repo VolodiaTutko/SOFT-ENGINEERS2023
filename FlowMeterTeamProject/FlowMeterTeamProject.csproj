@@ -9,7 +9,6 @@
 
 	<ItemGroup>
 		<None Remove="appsettings.json" />
-		<None Remove="logo.png" />
 		<None Remove="Presentation\Source\logo.png" />
 	</ItemGroup>
 

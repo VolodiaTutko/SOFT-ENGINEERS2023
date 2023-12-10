@@ -155,7 +155,7 @@
             </Grid>
         </Border >
 
-        <Image Name="log" Grid.Row="1" Source="/logo.png"/>
+        <Image Name="log" Grid.Row="1" Source="/Presentation/Source/logo.png"/>
 
         <Grid Name="Log_in" Grid.Row="2" Grid.Column="1">
             <Grid.RowDefinitions>
