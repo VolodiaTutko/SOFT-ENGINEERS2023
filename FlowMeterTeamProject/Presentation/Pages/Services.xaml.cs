@@ -159,5 +159,7 @@ namespace Presentation.Pages
 
 
 
+            NewServiceDialog.Show();
+        }
     }
 }

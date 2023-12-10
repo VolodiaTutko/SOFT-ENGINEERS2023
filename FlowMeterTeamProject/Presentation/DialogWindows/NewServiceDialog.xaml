@@ -1,0 +1,28 @@
+﻿<Window x:Class="FlowMeterTeamProject.Presentation.DialogWindows.NewServiceDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlowMeterTeamProject.Presentation.DialogWindows"
+        mc:Ignorable="d"
+        Title="Додати нову послугу" Height="301" Width="316">
+    <Grid x:Name="Edit">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="77*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.ColumnSpan="4">
+            <Label Content="Послуги для будинку:" VerticalAlignment="Center"/>
+            <ComboBox x:Name="HouseComboBox" Width="304" Height="20"/>
+            <Label Content="Ціна (грн):" VerticalAlignment="Center"/>
+            <TextBox x:Name="PriceTextBox" Margin="5"/>
+
+            <Label Content="Тип:" VerticalAlignment="Center"/>
+            <ComboBox x:Name="TypeComboBox" Margin="5"/>
+
+            <Label Content="Одиниці виміру:" VerticalAlignment="Center"/>
+            <ComboBox x:Name="UnitComboBox" Margin="5"/>
+
+        </StackPanel>
+        <Button Content="Створити" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="124,231,0,0" Click="CreateButton_Click" Width="68" Height="20" Grid.ColumnSpan="3"/>
+    </Grid>
+</Window>
