@@ -10,6 +10,7 @@
 	<ItemGroup>
 		<None Remove="appsettings.json" />
 		<None Remove="logo.png" />
+		<None Remove="Presentation\Source\logo.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -36,6 +37,10 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.0" />
+		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -43,7 +48,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Resource Include="logo.png" />
+	  <Resource Include="Presentation\Source\logo.png" />
 	</ItemGroup>
 
 </Project>

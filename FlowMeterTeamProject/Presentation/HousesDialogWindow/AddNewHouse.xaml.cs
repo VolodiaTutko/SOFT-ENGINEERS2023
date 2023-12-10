@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using DAL.Data;
-using FlowMeterTeamProject.Presentation;
-using Presentation.Pages;
-
-namespace Presentation.HousesDialogWindow
+﻿namespace Presentation.HousesDialogWindow
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Documents;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using System.Windows.Shapes;
+    using DAL.Data;
+    using FlowMeterTeamProject.Presentation;
+    using Presentation.Pages;
+
     /// <summary>
     /// Interaction logic for AddNewHouse.xaml
     /// </summary>
@@ -24,7 +24,7 @@ namespace Presentation.HousesDialogWindow
     {
         public AddNewHouse()
         {
-            InitializeComponent();
+            this.InitializeComponent();
             this.ResizeMode = ResizeMode.NoResize;
 
         }
@@ -33,7 +33,7 @@ namespace Presentation.HousesDialogWindow
 
         public AddNewHouse(IDataGridUpdater dataGridUpdater)
         {
-            InitializeComponent();
+            this.InitializeComponent();
             _dataGridUpdater = dataGridUpdater;
         }
 
@@ -54,24 +54,20 @@ namespace Presentation.HousesDialogWindow
             {
                 using (var context = new AppDbContext())
                 {
-                    
-                    string address = AddressTextBox.Text;
-                    int numberOfFlats = int.Parse(NumberOfFlatsTextBox.Text);
-                    int heatingArea = int.Parse(HeatingAreaTextBox.Text);
-                    int numberOfResidents = int.Parse(NumberOfResidentsTextBox.Text);
-
-                    
+                    string address = this.AddressTextBox.Text;
+                    int numberOfFlats = int.Parse(this.NumberOfFlatsTextBox.Text);
+                    int heatingArea = int.Parse(this.HeatingAreaTextBox.Text);
+                    int numberOfResidents = int.Parse(this.NumberOfResidentsTextBox.Text);
                     House newHouse = new House
                     {
                         HouseAddress = address,
                         NumberOfFlat = numberOfFlats,
                         HeatingAreaOfHouse = heatingArea,
-                        NumberOfResidents = numberOfResidents
+                        NumberOfResidents = numberOfResidents,
                     };
-                   
                     context.houses.Add(newHouse);
                     context.SaveChanges();
-                    _dataGridUpdater?.UpdateDataGrid();
+                    this._dataGridUpdater?.UpdateDataGrid();
                     this.Close();
                     MessageBox.Show($"Додано новий будинок: {newHouse.HouseAddress}");
                 }

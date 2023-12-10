@@ -1,20 +1,19 @@
-﻿using System;
-using System.Data;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL.Data.DataMock;
-using DAL.Data;
-using Microsoft.EntityFrameworkCore.Storage;
-
-namespace FlowMeterTeamProject.BLL.Utils.DataGrid
+﻿namespace FlowMeterTeamProject.BLL.Utils.DataGrid
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using DAL.Data;
+    using DAL.Data.DataMock;
+    using Microsoft.EntityFrameworkCore.Storage;
+
     static class ReceiptsLogic
     {
         public static Dictionary<string, List<(string ServiceName, string AccountNumber, decimal Price)>> GetNonZeroServices(string personalAccount, string houseAddres)
         {
-            string ServicesAndPrice = "ServicesAndPrice";
             using (var dbContext = new AppDbContext())
             {
                 var account = dbContext.accounts.FirstOrDefault(a => a.PersonalAccount == personalAccount);
@@ -31,21 +30,25 @@ namespace FlowMeterTeamProject.BLL.Utils.DataGrid
                         decimal price = preperetiv_receipt(hauseId, account.HotWater, "HotWater");
                         nonZeroServices.Add(("HotWater", account.HotWater, price));
                     }
+
                     if (account.ColdWater != "0")
                     {
                         decimal price = preperetiv_receipt(hauseId, account.ColdWater, "ColdWater");
                         nonZeroServices.Add(("ColdWater", account.ColdWater, price));
                     }
+
                     if (account.Heating != "0")
                     {
                         decimal price = preperetiv_receipt(hauseId, account.Heating, "Heating");
                         nonZeroServices.Add(("Heating", account.Heating, price));
                     }
+
                     if (account.Electricity != "0")
                     {
                         decimal price = preperetiv_receipt(hauseId, account.Electricity, "Electricity");
                         nonZeroServices.Add(("Electricity", account.Electricity, price));
                     }
+
                     if (account.PublicService != "0")
                     {
                         decimal price = preperetiv_receipt(hauseId, account.PublicService, "PublicService");
@@ -61,6 +64,7 @@ namespace FlowMeterTeamProject.BLL.Utils.DataGrid
                 return new Dictionary<string, List<(string ServiceName, string AccountNumber, decimal Price)>>();
             }
         }
+
         public static decimal preperetiv_receipt(int idHause, string personalAccount, string typeServices)
         {
             using (var dbContext = new AppDbContext())
@@ -119,12 +123,13 @@ namespace FlowMeterTeamProject.BLL.Utils.DataGrid
                                               select service.Price;
                     int? firstValue = query1.FirstOrDefault();
                     decimal decimalValue = firstValue.HasValue ? (decimal)firstValue.Value : 0m;
-                   
                     return decimalValue;
                 }
+
                 return 0;
             }
         }
+
         public static int FindHouseId(string address)
         {
             using (var dbContext = new AppDbContext())

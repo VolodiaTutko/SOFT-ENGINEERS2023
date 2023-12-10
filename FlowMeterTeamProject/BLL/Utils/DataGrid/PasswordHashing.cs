@@ -28,20 +28,17 @@ namespace FlowMeterTeamProject.BLL.Utils.DataGrid
                 dbContext.employees.Add(newemployee);
                 dbContext.SaveChanges();
             }
-
-               
-            
         }
 
         public static bool VerifyPassword(string enteredPassword, string hashedPassword)
         {
-            
             bool passwordMatches = BCrypt.Net.BCrypt.Verify(enteredPassword, hashedPassword);
 
             if (passwordMatches)
             {
                 return true;
             }
+
             return false;
         }
     }

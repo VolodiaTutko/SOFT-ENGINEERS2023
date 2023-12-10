@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Media;
-using System.Windows;
-
-namespace BLL.Utils.DataGrid
+﻿namespace BLL.Utils.DataGrid
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Documents;
+    using System.Windows.Media;
+
+#pragma warning disable SA1600 // Elements should be documented
     public static class DataGridSearch
+#pragma warning restore SA1600 // Elements should be documented
     {
         public static void PerformSearch(System.Windows.Controls.DataGrid dataGrid, TextBox searchBox)
         {
@@ -39,7 +41,7 @@ namespace BLL.Utils.DataGrid
                                 textBlock.Inlines.Add(new Run(cellText.Substring(index, searchText.Length))
                                 {
                                     Background = Brushes.Orange,
-                                    FontWeight = FontWeights.Bold
+                                    FontWeight = FontWeights.Bold,
                                 });
                                 textBlock.Inlines.Add(new Run(cellText.Substring(index + searchText.Length)));
                                 rowContainsSearchText = true;
