@@ -125,11 +125,15 @@ namespace Presentation.Pages
                     }
                 }
 
-                if (selectedRowsData.Count > 0)
+                if (selectedRowsData.Count > 1)
                 {
                     RowDetails dialog = new RowDetails(selectedRowsData);
                     dialog.Owner = Window.GetWindow(this);
                     dialog.ShowDialog();
+                }
+                else if (selectedRowsData.Count == 1) {
+                    var propertiesWindow = new PropertiesAccounts();
+                    propertiesWindow.ShowDialog();
                 }
                 else
                 {

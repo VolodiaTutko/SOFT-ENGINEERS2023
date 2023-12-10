@@ -19,8 +19,8 @@
                 <Button x:Name="Btn1" Content="Будинки" Click="BtnClick1" Grid.Column="0" Padding="10"/>
                 <Button x:Name="Btn2" Content="Особові рахунки" Click="BtnClick2" Grid.Column="1" Padding="10"/>
                 <Button x:Name="Btn3" Content="Лічильники" Click="BtnClick3" Grid.Column="2" Padding="10"/>
-                <Button x:Name="Btn4" Content="Послуги і тарифи" Click="BtnClick4" Grid.Column="3" Padding="10"/>
-                <Button x:Name="Btn5" Content="Оплата" Click="BtnClick5" Grid.Column="4" Padding="10"/>
+                <Button x:Name="Btn5" Content="Історія Лічильників" Click="BtnClick5" Grid.Column="3" Padding="10"/>
+                <Button x:Name="Btn4" Content="Послуги і тарифи" Click="BtnClick4" Grid.Column="4" Padding="10"/>
                 <Button x:Name="Btn6" Content="Квитанції" Click="BtnClick6" Grid.Column="5" Padding="10"/>
             </Grid>
         </StackPanel>

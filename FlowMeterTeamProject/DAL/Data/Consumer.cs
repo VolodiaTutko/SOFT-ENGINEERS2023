@@ -17,7 +17,5 @@ namespace DAL.Data
         public int? Flat { get; set; }
         public string ConsumerOwner { get; set; }
         public int? HeatingArea { get; set; }
-
-       
     }
 }

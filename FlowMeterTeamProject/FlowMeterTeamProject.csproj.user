@@ -6,10 +6,16 @@
     <Compile Update="Presentation\DialogWindows\RowDetails.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Presentation\Features\Counters\AddNewCounter.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Presentation\MainContent.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Presentation\Pages\Counters.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Presentation\Pages\CountersHistory.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Presentation\Pages\Houses.xaml.cs">
@@ -35,6 +41,9 @@
     <Page Update="Presentation\DialogWindows\RowDetails.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Presentation\Features\Counters\AddNewCounter.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Presentation\Main.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -42,6 +51,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Presentation\Pages\Counters.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Presentation\Pages\CountersHistory.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Presentation\Pages\Houses.xaml">

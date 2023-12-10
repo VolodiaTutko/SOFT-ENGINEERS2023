@@ -1,0 +1,26 @@
+﻿<Window x:Class="FlowMeterTeamProject.Presentation.Features.Counters.AddNewCounter"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlowMeterTeamProject.Presentation.Features.Counters"
+        mc:Ignorable="d"
+        Title="Додати новий лічильник" Height="315" Width="316">
+    <Grid x:Name="Edit">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="77*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.ColumnSpan="4">
+            <Label Content="Споживач:" VerticalAlignment="Center"/>
+            <ComboBox x:Name="ConsumerComboBox" Margin="5"  SelectionChanged="ConsumerComboBox_Change"/>
+
+                <Label Content="Доступні послуги користувача:" VerticalAlignment="Center"/>
+            <ComboBox x:Name="ServiceComboBox" Margin="5" SelectionChanged="ServiceComboBox_Change" />
+            <Label Content="Початковий показник:" VerticalAlignment="Center"/>
+            <TextBox x:Name="InitialIndicatorTextBox" Margin="5" TextChanged="InitialIndicatorTextBox_Changed"/>
+            <Label Content="Дата показника:" VerticalAlignment="Center"/>
+            <DatePicker x:Name="DatePickerControl" Margin="5" SelectedDateChanged="DatePicker_SelectedDateChanged"/>
+            <Button Content="Додати" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="AddButton_Click" Width="68" Height="20" Margin="10"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -28,7 +28,7 @@
             <TextBlock x:Name="currentDateTextBlock" Margin="10,0,0,0" />
         </StackPanel>
 
-        <DataGrid x:Name="dataGrid" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*" EnableRowVirtualization="False" EnableColumnVirtualization="False" SelectionChanged="dataGrid_SelectionChanged" MouseRightButtonDown="DataGrid_PreviewMouseRightButtonDown">
+        <DataGrid x:Name="dataGrid" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*" EnableRowVirtualization="False" EnableColumnVirtualization="False" SelectionChanged="dataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="30">
                     <DataGridTemplateColumn.CellTemplate>

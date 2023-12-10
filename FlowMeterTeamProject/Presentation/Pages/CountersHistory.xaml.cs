@@ -1,22 +1,30 @@
-﻿using System;
+﻿using FlowMeterTeamProject.BLL.Features.Counters;
+using FlowMeterTeamProject.Presentation.Features.Counters;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using DAL.Data;
-using FlowMeterTeamProject.Presentation.Features.Counters;
-using FlowMeterTeamProject.BLL.Features.Counters;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
-namespace Presentation.Pages
+namespace FlowMeterTeamProject.Presentation.Pages
 {
     /// <summary>
-    /// Interaction logic for Counters.xaml
+    /// Interaction logic for CountersHistory.xaml
     /// </summary>
-    public partial class Counters : Page
+    public partial class CountersHistory : Page, IDataGridUpdater
     {
         private CountersInfo countersInfo;
-        public Counters()
+        public CountersHistory()
         {
             InitializeComponent();
             this.countersInfo = new CountersInfo();
@@ -24,10 +32,16 @@ namespace Presentation.Pages
 
             FillDataGrid();
         }
+        public event EventHandler DataGridUpdated;
+
+        public void UpdateDataGrid()
+        {
+            FillDataGrid();
+        }
 
         public void FillDataGrid()
         {
-            List<CounterEntity> counters = countersInfo.GetCounterEntities();
+            List<CounterRecord> counters = countersInfo.GetCounterRecords();
 
             DataTable dt = new DataTable("Counter");
             dt.Columns.Add("Number", typeof(int));
@@ -54,7 +68,7 @@ namespace Presentation.Pages
 
         private void AddNewItem_Click(object sender, RoutedEventArgs e)
         {
-            AddNewCounter newCounterDialog = new AddNewCounter();
+            AddNewCounter newCounterDialog = new AddNewCounter(this);
             newCounterDialog.Show();
         }
 

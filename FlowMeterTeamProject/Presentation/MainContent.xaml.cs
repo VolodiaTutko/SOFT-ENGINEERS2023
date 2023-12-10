@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using FlowMeterTeamProject.Presentation.Pages;
+
 namespace Presentation
 {
     /// <summary>
@@ -66,7 +68,7 @@ namespace Presentation
         }
         private void BtnClick5(object sender, RoutedEventArgs e)
         {
-            Main.Content = new Pages.Payments();
+            Main.Content = new CountersHistory();
             ResetButtonColors();
             Btn5.Background = activeButtonColor;
         }
