@@ -14,6 +14,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using DAL.Data.DataMock;
+using Presentation.Pages;
+using System.IO;
+using BLL.Utils.DataGrid;
+using FlowMeterTeamProject.BLL.Utils.DataGrid;
+using System.Collections;
 
 namespace Presentation
 {
@@ -23,11 +28,12 @@ namespace Presentation
         public MainWindow()
         {
             InitializeComponent();
-
+            
             if (Mock.checkIfDbConsumersEmpty())
             {
                 Mock.FillRandomConsumersIntoDb(5);
             }
+           // PasswordHashing.HashPasswordAndAddUser("Jon", "12345", "user");
         }
 
         private void SwitchToMain_Click(object sender, RoutedEventArgs e)
@@ -38,7 +44,7 @@ namespace Presentation
             using (var dbContext = new AppDbContext())
             {
                 var employee = dbContext.employees.FirstOrDefault(e => e.EmployeeLogin == login);
-                if (employee != null && employee.EmployeePassword == password)
+                if (employee != null && PasswordHashing.VerifyPassword(password,employee.EmployeePassword))
                 {
 
                     Window newWindow = new Window

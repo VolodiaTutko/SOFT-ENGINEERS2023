@@ -37,10 +37,9 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="№" Binding="{Binding Number}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="ID послуги" Binding="{Binding ServiceId}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="ID будинку" Binding="{Binding HouseId}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Type Of Account" Binding="{Binding TypeOfAccount}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="№" Binding="{Binding №}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Адреса будинку" Binding="{Binding HouseId}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Тип послуги" Binding="{Binding TypeOfAccount}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Ціна" Binding="{Binding Price}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>

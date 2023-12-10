@@ -43,8 +43,6 @@ namespace Presentation.Pages
 
                 DataTable dt = new DataTable("Counter");
                 dt.Columns.Add("№", typeof(int));
-                dt.Columns.Add("CountersId", typeof(int));
-                dt.Columns.Add("PreviousIndicator", typeof(decimal));
                 dt.Columns.Add("CurrentIndicator", typeof(decimal));
                 dt.Columns.Add("Account", typeof(string));
                 dt.Columns.Add("TypeOfAccount", typeof(string));
@@ -54,7 +52,6 @@ namespace Presentation.Pages
                 {
                     dt.Rows.Add(
                         i + 1,
-                        counters[i].CountersId,
                         counters[i].CurrentIndicator,
                         counters[i].Account,
                         counters[i].TypeOfAccount,
@@ -71,8 +68,6 @@ namespace Presentation.Pages
         List<string> customHeaders = new List<string>
         {
             "№",
-            "CountersId",
-            "PreviousIndicator",
             "CurrentIndicator",
             "Account",
             "TypeOfAccount",

@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
+using DAL.Data;
+using FlowMeterTeamProject.BLL.Utils.DataGrid;
 
 namespace FlowMeterTeamProject.Presentation.DialogWindows
 {
@@ -25,15 +28,39 @@ namespace FlowMeterTeamProject.Presentation.DialogWindows
         {
             InitializeComponent();
             this.rowsData = rowsData;
-
-            foreach (var rowData in rowsData)
+            int rowCount = 0;
+            string logMessage="";
+            var finalsublist = new Dictionary<string, List<(string ServiceName, string AccountNumber, decimal Price)>>();
+            using (var dbContext = new AppDbContext())
             {
-                foreach (var pair in rowData)
+                foreach (var rowData in rowsData)
                 {
-                    detailsTextBlock.Text += $"{pair.Key}: {pair.Value}\n";
+                    foreach (var pair in rowData)
+                    {
+                        detailsTextBlock.Text += $"{pair.Key}: {pair.Value}\n";
+                        if(pair.Key== "Особовий рахунок")
+                        {
+                            string houseAddressValue;
+                            rowData.TryGetValue("Адреса будинку", out houseAddressValue);
+                            finalsublist = ReceiptsLogic.GetNonZeroServices(pair.Value, houseAddressValue);
+                            Dictionary<string, List<object>> newPair = new Dictionary<string, List<object>>();
+                            
+                        }
+                        logMessage += $"{pair.Key}: {pair.Value}\n";
+                    }
+                    foreach (var kvp in finalsublist)
+                    {
+                        foreach (var tuple in kvp.Value)
+                        {
+                            logMessage += ($"\t  ServiceName: {tuple.ServiceName}, AccountNumber: {tuple.AccountNumber}, Price: {tuple.Price}\n");
+                        }
+                    }
+                    detailsTextBlock.Text += "------------------------\n";
+                    rowCount++;
                 }
-
-                detailsTextBlock.Text += "------------------------\n";
+                string logFilePath = "testlogicReceipt.txt";
+                //string logMessage =  $"  rowsData: {rowsData}\n";
+                File.WriteAllText(logFilePath, $"{DateTime.Now}: {logMessage}\n");
             }
         }
     }
