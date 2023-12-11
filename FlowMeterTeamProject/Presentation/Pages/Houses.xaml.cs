@@ -28,12 +28,16 @@ namespace Presentation.Pages
     /// </summary>
     public partial class Houses : Page, IDataGridUpdater
     {
+
+        public int houseID;
         public Houses()
         {
             InitializeComponent();
             FillDataGrid();
 
-            dataGrid.MouseRightButtonDown += DataGrid_PreviewMouseRightButtonDown;
+
+
+            
         }
 
         public event EventHandler DataGridUpdated;
@@ -132,14 +136,107 @@ namespace Presentation.Pages
             newDialog.Show();
         }
 
-        private void DataGrid_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        private void DataGrid_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (e.RightButton == MouseButtonState.Pressed)
-            {
+            var selectedRows = dataGrid.SelectedItems;
 
-                var propertiesWindow = new PropertiesHouse();
-                propertiesWindow.ShowDialog();
+            if (selectedRows.Count > 0)
+            {
+                List<Dictionary<string, string>> selectedRowsData = new List<Dictionary<string, string>>();
+
+                foreach (var selectedItem in selectedRows)
+                {
+                    var row = (DataGridRow)(dataGrid.ItemContainerGenerator.ContainerFromItem(selectedItem));
+
+                    if (row != null)
+                    {
+                        CheckBox checkBox = FindVisualChild<CheckBox>(row);
+
+                        if (checkBox != null && checkBox.IsChecked == true)
+                        {
+                            Dictionary<string, string> rowData = new Dictionary<string, string>();
+
+                            foreach (var column in dataGrid.Columns)
+                            {
+                                if (column is DataGridTextColumn textColumn)
+                                {
+                                    string header = textColumn.Header.ToString();
+
+                                    var cellContent = column.GetCellContent(row);
+
+                                    if (cellContent is TextBlock textBlock)
+                                    {
+                                        string cellValue = textBlock.Text;
+                                        rowData.Add(header, cellValue);
+                                    }
+                                }
+                            }
+
+                            selectedRowsData.Add(rowData);
+                        }
+                    }
+                }
+
+                if (selectedRowsData.Count > 1) 
+                {
+                    MessageBox.Show("Вибрано більше ніж один запис.");
+
+                }
+                else if (selectedRowsData.Count == 1)
+                {
+
+                    string houseAddress = selectedRowsData[0]["Адреса будинку"];
+
+                    try
+                    {
+                        using (var context = new AppDbContext())
+                        {
+                            var house = context.houses.FirstOrDefault(c => c.HouseAddress == houseAddress);
+
+                            houseID = house.HouseId;
+
+                            context.SaveChanges();
+                           
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Помилка при видаленні даних: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                   
+                    var properties = new PropertiesHouse(houseID, this);
+
+                    properties.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Please select the checkbox in the row before viewing details.");
+                }
             }
+        }
+
+        private T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+
+                if (child != null && child is T)
+                {
+                    return (T)child;
+                }
+                else
+                {
+                    T childOfChild = FindVisualChild<T>(child);
+
+                    if (childOfChild != null)
+                    {
+                        return childOfChild;
+                    }
+                }
+            }
+
+            return null;
         }
 
         private void SelectAllCheckBox_Checked(object sender, RoutedEventArgs e)

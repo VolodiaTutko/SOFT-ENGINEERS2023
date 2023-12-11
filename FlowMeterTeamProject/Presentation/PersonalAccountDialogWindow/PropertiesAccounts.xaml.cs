@@ -27,8 +27,12 @@ namespace Presentation.PersonalAccountDialogWindow
     {
         public string personalacount;
 
+       
         List<Dictionary<string, string>> SelectedRowsData;
-        public PropertiesAccounts(string PersonalAccount, List<Dictionary<string, string>> selectedRowsData,  IDataGridUpdater dataGridUpdater)
+
+
+        private IDataGridUpdater _dataGridUpdater;
+        public PropertiesAccounts(string PersonalAccount, List<Dictionary<string, string>> selectedRowsData, IDataGridUpdater dataGridUpdater)
         {
             InitializeComponent();
             this.ResizeMode = ResizeMode.NoResize;
@@ -37,14 +41,14 @@ namespace Presentation.PersonalAccountDialogWindow
 
             SelectedRowsData = selectedRowsData;
 
-        }
+           }
 
-        private IDataGridUpdater _dataGridUpdater;
+       
 
-               private void Button_Click(object sender, RoutedEventArgs e)
+               private void EditData(object sender, RoutedEventArgs e)
         {
-
-            var editDataAccounts = new EditDataAccounts();
+            
+            var editDataAccounts = new EditDataAccounts(personalacount, _dataGridUpdater);
             editDataAccounts.ShowDialog();
         }
 

@@ -11,7 +11,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Button Content="Зняти з обліку" VerticalAlignment="Top" Width="NaN" Height="32" FontWeight="Bold" Background="White" BorderBrush="#FFC1C1C1" Margin="0,96,0,0" Click="Delete"/>
-        <Button VerticalAlignment="Top" Width="NaN" Height="32" Background="White" BorderBrush="#FFC1C1C1" Click="Button_Click">
+        <Button VerticalAlignment="Top" Width="NaN" Height="32" Background="White" BorderBrush="#FFC1C1C1" Click="EditData">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Редагувати дані" FontWeight="Bold" />
                 <Image Source="/Presentation/PersonalAccountDialogWindow/edit.png" Width="16" Height="16" RenderTransformOrigin="0.476,0.815" Margin="10,0,0,0" />
