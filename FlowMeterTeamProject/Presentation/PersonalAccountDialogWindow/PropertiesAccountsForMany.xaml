@@ -11,8 +11,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button Content="Зняти з обліку" VerticalAlignment="Top" Width="NaN" Height="32" FontWeight="Bold" Background="White" BorderBrush="#FFC1C1C1" Margin="0,32,0,0"/>
-        <Button Content="Сформувати китанції" VerticalAlignment="Top" Width="NaN" Height="32" FontWeight="Bold" Background="White" BorderBrush="#FFC1C1C1"/>
+        <Button Content="Зняти з обліку" VerticalAlignment="Top" Width="NaN" Height="32" FontWeight="Bold" Background="White" BorderBrush="#FFC1C1C1" Margin="0,32,0,0" Click="DeleteAll"/>
+        <Button Content="Сформувати китанції" VerticalAlignment="Top" Width="NaN" Height="32" FontWeight="Bold" Background="White" BorderBrush="#FFC1C1C1" Click="CreateReceipts"/>
 
     </Grid>
 

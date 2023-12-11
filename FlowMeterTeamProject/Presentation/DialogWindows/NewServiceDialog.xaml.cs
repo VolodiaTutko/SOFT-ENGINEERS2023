@@ -60,6 +60,7 @@ namespace FlowMeterTeamProject.Presentation.DialogWindows
                 {"Kilowatt", "Кіловат"}
             };
 
+
             UnitComboBox.ItemsSource = units.Values;
             UnitComboBox.SelectedIndex = 0;
         }
@@ -129,13 +130,17 @@ namespace FlowMeterTeamProject.Presentation.DialogWindows
                         .Select(h => h.HouseId)
                         .FirstOrDefault();
                 }
-
+                          
+                
                 Service newService = new Service
                 {
+                   
                     HouseId = houseId,
                     TypeOfAccount = typeOfAccount,
                     Price = price
                 };
+
+                newService.Price = price;
 
                 using (var context = new AppDbContext())
                 {

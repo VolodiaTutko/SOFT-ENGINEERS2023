@@ -1,39 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DAL.Data;
+using System;
 using System.IO;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using DAL.Data;
-using FlowMeterTeamProject.BLL.Utils.DataGrid;
 
-
-namespace FlowMeterTeamProject.Presentation.DialogWindows
+namespace FlowMeterTeamProject.BLL.Utils.DataGrid
 {
-    /// <summary>
-    /// Interaction logic for RowDetails.xaml
-    /// </summary>
-    public partial class RowDetails : Window
+    public class RowDetails
     {
         private readonly List<Dictionary<string, string>> rowsData;
 
-#pragma warning disable SA1614 // Element parameter documentation should have text
-        /// <summary>
-        /// Initializes a new instance of the <see cref="RowDetails"/> class.
-        /// </summary>
-        /// <param name="rowsData"></param>
         public RowDetails(List<Dictionary<string, string>> rowsData)
-#pragma warning restore SA1614 // Element parameter documentation should have text
         {
-            this.InitializeComponent();
+            //this.InitializeComponent();
             this.rowsData = rowsData;
             int rowCount = 0;
             string logMessage = " ";
@@ -44,7 +25,7 @@ namespace FlowMeterTeamProject.Presentation.DialogWindows
                 {
                     foreach (var pair in rowData)
                     {
-                        this.detailsTextBlock.Text += $"{pair.Key}: {pair.Value}\n";
+                        //this.detailsTextBlock.Text += $"{pair.Key}: {pair.Value}\n";
                         if (pair.Key == "Особовий рахунок")
                         {
                             string houseAddressValue;
@@ -64,7 +45,7 @@ namespace FlowMeterTeamProject.Presentation.DialogWindows
                         }
                     }
 
-                    this.detailsTextBlock.Text += "------------------------\n";
+                    // this.detailsTextBlock.Text += "------------------------\n";
                     rowCount++;
                 }
 
@@ -75,3 +56,4 @@ namespace FlowMeterTeamProject.Presentation.DialogWindows
         }
     }
 }
+

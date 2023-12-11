@@ -140,21 +140,17 @@ namespace Presentation.Pages
                 }
 
                 if (selectedRowsData.Count > 1) // відкривається вікно з Сформувати квитанції
-                {
-
-
-                    var propertiesMany = new PropertiesAccountsForMany();
+                {                   
+                    var propertiesMany = new PropertiesAccountsForMany(selectedRowsData, this);
                     propertiesMany.ShowDialog();
-                    //RowDetails dialog = new RowDetails(selectedRowsData);
-                    //dialog.Owner = Window.GetWindow(this);
-                    //dialog.ShowDialog();
+                    
                 }
                 else if (selectedRowsData.Count == 1)
                 {
                     personalAccountValue = selectedRowsData[0]["Особовий рахунок"];
 
 
-                    var properties = new PropertiesAccounts(personalAccountValue);
+                    var properties = new PropertiesAccounts(personalAccountValue, selectedRowsData, this);
 
                     properties.ShowDialog();
                 }

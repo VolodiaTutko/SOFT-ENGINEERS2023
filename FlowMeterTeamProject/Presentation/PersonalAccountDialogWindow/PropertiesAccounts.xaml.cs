@@ -1,4 +1,6 @@
-﻿using FlowMeterTeamProject.Presentation;
+﻿using DAL.Data;
+using FlowMeterTeamProject.BLL.Utils.DataGrid;
+using FlowMeterTeamProject.Presentation;
 using FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow;
 using Presentation.Pages;
 using System;
@@ -24,14 +26,22 @@ namespace Presentation.PersonalAccountDialogWindow
     public partial class PropertiesAccounts : Window
     {
         public string personalacount;
-        public PropertiesAccounts(string PersonalAccount)
+
+        List<Dictionary<string, string>> SelectedRowsData;
+        public PropertiesAccounts(string PersonalAccount, List<Dictionary<string, string>> selectedRowsData,  IDataGridUpdater dataGridUpdater)
         {
             InitializeComponent();
             this.ResizeMode = ResizeMode.NoResize;
             personalacount = PersonalAccount;
+            _dataGridUpdater = dataGridUpdater;
+
+            SelectedRowsData = selectedRowsData;
+
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private IDataGridUpdater _dataGridUpdater;
+
+               private void Button_Click(object sender, RoutedEventArgs e)
         {
 
             var editDataAccounts = new EditDataAccounts();
@@ -49,6 +59,57 @@ namespace Presentation.PersonalAccountDialogWindow
             subAccounts.LabelPersonalAccount.Content = personalacount;
             subAccounts.ShowDialog();
 
+        }
+
+        private void CreateReceipts(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                RowDetails receiptsWindow = new RowDetails(SelectedRowsData);
+                this.Close();
+                MessageBox.Show($"Квитанцію збережено та завантажено!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка при формуванні квитанції: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+        }
+
+        private void Delete(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                using (var context = new AppDbContext())
+                {                  
+                    var consumerToDelete = context.consumers.FirstOrDefault(c => c.PersonalAccount == personalacount);
+
+                    
+                    var accountToDelete = context.accounts.FirstOrDefault(a => a.PersonalAccount == personalacount);
+
+                    if (consumerToDelete != null)
+                    {
+                        
+                        context.consumers.Remove(consumerToDelete);
+                    }
+
+                    if (accountToDelete != null)
+                    {
+                        
+                        context.accounts.Remove(accountToDelete);
+                    }
+
+                   
+                    context.SaveChanges();
+                    this._dataGridUpdater?.UpdateDataGrid();
+                    this.Close();
+                    MessageBox.Show($"Особовий рахунок: {personalacount} видалено!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка при видаленні даних: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
