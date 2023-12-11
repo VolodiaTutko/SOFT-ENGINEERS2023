@@ -16,13 +16,13 @@
         <Label Content="Опалення :" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="42,181,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" FontFamily="Cambria" Background="#FFD4D4D4" Width="216"/>
         <Label Content="Електроенергія :" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="42,230,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" FontFamily="Cambria" Background="#FFD4D4D4" Width="216"/>
         <Label Content="Комунальні послуги :" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="42,330,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" FontFamily="Cambria" Background="#FFD4D4D4"/>
-        <TextBox x:Name="ColdWaterText" HorizontalAlignment="Left" Margin="307,131,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="20"/>
-        <TextBox x:Name="HeatingText" HorizontalAlignment="Left" Margin="307,181,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="20"/>
-        <TextBox x:Name="ElectricityText" HorizontalAlignment="Left" Margin="307,230,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="20"/>
-        <TextBox x:Name="GasText" HorizontalAlignment="Left" Margin="307,280,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="20"/>
+        <TextBox x:Name="ColdWaterText" HorizontalAlignment="Left" Margin="307,131,0,0" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="20"/>
+        <TextBox x:Name="HeatingText" HorizontalAlignment="Left" Margin="307,181,0,0" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="20"/>
+        <TextBox x:Name="ElectricityText" HorizontalAlignment="Left" Margin="307,230,0,0" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="20"/>
+        <TextBox x:Name="GasText" HorizontalAlignment="Left" Margin="307,280,0,0" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="20"/>
         <Label Content="Природній газ :" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="42,280,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" FontFamily="Cambria" Background="#FFD4D4D4" Width="216"/>
-        <TextBox x:Name="PublicServiceText" HorizontalAlignment="Left" Margin="307,330,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="20"/>
-        <TextBox x:Name="HotWaterText" HorizontalAlignment="Left" Margin="307,81,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="20"/>
+        <TextBox x:Name="PublicServiceText" HorizontalAlignment="Left" Margin="307,330,0,0" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="20"/>
+        <TextBox x:Name="HotWaterText" HorizontalAlignment="Left" Margin="307,81,0,0" Text="TextBox" VerticalAlignment="Top" Width="120" FontSize="20"/>
 
 
     </Grid>

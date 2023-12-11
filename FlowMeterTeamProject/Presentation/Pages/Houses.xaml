@@ -80,7 +80,7 @@
             <TextBlock x:Name="currentDateTextBlock" Margin="10,0,0,0" />
         </StackPanel>
 
-        <DataGrid x:Name="dataGrid" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*" EnableRowVirtualization="False" EnableColumnVirtualization="False" MouseRightButtonDown="DataGrid_PreviewMouseRightButtonDown" CanUserAddRows="False">
+        <DataGrid x:Name="dataGrid" Grid.Row="1" AutoGenerateColumns="False" ColumnWidth="*" EnableRowVirtualization="False" EnableColumnVirtualization="False" MouseRightButtonDown="DataGrid_MouseRightButtonDown" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="30">
                     <DataGridTemplateColumn.CellTemplate>
