@@ -55,9 +55,18 @@
                 using (var context = new AppDbContext())
                 {
                     string address = this.AddressTextBox.Text;
+
+                    // Check if a house with the given address already exists
+                    if (context.houses.Any(h => h.HouseAddress == address))
+                    {
+                        MessageBox.Show($"Будинок з адресою '{address}' вже існує.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return; // Do not proceed further if the house already exists
+                    }
+
                     int numberOfFlats = int.Parse(this.NumberOfFlatsTextBox.Text);
                     int heatingArea = int.Parse(this.HeatingAreaTextBox.Text);
                     int numberOfResidents = int.Parse(this.NumberOfResidentsTextBox.Text);
+
                     House newHouse = new House
                     {
                         HouseAddress = address,
@@ -65,6 +74,7 @@
                         HeatingAreaOfHouse = heatingArea,
                         NumberOfResidents = numberOfResidents,
                     };
+
                     context.houses.Add(newHouse);
                     context.SaveChanges();
                     this._dataGridUpdater?.UpdateDataGrid();
@@ -74,7 +84,7 @@
             }
             catch (Exception ex)
             {
-                // Опціонально: обробте помилку (виведення повідомлення або логування)
+                // Handle the exception (display a message or log it)
                 MessageBox.Show($"Помилка при збереженні даних: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
