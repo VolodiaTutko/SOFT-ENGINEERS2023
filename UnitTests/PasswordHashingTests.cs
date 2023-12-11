@@ -70,10 +70,53 @@ namespace UnitTests
             Assert.IsFalse(result);
         }
 
+        [TestMethod]
+        public void VerifyPassword_ShouldReturnFalseForNullOrEmptyEnteredPassword()
+        {
+            // Arrange
+            string enteredPassword = ""; // Empty entered password
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword("testPassword");
+
+            // Act
+            bool result = FlowMeterTeamProject.BLL.Utils.DataGrid.PasswordHashing.VerifyPassword(enteredPassword, hashedPassword);
+
+            // Assert
+            Assert.IsFalse(result, "Verification with empty entered password should return false");
+        }
+
+        [TestMethod]
+        public void VerifyPassword_ShouldReturnFalseForMismatchedHashAndPassword()
+        {
+            // Arrange
+            string enteredPassword = "testPassword";
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword("differentPassword");
+
+            // Act
+            bool result = FlowMeterTeamProject.BLL.Utils.DataGrid.PasswordHashing.VerifyPassword(enteredPassword, hashedPassword);
+
+            // Assert
+            Assert.IsFalse(result, "Verification with mismatched hash and password should return false");
+        }
+
+
+        [TestMethod]
+        public void VerifyPassword_ShouldReturnFalseForIncorrectHashedPassword()
+        {
+            // Arrange
+            string enteredPassword = "testPassword";
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword("differentPassword");
+
+            // Act
+            bool result = FlowMeterTeamProject.BLL.Utils.DataGrid.PasswordHashing.VerifyPassword(enteredPassword, hashedPassword);
+
+            // Assert
+            Assert.IsFalse(result, "Verification with incorrect hashed password should return false");
+        }
+
+
         [TestCleanup]
         public void TestCleanup()
         {
-            // Delete the user from the database after the test runs
             using (var dbContext = new AppDbContext())
             {
                 var userToDelete = dbContext.employees.SingleOrDefault(e => e.EmployeeLogin == testUsername);
@@ -84,5 +127,41 @@ namespace UnitTests
                 }
             }
         }
+
+        [TestMethod]
+        public void VerifyPassword_ShouldReturnFalseForMismatchedHashedPassword()
+        {
+            // Arrange
+            string enteredPassword = "testPassword";
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword("testPassword");
+
+            // Act
+            bool result = FlowMeterTeamProject.BLL.Utils.DataGrid.PasswordHashing.VerifyPassword("differentPassword", hashedPassword);
+
+            // Assert
+            Assert.IsFalse(result, "Verification with mismatched hashed password should return false");
+        }
+
+        [TestMethod]
+        public void HashPasswordAndAddUser_ShouldNotAddUserForMismatchedTypeOfUser()
+        {
+            // Arrange
+            string username = "testUser";
+            string password = "testPassword";
+            string correctTypeOfUser = "admin";
+            string incorrectTypeOfUser = "user";
+
+            // Act
+            FlowMeterTeamProject.BLL.Utils.DataGrid.PasswordHashing.HashPasswordAndAddUser(username, password, correctTypeOfUser);
+
+            // Assert
+            using (var dbContext = new AppDbContext())
+            {
+                var addedEmployee = dbContext.employees.SingleOrDefault(e => e.EmployeeLogin == username);
+                Assert.IsNotNull(addedEmployee);
+                Assert.AreNotEqual(incorrectTypeOfUser, addedEmployee.TypeOfUser, "User should not be added with mismatched type of user");
+            }
+        }
+
     }
 }

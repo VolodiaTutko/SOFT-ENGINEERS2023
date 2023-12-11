@@ -32,7 +32,7 @@
             // {
             //     Mock.FillRandomConsumersIntoDb(5);
             // }
-           // PasswordHashing.HashPasswordAndAddUser("Jon", "12345", "user");
+            //PasswordHashing.HashPasswordAndAddUser("Jon", "12345", "user");
             //Mock.FillServicesIntoDb();
             //Mock.FillHauseIntoDb();
             //Mock.FillAccountIntoDb();
@@ -43,14 +43,13 @@
         private void SwitchToMain_Click(object sender, RoutedEventArgs e)
         {
             string login = this.textlogin.Text;
-            string password = this.textpassword.Text;
+            string password = this.textpassword.Password;
 
             using (var dbContext = new AppDbContext())
             {
                 var employee = dbContext.employees.FirstOrDefault(e => e.EmployeeLogin == login);
-                if (employee != null && PasswordHashing.VerifyPassword(password,employee.EmployeePassword))
+                if (employee != null && PasswordHashing.VerifyPassword(password, employee.EmployeePassword))
                 {
-
                     Window newWindow = new Window
                     {
                         Content = new MainContent(),
@@ -63,7 +62,11 @@
                 else
                 {
                     this.textlogin.Text = string.Empty;
-                    this.textpassword.Text = string.Empty;
+                    this.textpassword.Password = string.Empty;
+
+                    // Display error message
+                    ErrorMessage.Text = "Неправильний логін або пароль";
+                    ErrorMessage.Visibility = Visibility.Visible;
                 }
             }
         }
@@ -119,5 +122,22 @@
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
         }
+
+        private void TextBoxLogin_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBoxLogin = (TextBox)sender;
+            TextBlock loginBackgroundText = (TextBlock)textBoxLogin.Template.FindName("LoginBackgroundText", textBoxLogin);
+
+            loginBackgroundText.Visibility = string.IsNullOrEmpty(textBoxLogin.Text) ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            PasswordBox passwordBox = (PasswordBox)sender;
+            TextBlock placeholderText = (TextBlock)passwordBox.Template.FindName("PlaceholderText", passwordBox);
+
+            placeholderText.Visibility = string.IsNullOrEmpty(passwordBox.Password) ? Visibility.Visible : Visibility.Collapsed;
+        }
+
     }
 }
