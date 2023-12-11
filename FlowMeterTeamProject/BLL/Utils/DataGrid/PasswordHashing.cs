@@ -10,7 +10,7 @@ using FlowMeterTeamProject.BLL.Utils.DataGrid;
 
 namespace FlowMeterTeamProject.BLL.Utils.DataGrid
 {
-    static class PasswordHashing
+    public static class PasswordHashing
     {
         public static void HashPasswordAndAddUser(string username, string password, string typeofuser)
         {
