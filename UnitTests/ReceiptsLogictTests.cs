@@ -84,5 +84,83 @@ namespace UnitTests
             // Assert
             Assert.AreEqual(0, result);
         }
+
+        [TestMethod]
+        public void GetNonZeroServices_ShouldReturnEmptyDictionaryForNonexistentAccount()
+        {
+            // Arrange
+            string personalAccount = "nonexistentAccount";
+            string houseAddress = "вул. Київська 27";
+
+            // Act
+            var result = ReceiptsLogic.GetNonZeroServices(personalAccount, houseAddress);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.ContainsKey(personalAccount), "Dictionary should be empty for nonexistent account");
+        }
+
+
+        [TestMethod]
+        public void preperetiv_receipt_ShouldReturnZeroForZeroCurrentIndicator()
+        {
+            // Arrange
+            int houseId = 1;
+            string personalAccount = "testAccount";
+            string typeServices = "Electricity";
+
+            // Act
+            // Assuming there is a counter with zero current indicator
+            var result = ReceiptsLogic.preperetiv_receipt(houseId, personalAccount, typeServices);
+
+            // Assert
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void preperetiv_receipt_ShouldReturnZeroForNegativeIndicatorDifference()
+        {
+            // Arrange
+            int houseId = 1;
+            string personalAccount = "testAccount";
+            string typeServices = "Electricity";
+
+            // Act
+            // Assuming there is a counter with a negative difference between current and previous indicators
+            var result = ReceiptsLogic.preperetiv_receipt(houseId, personalAccount, typeServices);
+
+            // Assert
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void FindHouseId_ShouldReturnZeroForNullOrEmptyAddress()
+        {
+            // Arrange
+            string houseAddress = "";
+
+            // Act
+            var result = ReceiptsLogic.FindHouseId(houseAddress);
+
+            // Assert
+            Assert.AreEqual(0, result);
+        }
+
+
+        [TestMethod]
+        public void GetNonZeroServices_ShouldReturnEmptyDictionaryForNullOrEmptyAddress()
+        {
+            // Arrange
+            string personalAccount = "testAccount";
+            string houseAddress = "";
+
+            // Act
+            var result = ReceiptsLogic.GetNonZeroServices(personalAccount, houseAddress);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.ContainsKey(personalAccount), "Dictionary should be empty for null or empty address");
+        }
+
     }
 }

@@ -71,7 +71,7 @@ namespace Presentation.PersonalAccountDialogWindow
             {
                 RowDetails receiptsWindow = new RowDetails(SelectedRowsData);
                 this.Close();
-                MessageBox.Show($"Квитанцію збережено та завантажено!");
+                MessageBox.Show($"Квитанцію збережено та завантажено в папку {Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads"}", "Saved Successfully", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
