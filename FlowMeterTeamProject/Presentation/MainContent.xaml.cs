@@ -100,9 +100,9 @@ namespace Presentation
 
         private void BtnClick5(object sender, RoutedEventArgs e)
         {
-            Main.Content = new CountersHistory();
-            ResetButtonColors();
-            Btn5.Background = activeButtonColor;
+            this.Main.Content = new CountersHistory();
+            this.ResetButtonColors();
+            this.SetActiveButtonColors(this.Btn5);
         }
 
         private void BtnClick6(object sender, RoutedEventArgs e)

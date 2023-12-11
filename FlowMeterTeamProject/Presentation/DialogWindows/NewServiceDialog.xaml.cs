@@ -130,26 +130,36 @@ namespace FlowMeterTeamProject.Presentation.DialogWindows
                         .Select(h => h.HouseId)
                         .FirstOrDefault();
                 }
-                          
-                
-                Service newService = new Service
-                {
-                   
-                    HouseId = houseId,
-                    TypeOfAccount = typeOfAccount,
-                    Price = price
-                };
-
-                newService.Price = price;
 
                 using (var context = new AppDbContext())
                 {
-                    context.services.Add(newService);
-                    context.SaveChanges();
+                    Service existingService = context.services
+                        .Where(s => s.TypeOfAccount == typeOfAccount && s.HouseId == houseId)
+                        .FirstOrDefault();
+
+                    if (existingService != null)
+                    {
+                        existingService.Price = price;
+                        context.SaveChanges();
+                        MessageBox.Show($"Ціни для {typeOfAccount} було оновлено.");
+                    }
+                    else
+                    {
+                        Service newService = new Service
+                        {
+                            HouseId = houseId,
+                            TypeOfAccount = typeOfAccount,
+                            Price = price
+                        };
+
+                        context.services.Add(newService);
+                        context.SaveChanges();
+                        MessageBox.Show($"Додано нову послугу: {newService.TypeOfAccount}");
+                    }
                 }
+
                 this._dataGridUpdater?.UpdateDataGrid();
                 this.Close();
-                MessageBox.Show($"Додано нову послугу: {newService.TypeOfAccount}");
             }
             catch (Exception ex)
             {

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 namespace FlowMeterTeamProject.BLL.Utils.DataGrid
 {
 
-    static class ReceiptsLogic
+    public static class ReceiptsLogic
     {
         public static Dictionary<string, List<(string ServiceName, string AccountNumber, decimal Price)>> GetNonZeroServices(string personalAccount, string houseAddres)
         {
