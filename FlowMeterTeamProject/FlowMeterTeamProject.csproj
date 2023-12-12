@@ -9,6 +9,7 @@
 
 	<ItemGroup>
 		<None Remove="appsettings.json" />
+		<None Remove="Presentation\HousesDialogWindow\edit.png" />
 		<None Remove="Presentation\Source\logo.png" />
 	</ItemGroup>
 
@@ -47,6 +48,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Resource Include="Presentation\HousesDialogWindow\edit.png" />
 	  <Resource Include="Presentation\Source\logo.png" />
 	</ItemGroup>
 

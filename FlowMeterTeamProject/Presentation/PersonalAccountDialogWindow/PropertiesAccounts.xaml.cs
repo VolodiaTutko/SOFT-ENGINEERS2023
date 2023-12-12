@@ -45,7 +45,7 @@ namespace Presentation.PersonalAccountDialogWindow
 
        
 
-               private void EditData(object sender, RoutedEventArgs e)
+        private void EditData(object sender, RoutedEventArgs e)
         {
             
             var editDataAccounts = new EditDataAccounts(personalacount, _dataGridUpdater);

@@ -34,9 +34,9 @@
             _dataGridUpdater = dataGridUpdater;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void EditData(object sender, RoutedEventArgs e)
         {
-            var editData = new EditDataHouse();
+            var editData = new EditDataHouse(houseID, _dataGridUpdater);
             editData.ShowDialog();
         }
 
