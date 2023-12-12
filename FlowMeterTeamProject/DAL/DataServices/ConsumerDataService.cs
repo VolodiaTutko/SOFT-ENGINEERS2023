@@ -31,11 +31,23 @@ namespace FlowMeterTeamProject.DAL.DataServices
 
         public static Account GetConsumerAccount(Consumer consumer)
         {
+            if (consumer == null) {
+                throw new ArgumentNullException();
+            }
             using (var dbContext = new AppDbContext())
             {
                 Account account = dbContext.accounts
                     .FirstOrDefault(a => a.PersonalAccount == consumer.PersonalAccount);
                 return account;
+            }
+        }
+
+        public static List<Consumer> GetConsumersByHouseId(int houseId)
+        {
+            using (var dbContext = new AppDbContext())
+            {
+                List<Consumer> consumers = dbContext.consumers.Where(c => c.HouseId == houseId).ToList();
+                return consumers;
             }
         }
     }

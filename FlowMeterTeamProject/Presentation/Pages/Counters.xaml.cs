@@ -20,7 +20,13 @@ namespace Presentation.Pages
     /// <summary>
     /// Interaction logic for Counters.xaml
     /// </summary>
-    public partial class Counters : Page
+    /// 
+
+    using FlowMeterTeamProject.Presentation;
+
+
+    // add deletion
+    public partial class Counters : Page, IDataGridUpdater
     {
         private CountersInfo countersInfo;
         public Counters()
@@ -29,6 +35,13 @@ namespace Presentation.Pages
             this.countersInfo = new CountersInfo();
             currentDateTextBlock.Text = DateTime.Now.ToString("dd-MM-yyyy");
 
+            FillDataGrid();
+        }
+
+        public event EventHandler DataGridUpdated;
+
+        public void UpdateDataGrid()
+        {
             FillDataGrid();
         }
 
@@ -160,7 +173,7 @@ namespace Presentation.Pages
 
         private void AddNewItem_Click(object sender, RoutedEventArgs e)
         {
-            AddNewCounter newCounterDialog = new AddNewCounter();
+            AddNewCounter newCounterDialog = new AddNewCounter(this, CounterCreationType.Entity, "Послуги без лічильника: ", "Лічильники уже існують для: ");
             newCounterDialog.Show();
         }
 
