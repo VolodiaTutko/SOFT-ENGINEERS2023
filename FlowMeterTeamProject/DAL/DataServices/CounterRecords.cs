@@ -34,6 +34,19 @@ namespace FlowMeterTeamProject.DAL.DataServices
             return GetDistinctCounterRecords(new CounterEntityComparer());
         }
 
+        public static Counter FindAnyRecordByAccount(string account)
+        {
+            var comparer = new CounterEntityComparer();
+            using (var dbContext = new AppDbContext())
+            {
+                Counter? record = dbContext.counters.First(c => c.Account == account);
+                if (record == null) {
+                    throw new Exception("found no record");
+                }
+                return record;
+            }
+        }
+
         public static Counter GetCounterLatestRecord(Counter record)
         {
             var comparer = new CounterEntityComparer();
@@ -57,5 +70,7 @@ namespace FlowMeterTeamProject.DAL.DataServices
                 dbContext.SaveChanges();
             }
         }
+
+        // todo t4: deleting
     }
 }

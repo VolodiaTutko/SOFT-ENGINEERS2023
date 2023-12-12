@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 using DAL.Data;
 using System.Reflection;
+using System;
 
 namespace FlowMeterTeamProject.BLL.Features.Consumers
 {
@@ -15,10 +16,45 @@ namespace FlowMeterTeamProject.BLL.Features.Consumers
             return consumers;
         }
 
+        public List<Consumer> GetConsumersByHouse(int id)
+        {
+            List<Consumer> consumers = ConsumerDataService.GetConsumersByHouseId(id);
+            return consumers;
+        }
+
         public Consumer GetConsumerByOwner(string owner)
         {
             Consumer consumer = ConsumerDataService.GetConsumerByOwner(owner);
             return consumer;
+        }
+
+        public List<string> GetServiceTypesWithCounters(Consumer consumer)
+        {
+            List<string> types = new List<string>();
+            Account account = ConsumerDataService.GetConsumerAccount(consumer);
+            if (account == null)
+            {
+                return types;
+            }
+            PropertyInfo[] subAccountTypes = account.GetType().GetProperties();
+            foreach (PropertyInfo type in subAccountTypes)
+            {
+                if (type.GetValue(account) != null &&
+                    type.GetValue(account) != "0" &&
+                    type.Name != "PersonalAccount"
+                )
+                {
+                    try {
+                        string accountStr = (string)type.GetValue(account);
+                        CounterRecords.FindAnyRecordByAccount(accountStr);
+                        types.Add(type.Name);
+                    } catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            return types;
         }
 
         public List<string> GetConsumerServiceTypes(Consumer consumer) {
@@ -27,15 +63,14 @@ namespace FlowMeterTeamProject.BLL.Features.Consumers
             if (account == null) {
                 return types;
             }
-            PropertyInfo[] properties = account.GetType().GetProperties();
-            foreach (PropertyInfo property in properties) {
-                if (property.GetValue(account) != null &&
-                    property.GetValue(account) != "0" &&
-                    property.Name != "PersonalAccount"
+            PropertyInfo[] subAccountTypes = account.GetType().GetProperties();
+            foreach (PropertyInfo type in subAccountTypes) {
+                if (type.GetValue(account) != null &&
+                    type.GetValue(account) != "0" &&
+                    type.Name != "PersonalAccount"
                 )
                 {
-                    //string value = (string)property.GetValue(account);
-                    types.Add(property.Name);
+                    types.Add(type.Name);
                 }
             }
             return types;
