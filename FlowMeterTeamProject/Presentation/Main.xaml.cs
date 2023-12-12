@@ -32,21 +32,13 @@
             // {
             //     Mock.FillRandomConsumersIntoDb(5);
             // }
-<<<<<<< HEAD
-            /*PasswordHashing.HashPasswordAndAddUser("Jon", "12345", "user");
-            Mock.FillServicesIntoDb();
-            Mock.FillHauseIntoDb();
-            Mock.FillAccountIntoDb();
-            Mock.FillConsumersIntoDb();
-            Mock.FillCounterIntoDb();*/
-=======
+
             //PasswordHashing.HashPasswordAndAddUser("Jon", "12345", "user");
             //Mock.FillServicesIntoDb();
             //Mock.FillHauseIntoDb();
             //Mock.FillAccountIntoDb();
             //Mock.FillConsumersIntoDb();
             //Mock.FillCounterIntoDb();
->>>>>>> 9817e72261e2244ce77860d5422354b6c0e427c8
         }
 
         private void SwitchToMain_Click(object sender, RoutedEventArgs e)
