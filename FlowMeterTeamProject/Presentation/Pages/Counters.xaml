@@ -16,7 +16,7 @@
 
         <StackPanel Orientation="Horizontal" Margin="10">
             <CheckBox x:Name="selectAllCheckBox" Content="Вибрати все" Margin="0,0,20,0" VerticalAlignment="Center" Checked="SelectAllCheckBox_Checked" Unchecked="SelectAllCheckBox_Unchecked"/>
-            <Button Content="Додати новий запис" Margin="0,0,20,0" FontWeight="Bold" BorderBrush="#FFB1B1B1" Background="#FF305AAB" Foreground="White" />
+            <Button Click="AddNewItem_Click" Content="Додати новий лічильник" Margin="0,0,20,0" FontWeight="Bold" BorderBrush="#FFB1B1B1" Background="#FF305AAB" Foreground="White" />
             <Button Content="Експортувати в PDF" Margin="0,0,20,0" Click="ExportToPdfButton_Click">
                 <Button.Style>
                     <Style TargetType="Button">

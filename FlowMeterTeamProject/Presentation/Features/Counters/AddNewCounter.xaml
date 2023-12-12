@@ -5,17 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlowMeterTeamProject.Presentation.Features.Counters"
         mc:Ignorable="d"
-        Title="Додати новий лічильник" Height="315" Width="316">
+        Title="Додати новий лічильник" Height="390" Width="326">
     <Grid x:Name="Edit">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="77*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.ColumnSpan="4">
+            <Label Content="Пошук за будинком:" VerticalAlignment="Center"/>
+            <ComboBox x:Name="HouseComboBox" Margin="5"  SelectionChanged="HouseComboBox_Change"/>
             <Label Content="Споживач:" VerticalAlignment="Center"/>
             <ComboBox x:Name="ConsumerComboBox" Margin="5"  SelectionChanged="ConsumerComboBox_Change"/>
 
-                <Label Content="Доступні послуги користувача:" VerticalAlignment="Center"/>
-            <ComboBox x:Name="ServiceComboBox" Margin="5" SelectionChanged="ServiceComboBox_Change" />
+            <Label x:Name="OperableServicesLabel" Content="Доступні послуги користувача:" VerticalAlignment="Center"/>
+            <ComboBox x:Name="ServiceComboBox" Margin="5 5 5 0" SelectionChanged="ServiceComboBox_Change" />
+            <StackPanel Orientation="Vertical" Margin="5 -3 5 0">
+                <TextBlock x:Name="NotOperableServicesLabelText" Text="Лічильники уже створено для: "/>
+                <TextBlock x:Name="NotOperableServicesListText" Text=""/>
+            </StackPanel>
             <Label Content="Початковий показник:" VerticalAlignment="Center"/>
             <TextBox x:Name="InitialIndicatorTextBox" Margin="5" TextChanged="InitialIndicatorTextBox_Changed"/>
             <Label Content="Дата показника:" VerticalAlignment="Center"/>
