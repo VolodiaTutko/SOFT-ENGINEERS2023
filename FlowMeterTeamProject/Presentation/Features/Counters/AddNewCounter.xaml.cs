@@ -23,24 +23,33 @@ namespace FlowMeterTeamProject.Presentation.Features.Counters
     public partial class AddNewCounter : Window
     {
 
-        private CounterCreation creation;
-        public List<string> consumers { get; set; } = new List<string>();
-        public AddNewCounter()
-        {
-            InitializeComponent();
-            this.creation = new CounterCreation();
-            consumers = creation.GetAvailableConsumers();
-            ConsumerComboBox.ItemsSource = consumers;
-        }
+
+
+        //
+        //
+        //
+
+        //
+        // todo t3: add new record window
+        // show last value using new method of counter service
+        // validate values using another new method of counter service ON data input
+
+        private CounterRecordAdding creation;
+        private List<string> consumers { get; set; }
+        private List<string> houses { get; set; }
 
         private IDataGridUpdater _dataGridUpdater;
 
-        public AddNewCounter(IDataGridUpdater dataGridUpdater)
+        public AddNewCounter(IDataGridUpdater dataGridUpdater, CounterCreationType addingType, string operableServicesLabel, string unoperableServicesLabel)
         {
             InitializeComponent();
-            this.creation = new CounterCreation();
+            this.creation = CounterCreationInjection.GetInstanceOf(addingType);
             consumers = creation.GetAvailableConsumers();
+            houses = creation.GetAvailableHouses();
             ConsumerComboBox.ItemsSource = consumers;
+            HouseComboBox.ItemsSource = houses;
+            NotOperableServicesLabelText.Text = unoperableServicesLabel;
+            OperableServicesLabel.Content = operableServicesLabel;
             _dataGridUpdater = dataGridUpdater;
         }
 
@@ -50,7 +59,18 @@ namespace FlowMeterTeamProject.Presentation.Features.Counters
             string selectedValue = (string)comboBox.SelectedItem;
 
             creation.SetConsumer(selectedValue);
-            ServiceComboBox.ItemsSource = creation.GetConsumerServices();
+            ServiceComboBox.ItemsSource = creation.GetOperableServices();
+            NotOperableServicesLabelText.Visibility = Visibility.Visible;
+            NotOperableServicesListText.Text = string.Join(", ", creation.GetUnoperableServices());
+        }
+
+        private void HouseComboBox_Change(object sender, RoutedEventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            string selectedValue = (string)comboBox.SelectedItem;
+
+            creation.SetHouse(selectedValue);
+            ConsumerComboBox.ItemsSource = creation.GetAvailableConsumers();
         }
 
         private void ServiceComboBox_Change(object sender, RoutedEventArgs e)
@@ -91,10 +111,10 @@ namespace FlowMeterTeamProject.Presentation.Features.Counters
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            if (creation.IsReadyToCreate())
+            if (creation.IsReadyToAdd())
             {
                 try {
-                    creation.Create();
+                    creation.Add();
                     _dataGridUpdater?.UpdateDataGrid();
                     this.Close();
                     MessageBox.Show($"New indicator value saved successfully");
