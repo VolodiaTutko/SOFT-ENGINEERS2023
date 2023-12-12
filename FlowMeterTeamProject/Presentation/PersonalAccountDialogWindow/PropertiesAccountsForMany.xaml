@@ -1,0 +1,19 @@
+﻿<Window x:Class="FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow.PropertiesAccountsForMany"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow"
+        mc:Ignorable="d"
+        Title="Властивості" Height="138" Width="250">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Зняти з обліку" VerticalAlignment="Top" Width="NaN" Height="32" FontWeight="Bold" Background="White" BorderBrush="#FFC1C1C1" Margin="0,32,0,0" Click="DeleteAll"/>
+        <Button Content="Сформувати китанції" VerticalAlignment="Top" Width="NaN" Height="32" FontWeight="Bold" Background="White" BorderBrush="#FFC1C1C1" Click="CreateReceipts"/>
+
+    </Grid>
+
+</Window>

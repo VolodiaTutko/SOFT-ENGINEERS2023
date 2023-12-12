@@ -1,0 +1,24 @@
+﻿<Window x:Class="Presentation.HousesDialogWindow.PropertiesHouse"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Presentation.HousesDialogWindow"
+        mc:Ignorable="d"
+        Title="Властивості" Height="251" Width="250">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Переглянути лічильники" VerticalAlignment="Top" Width="NaN" Height="32" FontWeight="Bold" Background="White" BorderBrush="#FFC1C1C1"/>
+        <Button Content="Переглянути особові рахунки" Margin="0,32,0,0" VerticalAlignment="Top" Width="NaN" Height="32" FontWeight="Bold" Background="White" BorderBrush="#FFC1C1C1" Click="Button_Click_1"/>
+        <Button Margin="0,64,0,0" VerticalAlignment="Top" Width="NaN" Height="32" Background="White" BorderBrush="#FFC1C1C1" Click="EditData">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Редагувати дані" FontWeight="Bold" />
+                <Image Source="/Presentation/HousesDialogWindow/edit.png" Width="16" Height="16" RenderTransformOrigin="0.476,0.815" Margin="10,0,0,0" />
+            </StackPanel>
+        </Button>
+        <Button Content="Зняти з обліку" Margin="0,96,0,0" VerticalAlignment="Top" Width="NaN" Height="32" FontWeight="Bold" Background="White" BorderBrush="#FFC1C1C1" Click="Delete"/>
+
+    </Grid>
+</Window>

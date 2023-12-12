@@ -1,0 +1,15 @@
+﻿<Window x:Class="Presentation.HousesDialogWindow.EditDataHouse"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Presentation.HousesDialogWindow"
+        mc:Ignorable="d"
+           Title="Редагувати дані" Height="263" Width="273">
+    <Grid Margin="0,0,0,-6">
+        <TextBox x:Name="NumberOfFlatText" HorizontalAlignment="Center" TextWrapping="Wrap" Text="436" VerticalAlignment="Top" Width="104" BorderBrush="Black" Height="31" Margin="0,66,0,0" TextAlignment="Center" FontSize="20"/>
+        <Label Content="Кількість мешканців" HorizontalAlignment="Left" Margin="82,97,0,0" VerticalAlignment="Top"/>
+        <Button Content="Зберегти" HorizontalAlignment="Left" Margin="166,177,0,0" VerticalAlignment="Top" Width="80" BorderBrush="#FFB7B7B7" FontFamily="Times New Roman" Foreground="White" Background="#FF1A5DFF" Height="24" FontSize="16" Click="SaveChanges"/>
+        <Button Content="Скасувати" HorizontalAlignment="Left" Margin="62,177,0,0" VerticalAlignment="Top" Width="80" BorderBrush="#FFB7B7B7" Foreground="White" FontFamily="Times New Roman" Background="#FFAF0018" Height="23" FontSize="16" Click="Close"/>
+    </Grid>
+</Window>

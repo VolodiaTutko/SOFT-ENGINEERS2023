@@ -1,0 +1,287 @@
+﻿<Window x:Class="Presentation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Presentation"
+        mc:Ignorable="d"
+        Height="650" Width="1200"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip">
+    <Window.Background>
+        <SolidColorBrush Color=" #faf8f0"/>
+    </Window.Background>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+
+                    <DoubleAnimation
+                    Storyboard.TargetName="textlogin"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:1" />
+
+                    <DoubleAnimation
+                    Storyboard.TargetName="textpassword"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:1" />
+
+                    <DoubleAnimation
+                    Storyboard.TargetName="MainLoginControler"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:1" />
+
+                    <DoubleAnimation
+                    Storyboard.TargetName="MainLoginControler"
+                    Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                    From="50"
+                    To="0"
+                    Duration="0:0:1" />
+
+                    <DoubleAnimation
+                    Storyboard.TargetName="Log_in"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0"
+                    To="1"
+                    Duration="0:0:1" />
+
+                    <DoubleAnimation
+                    Storyboard.TargetName="Log_in"
+                    Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                    From="-50"
+                    To="0"
+                    Duration="0:0:1" />
+
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Window.Resources>
+        <ControlTemplate x:Key="TextBoxLogin" TargetType="{x:Type TextBox}">
+            <Grid>
+                <Border Background="White" CornerRadius="10">
+                    <ScrollViewer x:Name="PART_ContentHost" Foreground="Black" Margin="7"/>
+                </Border>
+                <TextBlock Text="Логін" FontSize="12" Foreground="Gray" Margin="7" 
+                   IsHitTestVisible="False" Visibility="Collapsed" 
+                   x:Name="LoginBackgroundText" FontFamily="{Binding Path=FontFamily, RelativeSource={RelativeSource TemplatedParent}}"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Text" Value=""/>
+                        <Condition Property="IsFocused" Value="False"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Visibility" TargetName="LoginBackgroundText" Value="Visible"/>
+                </MultiTrigger>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter TargetName="LoginBackgroundText" Property="Visibility" Value="Collapsed"/>
+                </Trigger>
+                <Trigger Property="IsFocused" Value="False">
+                    <Setter TargetName="LoginBackgroundText" Property="Visibility" Value="Visible"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+
+        <ControlTemplate x:Key="PasswordBoxTemplate" TargetType="{x:Type PasswordBox}">
+            <Grid>
+                <Border Background="White" CornerRadius="10">
+                    <ScrollViewer x:Name="PART_ContentHost" Foreground="Black" Margin="7"/>
+                </Border>
+                <TextBlock x:Name="PlaceholderText" Text="Введіть пароль" Foreground="Gray" Margin="7">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=Password.Length, RelativeSource={RelativeSource TemplatedParent}}" Value="0">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Path=IsFocused, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Opacity" TargetName="PART_ContentHost" Value="0.7"/>
+                </Trigger>
+                <Trigger Property="IsFocused" Value="False">
+                    <Setter Property="Visibility" TargetName="PlaceholderText" Value="Visible"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+
+
+    </Window.Resources>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.ColumnSpan="2"
+                Background="#FF2196F3"
+                MouseDown="Border_MouseDown">
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Content="FlowMeter"
+                       Foreground="White"
+                       FontWeight="SemiBold" Grid.ColumnSpan="2"/>
+                <StackPanel HorizontalAlignment="Left"
+                            Orientation="Horizontal" Grid.Column="1" Margin="90,0,0,0">
+                    <Button Width="20" Height="20"
+                            Content="🗕"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="White"
+                            FontWeight="Bold"
+                            Margin="0,0,0,3"
+                            Click="ButtonMinimize_Click"/>
+                    <Button Width="20" Height="20"
+                            Content="⬜️"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="White"
+                            FontWeight="Bold"
+                            Click="WindowStateButton_Click"/>
+                    <Button Width="20" Height="20"
+                            Content="✕"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Foreground="White"
+                            FontWeight="Bold"
+                            Click="CloseButton_Click"/>
+
+                </StackPanel>
+            </Grid>
+        </Border >
+
+        <Image Name="log" Grid.Row="1" Source="/Presentation/Source/logo.png"/>
+
+        <Grid Name="Log_in" Grid.Row="2" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="67" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="250" />
+            </Grid.ColumnDefinitions>
+            
+            <Border  CornerRadius="18" BorderThickness="4" BorderBrush="#FF2196F3" Height="NaN" Width="NaN" >
+                <Border.Background>
+                    <SolidColorBrush Color="#FF131313" Opacity="0.1"/>
+                </Border.Background>
+                <StackPanel Margin="20">
+
+                    <StackPanel Orientation="Horizontal" Margin="10 0 10 10" HorizontalAlignment="Center">
+                        <TextBlock Text="Вітаємо" Foreground="#FF2196F3" FontSize="29" RenderTransformOrigin="2.556,1.057" />
+                    </StackPanel>
+                    <Grid Width="200" HorizontalAlignment="Center" Margin="10">
+                        <Border Background="#E67076" CornerRadius="5">
+                            <TextBlock x:Name="ErrorMessage" Foreground="#3B0F11" Margin="10 5" Visibility="Collapsed"/>
+                        </Border>
+                    </Grid>
+
+                    <TextBox x:Name="textlogin" Template="{StaticResource TextBoxLogin}" Margin="150 50 150 15" TextChanged="TextBoxLogin_TextChanged"/>
+                    <PasswordBox x:Name="textpassword" Template="{StaticResource PasswordBoxTemplate}" Margin="150 10 150 25" PasswordChanged="PasswordBox_PasswordChanged"/>
+
+
+                    <StackPanel Orientation="Horizontal" Margin="0 40 0 10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <ContentControl x:Name="MainLoginControler">
+                            <Button Content="Увійти" FontSize="17" Click="SwitchToMain_Click">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="#FF2196F3"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border x:Name="ButtonBorder"
+                                                            Background="{TemplateBinding Background}" 
+                                                            CornerRadius="15"
+                                                            Padding="0"
+                                                            BorderThickness="0"
+                                                            Margin="5" 
+                                                            Height="30"
+                                                            Width="150">
+                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        <Border.RenderTransform>
+                                                            <TransformGroup>
+                                                                <ScaleTransform ScaleX="1" ScaleY="1" CenterX="0.5"/>
+                                                                <ScaleTransform ScaleX="1" ScaleY="1" CenterX="0.5"/>
+                                                            </TransformGroup>
+                                                        </Border.RenderTransform>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsPressed" Value="True">
+                                                            <Setter Property="Background" Value="#FF305AAB"/>
+                                                            <Setter Property="Foreground" Value="White"/>
+                                                            <Setter TargetName="ButtonBorder" Property="Width" Value="140"/>
+                                                            <Setter TargetName="ButtonBorder" Property="RenderTransform">
+                                                                <Setter.Value>
+                                                                    <TransformGroup>
+                                                                        <ScaleTransform ScaleX="0.9" ScaleY="1" CenterX="0.5"/>
+                                                                        <ScaleTransform ScaleX="0.9" ScaleY="1" CenterX="0.5"/>
+                                                                    </TransformGroup>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Trigger>
+                                                        <Trigger Property="IsPressed" Value="False">
+                                                            <Setter Property="Background" Value="#FF2196F3"/>
+                                                            <Setter Property="Foreground" Value="White"/>
+                                                            <Setter TargetName="ButtonBorder" Property="Width" Value="150"/>
+                                                            <Setter TargetName="ButtonBorder" Property="RenderTransform">
+                                                                <Setter.Value>
+                                                                    <TransformGroup>
+                                                                        <ScaleTransform ScaleX="1" ScaleY="1" CenterX="0.5"/>
+                                                                        <ScaleTransform ScaleX="1" ScaleY="1" CenterX="0.5"/>
+                                                                    </TransformGroup>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </ContentControl>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="3"   Background="#FF2196F3" Grid.ColumnSpan="2" Width="NaN">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="25" />
+
+            </Grid.RowDefinitions>
+        </Grid>
+    </Grid>
+</Window>
