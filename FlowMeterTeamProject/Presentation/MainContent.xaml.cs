@@ -42,7 +42,6 @@ namespace Presentation
             this.Btn3.Background = Brushes.Transparent;
             this.Btn4.Background = Brushes.Transparent;
             this.Btn5.Background = Brushes.Transparent;
-            this.Btn6.Background = Brushes.Transparent;
 
             this.Btn1.Foreground = Brushes.Black;
             this.Btn1.FontWeight = FontWeights.Normal;
@@ -59,8 +58,6 @@ namespace Presentation
             this.Btn5.Foreground = Brushes.Black;
             this.Btn5.FontWeight = FontWeights.Normal;
 
-            this.Btn6.Foreground = Brushes.Black;
-            this.Btn6.FontWeight = FontWeights.Normal;
         }
 
         private void SetActiveButtonColors(Button btn)
@@ -103,13 +100,6 @@ namespace Presentation
             this.Main.Content = new CountersHistory();
             this.ResetButtonColors();
             this.SetActiveButtonColors(this.Btn5);
-        }
-
-        private void BtnClick6(object sender, RoutedEventArgs e)
-        {
-            this.Main.Content = new Pages.Receipts();
-            this.ResetButtonColors();
-            this.SetActiveButtonColors(this.Btn6);
         }
     }
 }
