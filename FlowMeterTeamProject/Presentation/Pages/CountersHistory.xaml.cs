@@ -29,7 +29,7 @@ namespace FlowMeterTeamProject.Presentation.Pages
         {
             InitializeComponent();
             this.countersInfo = new CountersInfo();
-            currentDateTextBlock.Text = DateTime.Now.ToString("dd-MM-yyyy");
+            
 
             FillDataGrid();
         }

@@ -17,38 +17,6 @@
         <StackPanel Orientation="Horizontal" Margin="10">
             <CheckBox x:Name="selectAllCheckBox" Content="Вибрати все" Margin="0,0,20,0" VerticalAlignment="Center" Checked="SelectAllCheckBox_Checked" Unchecked="SelectAllCheckBox_Unchecked"/>
             <Button Content="Додати новий запис" Margin="0,0,20,0" FontWeight="Bold" BorderBrush="#FFB1B1B1" Background="#FF1F4E8E" Foreground="White" Click="CreateButton_Click"/>
-            <Button Content="Експортувати в PDF" Margin="0,0,20,0" Click="ExportToPdfButton_Click">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="#FF305AAB"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="BorderBrush" Value="#FFB1B1B1"/>
-                        <Setter Property="FontWeight" Value="Bold"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#FF305AAB"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-
-            <Button Content="Експортувати в XLSX" Margin="0,0,20,0" Click="ExportToExcelButton_Click">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Background" Value="#FF305AAB"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="BorderBrush" Value="#FFB1B1B1"/>
-                        <Setter Property="FontWeight" Value="Bold"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#FF305AAB"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
-            </Button>
-
             <TextBox x:Name="searchBox" Width="200" TextChanged="SearchBox_TextChanged" BorderThickness="1">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
@@ -76,6 +44,37 @@
                     </ControlTemplate>
                 </TextBox.Template>
             </TextBox>
+            <Button Content="Експортувати в PDF" Margin="20,0,20,0" Click="ExportToPdfButton_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="FontWeight" Value="Normal"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter Property="Background" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+
+            <Button Content="Експортувати в XLSX" Margin="0,0,20,0" Click="ExportToExcelButton_Click">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="FontWeight" Value="Normal"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="False">
+                                <Setter Property="Background" Value="White"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
             <TextBlock x:Name="currentDateTextBlock" Margin="10,0,0,0" />
         </StackPanel>
 
