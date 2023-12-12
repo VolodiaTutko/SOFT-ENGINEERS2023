@@ -18,7 +18,8 @@
                 <Image Source="/HousesDialogWindow/edit.png" Width="16" Height="16" RenderTransformOrigin="0.476,0.815" Margin="10,0,0,0" />
             </StackPanel>
         </Button>
-        <Button Content="Зняти з обліку" Margin="0,96,0,0" VerticalAlignment="Top" Width="NaN" Height="32" FontWeight="Bold" Background="White" BorderBrush="#FFC1C1C1" Click="Delete"/>
+        <Button Content="Призначити послугу" Margin="0,96,0,0" VerticalAlignment="Top" Width="NaN" Height="32" FontWeight="Bold" Background="White" BorderBrush="#FFC1C1C1"/>
+        <Button Content="Зняти з обліку" Margin="0,128,0,0" VerticalAlignment="Top" Width="NaN" Height="32" FontWeight="Bold" Background="White" BorderBrush="#FFC1C1C1"/>
 
     </Grid>
 </Window>

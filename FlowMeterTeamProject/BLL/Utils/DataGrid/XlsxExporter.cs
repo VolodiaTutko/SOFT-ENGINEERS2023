@@ -116,7 +116,7 @@
                     package.SaveAs(new FileInfo(filePath));
                 }
 
-                MessageBox.Show($"Дані успішно експортовані в Excel в папку {Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads"}", "Export Successful", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Дані успішно експортовані в Excel.", "Export Successful", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {

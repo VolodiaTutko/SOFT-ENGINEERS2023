@@ -27,12 +27,8 @@ namespace Presentation.PersonalAccountDialogWindow
     {
         public string personalacount;
 
-       
         List<Dictionary<string, string>> SelectedRowsData;
-
-
-        private IDataGridUpdater _dataGridUpdater;
-        public PropertiesAccounts(string PersonalAccount, List<Dictionary<string, string>> selectedRowsData, IDataGridUpdater dataGridUpdater)
+        public PropertiesAccounts(string PersonalAccount, List<Dictionary<string, string>> selectedRowsData,  IDataGridUpdater dataGridUpdater)
         {
             InitializeComponent();
             this.ResizeMode = ResizeMode.NoResize;
@@ -41,14 +37,14 @@ namespace Presentation.PersonalAccountDialogWindow
 
             SelectedRowsData = selectedRowsData;
 
-           }
+        }
 
-       
+        private IDataGridUpdater _dataGridUpdater;
 
-               private void EditData(object sender, RoutedEventArgs e)
+               private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
-            var editDataAccounts = new EditDataAccounts(personalacount, _dataGridUpdater);
+
+            var editDataAccounts = new EditDataAccounts();
             editDataAccounts.ShowDialog();
         }
 
@@ -71,7 +67,7 @@ namespace Presentation.PersonalAccountDialogWindow
             {
                 RowDetails receiptsWindow = new RowDetails(SelectedRowsData);
                 this.Close();
-                MessageBox.Show($"Квитанцію збережено та завантажено в папку {Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads"}", "Saved Successfully", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show($"Квитанцію збережено та завантажено!");
             }
             catch (Exception ex)
             {

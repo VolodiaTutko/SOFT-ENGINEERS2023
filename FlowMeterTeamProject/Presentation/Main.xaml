@@ -66,64 +66,40 @@
 
     <Window.Resources>
         <ControlTemplate x:Key="TextBoxLogin" TargetType="{x:Type TextBox}">
-            <Grid>
-                <Border Background="White" CornerRadius="10">
-                    <ScrollViewer x:Name="PART_ContentHost" Foreground="Black" Margin="7"/>
-                </Border>
-                <TextBlock Text="Логін" FontSize="12" Foreground="Gray" Margin="7" 
-                   IsHitTestVisible="False" Visibility="Collapsed" 
-                   x:Name="LoginBackgroundText" FontFamily="{Binding Path=FontFamily, RelativeSource={RelativeSource TemplatedParent}}"/>
-            </Grid>
+            <Border Background="White"  CornerRadius="10">
+                <Grid>
+                    <TextBlock Text="Логін" FontSize="15" Foreground="Gray" Margin="5" IsHitTestVisible="False" Visibility="Collapsed" Name="LoginBackgroundText" />
+                    <ScrollViewer x:Name="PART_ContentHost" Foreground="Black"  Margin="7"/>
+                </Grid>
+            </Border>
             <ControlTemplate.Triggers>
                 <MultiTrigger>
                     <MultiTrigger.Conditions>
-                        <Condition Property="Text" Value=""/>
-                        <Condition Property="IsFocused" Value="False"/>
+                        <Condition Property="Text" Value="" />
+                        <Condition Property="IsFocused" Value="False" />
                     </MultiTrigger.Conditions>
-                    <Setter Property="Visibility" TargetName="LoginBackgroundText" Value="Visible"/>
+                    <Setter Property="Visibility" TargetName="LoginBackgroundText" Value="Visible" />
                 </MultiTrigger>
-                <Trigger Property="IsFocused" Value="True">
-                    <Setter TargetName="LoginBackgroundText" Property="Visibility" Value="Collapsed"/>
-                </Trigger>
-                <Trigger Property="IsFocused" Value="False">
-                    <Setter TargetName="LoginBackgroundText" Property="Visibility" Value="Visible"/>
-                </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
 
-
-        <ControlTemplate x:Key="PasswordBoxTemplate" TargetType="{x:Type PasswordBox}">
-            <Grid>
-                <Border Background="White" CornerRadius="10">
-                    <ScrollViewer x:Name="PART_ContentHost" Foreground="Black" Margin="7"/>
-                </Border>
-                <TextBlock x:Name="PlaceholderText" Text="Введіть пароль" Foreground="Gray" Margin="7">
-                    <TextBlock.Style>
-                        <Style TargetType="TextBlock">
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=Password.Length, RelativeSource={RelativeSource TemplatedParent}}" Value="0">
-                                    <Setter Property="Visibility" Value="Visible"/>
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding Path=IsFocused, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
-            </Grid>
+        <ControlTemplate x:Key="TextBoxPassword" TargetType="{x:Type TextBox}">
+            <Border Background="White"  CornerRadius="10">
+                <Grid>
+                    <TextBlock Text="Введіть пароль" FontSize="15" Foreground="Gray" Margin="5" IsHitTestVisible="False" Visibility="Collapsed" Name="PasswordBackgroundText" />
+                    <ScrollViewer x:Name="PART_ContentHost" Foreground="Black"  Margin="7"/>
+                </Grid>
+            </Border>
             <ControlTemplate.Triggers>
-                <Trigger Property="IsFocused" Value="True">
-                    <Setter Property="Opacity" TargetName="PART_ContentHost" Value="0.7"/>
-                </Trigger>
-                <Trigger Property="IsFocused" Value="False">
-                    <Setter Property="Visibility" TargetName="PlaceholderText" Value="Visible"/>
-                </Trigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Text" Value="" />
+                        <Condition Property="IsFocused" Value="False" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Visibility" TargetName="PasswordBackgroundText" Value="Visible" />
+                </MultiTrigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
-
-
-
     </Window.Resources>
 
     <Grid>
@@ -190,7 +166,6 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="250" />
             </Grid.ColumnDefinitions>
-            
             <Border  CornerRadius="18" BorderThickness="4" BorderBrush="#FF2196F3" Height="NaN" Width="NaN" >
                 <Border.Background>
                     <SolidColorBrush Color="#FF131313" Opacity="0.1"/>
@@ -200,15 +175,9 @@
                     <StackPanel Orientation="Horizontal" Margin="10 0 10 10" HorizontalAlignment="Center">
                         <TextBlock Text="Вітаємо" Foreground="#FF2196F3" FontSize="29" RenderTransformOrigin="2.556,1.057" />
                     </StackPanel>
-                    <Grid Width="200" HorizontalAlignment="Center" Margin="10">
-                        <Border Background="#E67076" CornerRadius="5">
-                            <TextBlock x:Name="ErrorMessage" Foreground="#3B0F11" Margin="10 5" Visibility="Collapsed"/>
-                        </Border>
-                    </Grid>
 
-                    <TextBox x:Name="textlogin" Template="{StaticResource TextBoxLogin}" Margin="150 50 150 15" TextChanged="TextBoxLogin_TextChanged"/>
-                    <PasswordBox x:Name="textpassword" Template="{StaticResource PasswordBoxTemplate}" Margin="150 10 150 25" PasswordChanged="PasswordBox_PasswordChanged"/>
-
+                    <TextBox x:Name="textlogin" Template="{StaticResource TextBoxLogin}" Margin="150 50 150 15"  />
+                    <TextBox x:Name="textpassword" Template="{StaticResource TextBoxPassword}" Margin="150 10 150 25"  />
 
                     <StackPanel Orientation="Horizontal" Margin="0 40 0 10" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <ContentControl x:Name="MainLoginControler">

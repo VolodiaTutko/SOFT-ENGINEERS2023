@@ -170,7 +170,7 @@ namespace FlowMeterTeamProject.Presentation.Pages
 
         private void AddNewItem_Click(object sender, RoutedEventArgs e)
         {
-            AddNewCounter newCounterDialog = new AddNewCounter(this);
+            AddNewCounter newCounterDialog = new AddNewCounter(this, CounterCreationType.Record, "Лічильник для послуги", "Не створені лічильники для: ");
             newCounterDialog.Show();
         }
 

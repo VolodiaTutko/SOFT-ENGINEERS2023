@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 using DAL.Data;
 using DAL.Data.DataMock;
 using Microsoft.EntityFrameworkCore.Storage;
-using Presentation.Pages;
 
 namespace FlowMeterTeamProject.BLL.Utils.DataGrid
 {
 
     public static class ReceiptsLogic
     {
-        public static Dictionary<string, List<(string ServiceName, string AccountNumber, decimal Price, decimal Tariff)>> GetNonZeroServices(string personalAccount, string houseAddres)
+        public static Dictionary<string, List<(string ServiceName, string AccountNumber, decimal Price)>> GetNonZeroServices(string personalAccount, string houseAddres)
         {
             using (var dbContext = new AppDbContext())
             {
@@ -25,49 +24,49 @@ namespace FlowMeterTeamProject.BLL.Utils.DataGrid
                 {
                     int hauseId = FindHouseId(houseAddres);
                     // Створюємо список послуг, де значення не дорівнює 0
-                    var nonZeroServices = new List<(string ServiceName, string AccountNumber, decimal Price, decimal Tariff)>();
+                    var nonZeroServices = new List<(string ServiceName, string AccountNumber, decimal Price)>();
 
                     if (account.HotWater != "0")
                     {
-                        var price = preperetiv_receipt(hauseId, account.HotWater, "HotWater");
-                        nonZeroServices.Add(("HotWater", account.HotWater, price[0], price[1]));
+                        decimal price = preperetiv_receipt(hauseId, account.HotWater, "HotWater");
+                        nonZeroServices.Add(("HotWater", account.HotWater, price));
                     }
 
                     if (account.ColdWater != "0")
                     {
-                        var price = preperetiv_receipt(hauseId, account.ColdWater, "ColdWater");
-                        nonZeroServices.Add(("ColdWater", account.ColdWater, price[0], price[1]));
+                        decimal price = preperetiv_receipt(hauseId, account.ColdWater, "ColdWater");
+                        nonZeroServices.Add(("ColdWater", account.ColdWater, price));
                     }
 
                     if (account.Heating != "0")
                     {
-                        var price = preperetiv_receipt(hauseId, account.Heating, "Heating");
-                        nonZeroServices.Add(("Heating", account.Heating, price[0], price[1]));
+                        decimal price = preperetiv_receipt(hauseId, account.Heating, "Heating");
+                        nonZeroServices.Add(("Heating", account.Heating, price));
                     }
 
                     if (account.Electricity != "0")
                     {
-                        var price = preperetiv_receipt(hauseId, account.Electricity, "Electricity");
-                        nonZeroServices.Add(("Electricity", account.Electricity, price[0], price[1]));
+                        decimal price = preperetiv_receipt(hauseId, account.Electricity, "Electricity");
+                        nonZeroServices.Add(("Electricity", account.Electricity, price));
                     }
 
                     if (account.PublicService != "0")
                     {
-                        var price = preperetiv_receipt(hauseId, account.PublicService, "PublicService");
-                        nonZeroServices.Add(("PublicService", account.PublicService, price[0], price[1]));
+                        decimal price = preperetiv_receipt(hauseId, account.PublicService, "PublicService");
+                        nonZeroServices.Add(("PublicService", account.PublicService,price));
                     }
 
-                    var result = new Dictionary<string, List<(string ServiceName, string AccountNumber, decimal Price, decimal Tariff)>>();
+                    var result = new Dictionary<string, List<(string ServiceName, string AccountNumber, decimal Price)>>();
                     result.Add(personalAccount, nonZeroServices);
 
                     return result;
                 }
 
-                return new Dictionary<string, List<(string ServiceName, string AccountNumber, decimal Price, decimal Tariff)>>();
+                return new Dictionary<string, List<(string ServiceName, string AccountNumber, decimal Price)>>();
             }
         }
 
-        public static decimal[] preperetiv_receipt(int idHause, string personalAccount, string typeServices)
+        public static decimal preperetiv_receipt(int idHause, string personalAccount, string typeServices)
         {
             using (var dbContext = new AppDbContext())
             {
@@ -97,13 +96,13 @@ namespace FlowMeterTeamProject.BLL.Utils.DataGrid
 
                         var receipt = (currentIndicator.GetValueOrDefault() - previousCurrentIndicator.GetValueOrDefault()) * decimalValue;
 
-                        return new decimal[] { receipt, decimalValue };
+                        return receipt;
                     }
                     else if (query.Count() == 1)
                     {
                         if (result[0].CurrentIndicator == 0)
                         {
-                            return new decimal[] { 0, 0 };
+                            return 0;
                         }
                         else
                         {
@@ -113,10 +112,10 @@ namespace FlowMeterTeamProject.BLL.Utils.DataGrid
 
                             var receipt = currentIndicator.GetValueOrDefault() * decimalValue;
 
-                            return new decimal[] { receipt, decimalValue };
+                            return receipt;
                         }
                     }
-                    else if (query.Count() == 0) { return new decimal[] { 0, 0 }; }
+                    else if (query.Count() == 0) { return 0; }
                 }
                 else
                 {
@@ -125,10 +124,10 @@ namespace FlowMeterTeamProject.BLL.Utils.DataGrid
                                               select service.Price;
                     int? firstValue = query1.FirstOrDefault();
                     decimal decimalValue = firstValue.HasValue ? (decimal)firstValue.Value : 0m;
-                    return new decimal[] { decimalValue, decimalValue };
+                    return decimalValue;
                 }
 
-                return new decimal[] { 0, 0 };
+                return 0;
             }
         }
 

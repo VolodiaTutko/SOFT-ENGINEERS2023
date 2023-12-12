@@ -63,23 +63,19 @@ namespace FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow
                     var selectedItem = HouseComboBox.SelectedItem;
                     string selectedValue = selectedItem.ToString();
 
+
                     int houseid = context.houses
                         .Where(h => h.HouseAddress == selectedValue)
                         .Select(h => h.HouseId)
                         .FirstOrDefault();
 
+                   
                     string owner = OwnerTextBox.Text;
                     int flat = int.Parse(FlatTextBox.Text);
                     int heatingArea = int.Parse(HeatingAreaTextBox.Text);
                     string personalAccount = PersonalAccountTextBox.Text;
                     int numberOfPersons = int.Parse(NumberOfPersonsTextBox.Text);
 
-                    // Check if the personal account already exists
-                    if (context.consumers.Any(c => c.HouseId == houseid && c.Flat == flat || c.PersonalAccount == personalAccount))
-                    {
-                        MessageBox.Show($"Такий запис вже існує.", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return; // Do not proceed further if the personal account already exists
-                    }
 
                     Consumer newPersonalAccount = new Consumer
                     {

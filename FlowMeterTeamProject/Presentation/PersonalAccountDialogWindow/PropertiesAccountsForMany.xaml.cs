@@ -99,7 +99,7 @@ namespace FlowMeterTeamProject.Presentation.PersonalAccountDialogWindow
             {
                 RowDetails receiptsWindow = new RowDetails(SelectedRowsData);
                 this.Close();
-                MessageBox.Show($"Квитанції збережено та завантажено в папку {Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\Downloads"}", "Saved Successfully", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show($"Квитанції збережено та завантажено!");
             }
             catch (Exception ex)
             {

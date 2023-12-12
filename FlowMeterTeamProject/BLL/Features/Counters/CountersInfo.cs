@@ -28,5 +28,10 @@ namespace FlowMeterTeamProject.BLL.Features.Counters
             return records;
         }
 
+        // todo t2: get last record by account
+        // insert new record
+
+        // todo t4: delete entity
+
     }
 }

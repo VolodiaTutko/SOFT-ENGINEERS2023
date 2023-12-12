@@ -9,9 +9,9 @@
     <Grid>
         <Label Content="ПІБ власника" HorizontalAlignment="Left" Margin="29,27,0,0" VerticalAlignment="Top"/>
         <Label Content="Кількість мешканців" HorizontalAlignment="Left" Margin="29,0,0,0" VerticalAlignment="Center"/>
-        <TextBox x:Name="OwnerText" HorizontalAlignment="Left" Margin="187,31,0,0" TextWrapping="Wrap" Text="Тутко Володимир Григорович" VerticalAlignment="Top" Width="183" Height="22" TextAlignment="Center"/>
-        <TextBox x:Name="NumberText" HorizontalAlignment="Left" Margin="187,0,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Center" Width="183" Height="22" TextAlignment="Center"/>
-        <Button Content="Зберегти" HorizontalAlignment="Left" Margin="291,128,0,0" VerticalAlignment="Top" Width="80" BorderBrush="#FFB7B7B7" FontFamily="Times New Roman" Foreground="White" Background="#FF1A5DFF" Height="24" FontSize="16" Click="SaveChanges"/>
-        <Button Content="Скасувати" HorizontalAlignment="Left" Margin="187,128,0,0" VerticalAlignment="Top" Width="80" BorderBrush="#FFB7B7B7" Foreground="White" FontFamily="Times New Roman" Background="#FFAF0018" Height="23" FontSize="16" Click="Close"/>
+        <TextBox HorizontalAlignment="Left" Margin="187,31,0,0" TextWrapping="Wrap" Text="Тутко Володимир Григорович" VerticalAlignment="Top" Width="183" Height="22" TextAlignment="Center"/>
+        <TextBox HorizontalAlignment="Left" Margin="187,0,0,0" TextWrapping="Wrap" Text="3" VerticalAlignment="Center" Width="183" Height="22" TextAlignment="Center"/>
+        <Button Content="Зберегти" HorizontalAlignment="Left" Margin="291,128,0,0" VerticalAlignment="Top" Width="80" BorderBrush="#FFB7B7B7" FontFamily="Times New Roman" Foreground="White" Background="#FF1A5DFF" Height="24" FontSize="16" Click="Button_Click"/>
+        <Button Content="Скасувати" HorizontalAlignment="Left" Margin="187,128,0,0" VerticalAlignment="Top" Width="80" BorderBrush="#FFB7B7B7" Foreground="White" FontFamily="Times New Roman" Background="#FFAF0018" Height="23" FontSize="16" Click="Button_Click_1"/>
     </Grid>
 </Window>
