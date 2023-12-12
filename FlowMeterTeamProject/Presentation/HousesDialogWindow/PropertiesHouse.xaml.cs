@@ -75,7 +75,7 @@
 
 
                     context.SaveChanges();
-                   this._dataGridUpdater?.UpdateDataGrid();
+                    this._dataGridUpdater?.UpdateDataGrid();
                     this.Close();
                     MessageBox.Show($"Житловий будинок : {houseToDelete.HouseAddress} видалено!");
                 }
@@ -83,6 +83,36 @@
             catch (Exception ex)
             {
                 MessageBox.Show($"Помилка при видаленні даних: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                using (var context = new AppDbContext())
+                {
+                    var receiptsAndOwners = from receipt in context.consumers
+                                            join consumer in context.consumers on receipt.PersonalAccount equals consumer.PersonalAccount
+                                            where consumer.HouseId == houseID
+                                            select new
+                                            {
+                                                ReceiptId = receipt.PersonalAccount,
+                                                OwnerName = consumer.ConsumerOwner
+                                            };
+
+                    StringBuilder message = new StringBuilder();
+                    foreach (var item in receiptsAndOwners)
+                    {
+                        message.AppendLine($"Особовий рахунок: {item.ReceiptId}, Власник: {item.OwnerName}");
+                    }
+
+                    MessageBox.Show(message.ToString(), "Особові рахунки та власники");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка: {ex.Message}", "Помилка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
