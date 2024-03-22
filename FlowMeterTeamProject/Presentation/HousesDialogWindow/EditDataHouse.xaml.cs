@@ -43,7 +43,7 @@
 
                     if (houseToEdit != null && houseToEdit.NumberOfFlat != null)
                     {
-                        houseFlat = houseToEdit.NumberOfFlat;
+                        houseFlat = houseToEdit.NumberOfResidents;
                         NumberOfFlatText.Text = houseFlat?.ToString();
                         context.SaveChanges();
                     }
@@ -88,7 +88,7 @@
                        
                         int NumberOfFlat = int.TryParse(NumberOfFlatText.Text, out int result) ? result : 0;
                         
-                        House.NumberOfFlat = NumberOfFlat;
+                        House.NumberOfResidents = NumberOfFlat;
                       
                         context.SaveChanges();
                         _dataGridUpdater?.UpdateDataGrid();

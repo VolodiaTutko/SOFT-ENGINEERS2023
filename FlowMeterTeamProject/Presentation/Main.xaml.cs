@@ -33,7 +33,7 @@
             //     Mock.FillRandomConsumersIntoDb(5);
             // }
 
-            //PasswordHashing.HashPasswordAndAddUser("Jon", "12345", "user");
+            //PasswordHashing.HashPasswordAndAddUser("John", "12345", "user");
             //Mock.FillServicesIntoDb();
             //Mock.FillHauseIntoDb();
             //Mock.FillAccountIntoDb();
